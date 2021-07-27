@@ -8,7 +8,7 @@ class Classmate(db.Model):
     userId = db.Column(db.Integer, nullable=False)
     classmateId = db.Column(db.Integer, nullable=False)
     unique = db.Column(db.Integer, nullable=False, unique=True)
-    createdAt = db.Column(db.DateTime, default=datetime.datetime, nullable=False)
+    createdAt = db.Column(db.DateTime, default=datetime.datetime.now())
 
     def to_dict(self):
         return {

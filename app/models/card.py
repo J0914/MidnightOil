@@ -1,6 +1,7 @@
 from .db import db
 import datetime
 
+the_time = datetime.datetime.now()
 class Card(db.Model):
     __tablename__ = 'Cards'
 
@@ -9,8 +10,8 @@ class Card(db.Model):
     back = db.Column(db.String, nullable=False)
     userId = db.Column(db.Integer, nullable=False)
     deckId = db.Column(db.Integer, nullable=False)
-    createdAt = db.Column(db.DateTime, default=datetime.datetime, nullable=False)
-    updatedAt = db.Column(db.DateTime, default=datetime.datetime, nullable=False)
+    createdAt = db.Column(db.DateTime, default=datetime.datetime.now())
+    updatedAt = db.Column(db.DateTime, default=datetime.datetime.now())
 
     def to_dict(self):
         return {

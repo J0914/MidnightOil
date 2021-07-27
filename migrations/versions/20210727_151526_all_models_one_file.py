@@ -1,8 +1,8 @@
 """all_models_one_file
 
-Revision ID: aaf242ce642c
+Revision ID: 4837e649da54
 Revises: 
-Create Date: 2021-07-27 12:25:16.732180
+Create Date: 2021-07-27 15:15:26.074068
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'aaf242ce642c'
+revision = '4837e649da54'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -24,8 +24,8 @@ def upgrade():
     sa.Column('back', sa.String(), nullable=False),
     sa.Column('userId', sa.Integer(), nullable=False),
     sa.Column('deckId', sa.Integer(), nullable=False),
-    sa.Column('createdAt', sa.DateTime(), nullable=False),
-    sa.Column('updatedAt', sa.DateTime(), nullable=False),
+    sa.Column('createdAt', sa.DateTime(), nullable=True),
+    sa.Column('updatedAt', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('Classmates',
@@ -33,7 +33,7 @@ def upgrade():
     sa.Column('userId', sa.Integer(), nullable=False),
     sa.Column('classmateId', sa.Integer(), nullable=False),
     sa.Column('unique', sa.Integer(), nullable=False),
-    sa.Column('createdAt', sa.DateTime(), nullable=False),
+    sa.Column('createdAt', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('unique')
     )
@@ -42,17 +42,16 @@ def upgrade():
     sa.Column('title', sa.String(length=40), nullable=False),
     sa.Column('userId', sa.Integer(), nullable=False),
     sa.Column('share', sa.Boolean(), nullable=False),
-    sa.Column('createdAt', sa.DateTime(), nullable=False),
-    sa.Column('updatedAt', sa.DateTime(), nullable=False),
+    sa.Column('createdAt', sa.DateTime(), nullable=True),
+    sa.Column('updatedAt', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('Notebooks',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=40), nullable=False),
     sa.Column('userId', sa.Integer(), nullable=False),
-    sa.Column('share', sa.Boolean(), nullable=False),
-    sa.Column('createdAt', sa.DateTime(), nullable=False),
-    sa.Column('updatedAt', sa.DateTime(), nullable=False),
+    sa.Column('createdAt', sa.DateTime(), nullable=True),
+    sa.Column('updatedAt', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('Notes',
@@ -62,8 +61,8 @@ def upgrade():
     sa.Column('userId', sa.Integer(), nullable=False),
     sa.Column('notebookId', sa.Integer(), nullable=False),
     sa.Column('share', sa.Boolean(), nullable=False),
-    sa.Column('createdAt', sa.DateTime(), nullable=False),
-    sa.Column('updatedAt', sa.DateTime(), nullable=False),
+    sa.Column('createdAt', sa.DateTime(), nullable=True),
+    sa.Column('updatedAt', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('Users',

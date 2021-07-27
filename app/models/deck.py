@@ -8,8 +8,8 @@ class Deck(db.Model):
     title = db.Column(db.String(40), nullable=False)
     userId = db.Column(db.Integer, nullable=False)
     share = db.Column(db.Boolean, default=False, nullable=False)
-    createdAt = db.Column(db.DateTime, default=datetime.datetime, nullable=False)
-    updatedAt = db.Column(db.DateTime, default=datetime.datetime, nullable=False)
+    createdAt = db.Column(db.DateTime, default=datetime.datetime.now())
+    updatedAt = db.Column(db.DateTime, default=datetime.datetime.now())
 
     def to_dict(self):
         return {
