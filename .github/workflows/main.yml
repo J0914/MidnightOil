@@ -18,8 +18,8 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-    env: HEROKU_API_KEY:${{53cb2805-feab-4a60-9c9a-e0e02756b78e}}
+    runs-on: ubuntu-latest,
+    env: HEROKU_API_KEY:${{53cb2805-feab-4a60-9c9a-e0e02756b78e}},
     steps:
       - uses: actions/checkout@v2
       - name: build and push
