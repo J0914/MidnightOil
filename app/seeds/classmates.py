@@ -4,12 +4,9 @@ from app.models import db, Classmate
 # Adds a demo , you can add other Classmates here if you want
 def seed_Classmates():
     one = Classmate(
-        userId=1, classmateId=2, unique=12)
-    two = Classmate(
-        userId=2, classmateId=1, unique=21)
+        user1=1, user2=2, status=True, unique=12)
 
     db.session.add(one)
-    db.session.add(two)
 
     db.session.commit()
 
