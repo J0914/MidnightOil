@@ -18,4 +18,5 @@ class Notebook(db.Model):
             'userId': self.userId,
             'createdAt': self.createdAt,
             'updatedAt': self.updatedAt,
+            'notes': {note.id: note.to_dict() for note in self.notes}
         }
