@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import db, User, Notebook, Note, Deck, Card, Classmate
-from app.forms import NotebookForm, NoteForm, DeckForm
+from app.forms import NotebookForm, NoteForm, DeckForm, CardForm
 
 user_routes = Blueprint('users', __name__)
 
@@ -46,17 +46,13 @@ def post_notebooks(userId):
 # @login_required
 def patch_and_delete_notebooks(userId, notebookId):
     if request.method == 'PATCH':
-        form = NotebookForm()
-        form['csrf_token'].data = request.cookies['csrf_token']
-        if form.validate_on_submit():
-            data = request.get_json()
-            notebook = Notebook.query.get(notebookId)
+        data = request.get_json()
+        notebook = Notebook.query.get(notebookId)
+        if data['title']:
             notebook.title = data['title']
-            db.session.commit()
-            notebooks = Notebook.query.filter_by(userId=userId).all()
-            return {'notebooks': [notebook.to_dict() for notebook in notebooks]}
-        else:
-            return jsonify({'errors': form.errors})
+        db.session.commit()
+        notebooks = Notebook.query.filter_by(userId=userId).all()
+        return {'notebooks': [notebook.to_dict() for notebook in notebooks]}
     elif request.method == 'DELETE':
         notebook = Notebook.query.get(notebookId)
         db.session.delete(notebook)
@@ -90,20 +86,17 @@ def post_notes(userId, notebookId):
 # @login_required
 def patch_and_delete_notes(userId, notebookId, noteId):
     if request.method == 'PATCH':
-        form = NoteForm()
-        form['csrf_token'].data = request.cookies['csrf_token']
-        form['userId'].data = userId
-        if form.validate_on_submit():
-            data = request.get_json()
-            note = Note.query.get(noteId)
+        data = request.get_json()
+        note = Note.query.get(noteId)
+        if data['title']:
             note.title = data['title']
+        if data['body']:
             note.body = data['body']
+        if data['share']:
             note.share = data['share']
-            db.session.commit()
-            notebooks = Notebook.query.filter_by(userId=userId).all()
-            return {'notebooks': [notebook.to_dict() for notebook in notebooks]}
-        else:
-            return jsonify({'errors': form.errors})
+        db.session.commit()
+        notebooks = Notebook.query.filter_by(userId=userId).all()
+        return {'notebooks': [notebook.to_dict() for notebook in notebooks]}
     elif request.method == 'DELETE':
         note = Note.query.get(noteId)
         db.session.delete(note)
@@ -132,24 +125,20 @@ def post_decks(userId):
     else: 
         return jsonify({'errors': form.errors})
 
-# edit or delete a note
+# edit or delete a deck
 @user_routes.route('/<int:userId>/decks/<int:deckId>', methods=['PATCH', 'DELETE'])
 # @login_required
 def patch_and_delete_decks(userId, deckId):
     if request.method == 'PATCH':
-        form = DeckForm()
-        form['csrf_token'].data = request.cookies['csrf_token']
-        form['userId'].data = userId
-        if form.validate_on_submit():
-            data = request.get_json()
-            deck = Deck.query.get(deckId)
+        data = request.get_json()
+        deck = Deck.query.get(deckId)
+        if data['title']:
             deck.title = data['title']
+        if data['share']:
             deck.share = data['share']
-            db.session.commit()
-            decks = Deck.query.filter_by(userId=userId).all()
-            return {'decks': [deck.to_dict() for deck in decks]}
-        else:
-            return jsonify({'errors': form.errors})
+        db.session.commit()
+        decks = Deck.query.filter_by(userId=userId).all()
+        return {'decks': [deck.to_dict() for deck in decks]}
     elif request.method == 'DELETE':
         deck = Deck.query.get(deckId)
         db.session.delete(deck)
@@ -162,19 +151,43 @@ def patch_and_delete_decks(userId, deckId):
 
 # <<<<< User Cards >>>>>
 
-# # create a new note
-# @user_routes.route('/<int:userId>/decks/<int:deckId>/cards', methods=['POST'])
-# # @login_required
-# def post_cards(userId, notebookId):
-#     form = NoteForm()
-#     form['csrf_token'].data = request.cookies['csrf_token']
-#     form['userId'].data = userId
-#     if form.validate_on_submit() and form.title_exists():
-#         data = request.get_json()
-#         note = Note(userId=userId, title=data['title'], body=data['body'], notebookId=notebookId, share=data['share'])
-#         db.session.add(note)
-#         db.session.commit()
-#         notebooks = Notebook.query.filter_by(userId=userId).all()
-#         return {'notebooks': [notebook.to_dict() for notebook in notebooks]}
-#     else: 
-#         return jsonify({'errors': form.errors})
+# create a new card
+@user_routes.route('/<int:userId>/decks/<int:deckId>/cards', methods=['POST'])
+# @login_required
+def post_cards(userId, deckId):
+    form = CardForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    form['userId'].data = userId
+    form['deckId'].data = deckId
+    if form.validate_on_submit() and form.card_exists():
+        data = request.get_json()
+        card = Card(front=data['front'], back=data['back'], userId=userId,  deckId=deckId)
+        db.session.add(card)
+        db.session.commit()
+        decks = Deck.query.filter_by(userId=userId).all()
+        return {'decks': [deck.to_dict() for deck in decks]}
+    else: 
+        return jsonify({'errors': form.errors})
+
+# edit or delete a card
+@user_routes.route('/<int:userId>/decks/<int:deckId>/cards/<int:cardId>', methods=['PATCH', 'DELETE'])
+# @login_required
+def patch_and_delete_cards(userId, deckId, cardId):
+    if request.method == 'PATCH':
+        data = request.get_json()
+        card = Card.query.get(cardId)
+        if data['front']:
+            card.front = data['front']
+        if data['back']:
+            card.back = data['back']
+        db.session.commit()
+        decks = Deck.query.filter_by(userId=userId).all()
+        return {'decks': [deck.to_dict() for deck in decks]}
+    elif request.method == 'DELETE':
+        card = Card.query.get(cardId)
+        db.session.delete(card)
+        db.session.commit()
+        decks = Deck.query.filter_by(userId=userId).all()
+        return {'decks': [deck.to_dict() for deck in decks]}
+    else:
+        raise ValueError('Invalid request method, try a different route')
