@@ -37,7 +37,7 @@ def post_notebooks(userId):
     form = NotebookForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     form['userId'].data = userId
-    if form.validate_on_submit() and form.title_exists():
+    if form.validate_on_submit() and form.title_exists() and form.validate_title():
         data = request.get_json()
         notebook = Notebook(userId=userId, title=data['title'])
         db.session.add(notebook)
@@ -57,6 +57,8 @@ def patch_and_delete_notebooks(userId, notebookId):
         notebook = Notebook.query.get(notebookId)
         if 'title' in data.keys() and data['title'] != '':
             notebook.title = data['title']
+        elif 'title' in data.keys() and data['title'] == '':
+            return {'errors': 'Title cannot be blank'}
         db.session.commit()
         notebooks = Notebook.query.filter_by(userId=userId).all()
         return {'notebooks': [notebook.to_dict() for notebook in notebooks]}
@@ -85,7 +87,7 @@ def post_notes(userId, notebookId):
     form = NoteForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     form['userId'].data = userId
-    if form.validate_on_submit() and form.title_exists():
+    if form.validate_on_submit() and form.title_exists() and form.validate_title_and_body():
         data = request.get_json()
         note = Note(userId=userId, title=data['title'], body=data['body'], notebookId=notebookId, share=data['share'])
         db.session.add(note)
@@ -104,8 +106,12 @@ def patch_and_delete_notes(userId, notebookId, noteId):
         note = Note.query.get(noteId)
         if 'title' in data.keys() and data['title'] != '':
             note.title = data['title']
+        elif 'title' in data.keys() and data['title'] == '':
+            return {'errors': 'Title cannot be blank'}
         if 'body' in data.keys() and data['body'] != '':
             note.body = data['body']
+        elif 'body' in data.keys() and data['body'] == '':
+            return {'errors': 'Body cannot be blank'}
         if 'share' in data.keys():
             note.share = data['share']
         db.session.commit()
@@ -136,7 +142,7 @@ def post_decks(userId):
     form = DeckForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     form['userId'].data = userId
-    if form.validate_on_submit() and form.title_exists():
+    if form.validate_on_submit() and form.title_exists() and form.validate_title():
         data = request.get_json()
         deck = Deck(userId=userId, title=data['title'], share=data['share'])
         db.session.add(deck)
@@ -155,6 +161,8 @@ def patch_and_delete_decks(userId, deckId):
         deck = Deck.query.get(deckId)
         if 'title' in data.keys() and data['title'] != '':
             deck.title = data['title']
+        elif 'title' in data.keys() and data['title'] == '':
+            return jsonify({'errors': 'title of deck cannot be blank'})
         if 'share' in data.keys() and data['share'] != '':
             deck.share = data['share']
         db.session.commit()
@@ -187,36 +195,40 @@ def post_cards(userId, deckId):
     form['csrf_token'].data = request.cookies['csrf_token']
     form['userId'].data = userId
     form['deckId'].data = deckId
-    if form.validate_on_submit() and form.card_exists():
+    if form.validate_on_submit() and form.card_exists() and form.validate_front_and_back():
         data = request.get_json()
         card = Card(front=data['front'], back=data['back'], userId=userId,  deckId=deckId)
         db.session.add(card)
         db.session.commit()
-        decks = Deck.query.filter_by(userId=userId).all()
-        return {'decks': [deck.to_dict() for deck in decks]}
+        cards = Card.query.filter_by(userId=userId, deckId=deckId).all()
+        return {'cards': [card.to_dict() for card in cards]}
     else: 
         return jsonify({'errors': form.errors})
 
 # edit or delete a card
 @user_routes.route('/<int:userId>/decks/<int:deckId>/cards/<int:cardId>', methods=['PATCH', 'DELETE'])
 # @login_required
-def patch_and_delete_cards(userId, cardId):
+def patch_and_delete_cards(userId, deckId, cardId):
     if request.method == 'PATCH':
         data = request.get_json()
         card = Card.query.get(cardId)
         if 'front' in data.keys() and data['front'] != '':
             card.front = data['front']
+        elif 'front' in data.keys() and data['front'] == '':
+            return jsonify({'errors': 'front of card cannot be blank'})
         if 'back' in data.keys() and data['back'] != '':
             card.back = data['back']
+        elif 'back' in data.keys() and data['back'] == '':
+            return jsonify({'errors': 'back of card cannot be blank'})
         db.session.commit()
-        decks = Deck.query.filter_by(userId=userId).all()
-        return {'decks': [deck.to_dict() for deck in decks]}
+        cards = Card.query.filter_by(userId=userId, deckId=deckId).all()
+        return {'cards': [card.to_dict() for card in cards]}
     elif request.method == 'DELETE':
         card = Card.query.get(cardId)
         db.session.delete(card)
         db.session.commit()
-        decks = Deck.query.filter_by(userId=userId).all()
-        return {'decks': [deck.to_dict() for deck in decks]}
+        cards = Card.query.filter_by(userId=userId, deckId=deckId).all()
+        return {'cards': [card.to_dict() for card in cards]}
     else:
         raise Exception('Invalid request method, try a different route')
 
