@@ -1,0 +1,26 @@
+#nav {
+    background-color: #2C1328;
+    height: 50px;
+    box-shadow: 0.0625rem 0.0625rem 0.325rem -2px #5F3C5D;
+    
+}
+
+#nav_span {
+   display: flex;
+   justify-content: space-between; 
+   align-items: center;
+}
+
+.navlink {
+    color: white;
+    text-decoration: none;
+    background-color: #29304A;
+    border: 1px solid #D2CCCC;
+    border-radius: 5px;
+    height: fit-content;
+    font-size: 1.5rem;
+}
+
+.nav_active {
+    color: #5094A7;
+}
