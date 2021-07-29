@@ -16,3 +16,11 @@ class NotebookForm(FlaskForm):
             return False
         else:
             return True
+
+    def validate_title(self):
+        title = self.title.data
+        if title == '':
+            self.title.errors.append('Please enter a value for the title of this notebook.')
+            return False
+        else:
+            return True

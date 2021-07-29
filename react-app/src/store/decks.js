@@ -127,7 +127,7 @@ export const getCards = (userId, deckId) => async (dispatch) => {
 // create a new card
 export const createCard = (userId, deckId, cardVals) => async (dispatch) => {
     
-    const response = await fetch(`/api/users/${userId}/decks/${deckId}/notes`, {
+    const response = await fetch(`/api/users/${userId}/decks/${deckId}/cards`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -195,16 +195,16 @@ export const deleteCard = (userId, deckId, cardId) => async (dispatch) => {
 const initialState = { decks: null, deckErrors: null, cards: null, cardErrors: null};
 
 export default function reducer(state = initialState, action) {
-  switch (action.type) {
-    case SET_DECKS:
-      return { ...state, decks: action.payload, deckErrors: null }
-    case SET_CARDS:
-        return { ...state, cards: action.payload, cardErrors: null }
-    case SET_DECK_ERRORS:
-        return { ...state, deckErrors: action.payload }
-    case SET_CARD_ERRORS:
-        return { ...state, cardErrors: action.payload }
-    default:
-      return state;
+    switch (action.type) {
+        case SET_DECKS:
+        return { ...state, decks: action.payload, deckErrors: null }
+        case SET_CARDS:
+            return { ...state, cards: action.payload, cardErrors: null }
+        case SET_DECK_ERRORS:
+            return { ...state, deckErrors: action.payload }
+        case SET_CARD_ERRORS:
+            return { ...state, cardErrors: action.payload }
+        default:
+        return state;
     }
 }
