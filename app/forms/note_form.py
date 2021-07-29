@@ -1,22 +1,20 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, BooleanField
+from wtforms import StringField, TextAreaField, BooleanField, IntegerField
 from wtforms.validators import DataRequired, ValidationError
 from app.models import Note
 
-# def user_exists(form, field):
-#     # Checking if user exists
-#     email = field.data
-#     user = User.query.filter(User.email == email).first()
-#     if user:
-#         raise ValidationError('Email address is already in use.')
-
-def title_exists(form, field):
-    title = field.data
-    note = Note.query.filter_by(title=title).first()
-    if note:
-         raise ValidationError('A note with that title already exists.')
-
 class NoteForm(FlaskForm):
-    title = StringField('title', validators=[DataRequired(), title_exists], )
+    title = StringField('title', validators=[DataRequired()], )
     body = TextAreaField('body', validators=[DataRequired()])
-    share = BooleanField('share', validators=[DataRequired()])
+    share = BooleanField('share', default=False)
+    userId = IntegerField('userId')
+
+    def title_exists(self):
+        title = self.title.data
+        userId = self.userId.data
+        notebook = Note.query.filter_by(userId=userId, title=title).first()
+        if notebook:
+            self.title.errors.append('Note with that title already exists.')
+            return False
+        else:
+            return True
