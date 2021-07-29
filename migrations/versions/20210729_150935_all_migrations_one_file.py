@@ -1,8 +1,8 @@
-"""all_models_one_file
+"""all_migrations_one_file
 
-Revision ID: 3922af1dee9c
+Revision ID: b2102cfd9a29
 Revises: 
-Create Date: 2021-07-27 18:24:51.402080
+Create Date: 2021-07-29 15:09:35.344007
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '3922af1dee9c'
+revision = 'b2102cfd9a29'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -33,13 +33,13 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user1', sa.Integer(), nullable=False),
     sa.Column('user2', sa.Integer(), nullable=False),
-    sa.Column('status', sa.Boolean(), nullable=False),
-    sa.Column('unique', sa.Integer(), nullable=False),
+    sa.Column('accepted', sa.Boolean(), nullable=False),
+    sa.Column('requestor', sa.Boolean(), nullable=False),
     sa.Column('createdAt', sa.DateTime(), nullable=True),
+    sa.Column('updatedAt', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['user1'], ['users.id'], ),
     sa.ForeignKeyConstraint(['user2'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('unique')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('decks',
     sa.Column('id', sa.Integer(), nullable=False),

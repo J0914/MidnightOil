@@ -242,46 +242,52 @@ def classmate(userId):
     classmates = Classmate.query.filter_by(user1=userId).all()
     return {'classmates': [classmate.to_dict() for classmate in classmates]}
 
-# send a friend request to classmate
-@user_routes.route('/<int:userId>/classmates/<int:classmateId>', methods=['POST'])
+# send a friend request to classmate, accept/refuse friend request, remove a classmate from list.
+@user_routes.route('/<int:userId>/classmates/<int:classmateId>', methods=['POST', 'PATCH', 'DELETE'])
 # @login_required
-def post_classmates(userId, classmateId):
-    unique = int(str(userId) + str(classmateId))
-    form = ClassmateForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    form['user1'].data = userId
-    form['user2'].data = classmateId
-    form['unique'].data = unique
-    if form.validate_on_submit() and form.friendship_exists():
-        classmate = Classmate(user1=userId, user2=classmateId, unique=unique, status=False)
-        db.session.add(classmate)
-        db.session.commit()
-        classmates = Classmate.query.filter_by(user1=userId).all()
-        return {'classmates': [classmate.to_dict() for classmate in classmates]}
-    else:
-        return jsonify({'errors': form.errors})
-
-# accept/refuse a friend request or delete a classmate from your list.
-@user_routes.route('/<int:userId>/classmates/<int:classmateId>', methods=['PATCH', 'DELETE'])
-# @login_required
-def patch_and_delete_classmates(userId, classmateId):
+def post_patch_delete_classmates(userId, classmateId):
     data = request.get_json()
-    if request.method == 'PATCH':
-        friendship = Classmate.query.filter_by(user1=userId, user2=classmateId).first()
-        if data['accept'] == True:
-            friendship.status = True
+
+    if request.method == 'POST':
+        form = ClassmateForm()
+        form['csrf_token'].data = request.cookies['csrf_token']
+        form['user1'].data = userId
+        form['user2'].data = classmateId
+        if form.validate_on_submit() and form.friendship_exists():
+            classmate1 = Classmate(user1=userId, user2=classmateId, requestor=True)
+            classmate2 = Classmate(user1=classmateId, user2=userId)
+            db.session.add(classmate1)
+            db.session.add(classmate2)
             db.session.commit()
             classmates = Classmate.query.filter_by(user1=userId).all()
             return {'classmates': [classmate.to_dict() for classmate in classmates]}
         else:
-            db.session.delete(friendship)
+            return jsonify({'errors': form.errors})
+
+    elif request.method == 'PATCH':
+        friendship1 = Classmate.query.filter_by(user1=userId, user2=classmateId).first()
+        friendship2 = Classmate.query.filter_by(user1=classmateId, user2=userId).first()
+        if 'accept' in data.keys() and data['accept'] == True and friendship1.requestor == False:
+            friendship1.accepted = True
+            friendship2.accepted = True
             db.session.commit()
             classmates = Classmate.query.filter_by(user1=userId).all()
             return {'classmates': [classmate.to_dict() for classmate in classmates]}
+        elif 'accept' in data.keys() and data['accept'] == False:
+            db.session.delete(friendship1)
+            db.session.delete(friendship2)
+            db.session.commit()
+            classmates = Classmate.query.filter_by(user1=userId).all()
+            return {'classmates': [classmate.to_dict() for classmate in classmates]}
+        else:
+            raise Exception('Did not include "accept" in data obj')
+
     elif request.method == 'DELETE':
-        friendship = Classmate.query.filter_by(user1=userId, user2=classmateId).first()
-        if friendship:
-            db.session.delete(friendship)
+        friendship1 = Classmate.query.filter_by(user1=userId, user2=classmateId).first()
+        friendship2 = Classmate.query.filter_by(user1=classmateId, user2=userId).first()
+        if friendship1 and friendship2:
+            db.session.delete(friendship1)
+            db.session.delete(friendship2)
             db.session.commit()
             classmates = Classmate.query.filter_by(user1=userId).all()
             return {'classmates': [classmate.to_dict() for classmate in classmates]}
@@ -289,3 +295,5 @@ def patch_and_delete_classmates(userId, classmateId):
             raise Exception('Friendship does not exist')
     else:
         raise Exception('Invalid request method, try a different route')
+
+        
