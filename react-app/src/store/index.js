@@ -3,9 +3,10 @@ import thunk from 'redux-thunk';
 import session from './session'
 import notebooks from './notebooks'
 import decks from './decks'
+import classmates from './classmates'
 
 const rootReducer = combineReducers({
-  session, notebooks, decks
+  session, notebooks, decks, classmates
 });
 
 
