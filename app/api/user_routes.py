@@ -162,19 +162,19 @@ def patch_and_delete_decks(userId, deckId):
 
 # <<<<< User Cards >>>>>
 
-# create a new note
-@user_routes.route('/<int:userId>/decks/<int:deckId>/cards', methods=['POST'])
-# @login_required
-def post_cards(userId, notebookId):
-    form = NoteForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    form['userId'].data = userId
-    if form.validate_on_submit() and form.title_exists():
-        data = request.get_json()
-        note = Note(userId=userId, title=data['title'], body=data['body'], notebookId=notebookId, share=data['share'])
-        db.session.add(note)
-        db.session.commit()
-        notebooks = Notebook.query.filter_by(userId=userId).all()
-        return {'notebooks': [notebook.to_dict() for notebook in notebooks]}
-    else: 
-        return jsonify({'errors': form.errors})
+# # create a new note
+# @user_routes.route('/<int:userId>/decks/<int:deckId>/cards', methods=['POST'])
+# # @login_required
+# def post_cards(userId, notebookId):
+#     form = NoteForm()
+#     form['csrf_token'].data = request.cookies['csrf_token']
+#     form['userId'].data = userId
+#     if form.validate_on_submit() and form.title_exists():
+#         data = request.get_json()
+#         note = Note(userId=userId, title=data['title'], body=data['body'], notebookId=notebookId, share=data['share'])
+#         db.session.add(note)
+#         db.session.commit()
+#         notebooks = Notebook.query.filter_by(userId=userId).all()
+#         return {'notebooks': [notebook.to_dict() for notebook in notebooks]}
+#     else: 
+#         return jsonify({'errors': form.errors})
