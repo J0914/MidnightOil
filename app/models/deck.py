@@ -10,6 +10,7 @@ class Deck(db.Model):
     share = db.Column(db.Boolean, default=False, nullable=False)
     createdAt = db.Column(db.DateTime, default=datetime.datetime.now())
     updatedAt = db.Column(db.DateTime, default=datetime.datetime.now())
+    cards = db.relationship('Card', backref='deck', lazy=True)
 
     def to_dict(self):
         return {
@@ -19,4 +20,5 @@ class Deck(db.Model):
             'share': self.share,
             'createdAt': self.createdAt,
             'updatedAt': self.updatedAt,
+            'cards': {card.id: card.to_dict() for card in self.cards}
         }

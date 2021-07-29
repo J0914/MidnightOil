@@ -14,8 +14,9 @@ class Classmate(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'userId': self.userId,
-            'classmateId': self.classmateId,
+            'user1': self.user1,
+            'user2': self.user2,
+            'status': self.status,
             'unique': self.uniqueCheck,
             'createdAt': self.createdAt,
         }
