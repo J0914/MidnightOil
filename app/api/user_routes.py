@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.models import db, User, Notebook, Note, Deck, Card, Classmate
-from app.forms import NotebookForm, NoteForm, DeckForm, CardForm
+from app.forms import NotebookForm, NoteForm, DeckForm, CardForm, ClassmateForm
 
 user_routes = Blueprint('users', __name__)
 
@@ -60,7 +60,7 @@ def patch_and_delete_notebooks(userId, notebookId):
         notebooks = Notebook.query.filter_by(userId=userId).all()
         return {'notebooks': [notebook.to_dict() for notebook in notebooks]}
     else:
-        raise ValueError('Invalid request method, try a different route')
+        raise Exception('Invalid request method, try a different route')
 
 # <<<<< User Notes >>>>>
 
@@ -104,7 +104,7 @@ def patch_and_delete_notes(userId, notebookId, noteId):
         notebooks = Notebook.query.filter_by(userId=userId).all()
         return {'notebooks': [notebook.to_dict() for notebook in notebooks]}
     else:
-        raise ValueError('Invalid request method, try a different route')
+        raise Exception('Invalid request method, try a different route')
 
 # <<<<< User Decks >>>>>
 
@@ -146,7 +146,7 @@ def patch_and_delete_decks(userId, deckId):
         decks = Deck.query.filter_by(userId=userId).all()
         return {'decks': [deck.to_dict() for deck in decks]}
     else:
-        raise ValueError('Invalid request method, try a different route')
+        raise Exception('Invalid request method, try a different route')
 
 
 # <<<<< User Cards >>>>>
@@ -190,4 +190,62 @@ def patch_and_delete_cards(userId, deckId, cardId):
         decks = Deck.query.filter_by(userId=userId).all()
         return {'decks': [deck.to_dict() for deck in decks]}
     else:
-        raise ValueError('Invalid request method, try a different route')
+        raise Exception('Invalid request method, try a different route')
+
+
+# <<<<< User Classmates >>>>>
+
+# get classmates
+@user_routes.route('/<int:userId>/classmates')
+# @login_required
+def classmate(userId):
+    classmates = Classmate.query.filter_by(user1=userId).all()
+    return {'classmates': [classmate.to_dict() for classmate in classmates]}
+
+# send a friend request to classmate
+@user_routes.route('/<int:userId>/classmates/<int:classmateId>', methods=['POST'])
+# @login_required
+def post_classmates(userId, classmateId):
+    unique = int(str(userId) + str(classmateId))
+    form = ClassmateForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    form['user1'].data = userId
+    form['user2'].data = classmateId
+    form['unique'].data = unique
+    if form.validate_on_submit() and form.friendship_exists():
+        classmate = Classmate(user1=userId, user2=classmateId, unique=unique, status=False)
+        db.session.add(classmate)
+        db.session.commit()
+        classmates = Classmate.query.filter_by(user1=userId).all()
+        return {'classmates': [classmate.to_dict() for classmate in classmates]}
+    else:
+        return jsonify({'errors': form.errors})
+
+# accept/refuse a friend request or delete a classmate from your list.
+@user_routes.route('/<int:userId>/classmates/<int:classmateId>', methods=['PATCH', 'DELETE'])
+# @login_required
+def patch_and_delete_classmates(userId, classmateId):
+    data = request.get_json()
+    if request.method == 'PATCH':
+        friendship = Classmate.query.filter_by(user1=userId, user2=classmateId).first()
+        if data['accept'] == True:
+            friendship.status = True
+            db.session.commit()
+            classmates = Classmate.query.filter_by(user1=userId).all()
+            return {'classmates': [classmate.to_dict() for classmate in classmates]}
+        else:
+            db.session.delete(friendship)
+            db.session.commit()
+            classmates = Classmate.query.filter_by(user1=userId).all()
+            return {'classmates': [classmate.to_dict() for classmate in classmates]}
+    elif request.method == 'DELETE':
+        friendship = Classmate.query.filter_by(user1=userId, user2=classmateId).first()
+        if friendship:
+            db.session.delete(friendship)
+            db.session.commit()
+            classmates = Classmate.query.filter_by(user1=userId).all()
+            return {'classmates': [classmate.to_dict() for classmate in classmates]}
+        else:
+            raise Exception('Friendship does not exist')
+    else:
+        raise Exception('Invalid request method, try a different route')

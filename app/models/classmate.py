@@ -17,6 +17,6 @@ class Classmate(db.Model):
             'user1': self.user1,
             'user2': self.user2,
             'status': self.status,
-            'unique': self.uniqueCheck,
+            'unique': self.unique,
             'createdAt': self.createdAt,
         }

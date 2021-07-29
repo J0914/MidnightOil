@@ -16,10 +16,10 @@ class CardForm(FlaskForm):
         front = Card.query.filter_by(deckId=deckId, front=front).first()
         back = Card.query.filter_by(deckId=deckId, back=back).first()
         if front:
-            self.title.errors.append('The front of this card is identical to another card in this deck.')
+            self.front.errors.append('The front of this card is identical to another card in this deck.')
             return False
         elif back:
-            self.title.errors.append('The back of this card is identical to another card in this deck.')
+            self.back.errors.append('The back of this card is identical to another card in this deck.')
             return False
         else:
             return True
