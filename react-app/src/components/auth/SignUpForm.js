@@ -13,6 +13,7 @@ const SignUpForm = () => {
   const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
+  console.log(email)
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -68,6 +69,8 @@ const SignUpForm = () => {
           name='username'
           onChange={updateUsername}
           value={username}
+          required={true}
+          placeholder='must be 3 - 40 '
         ></input>
       </div>
       <div>
@@ -77,6 +80,7 @@ const SignUpForm = () => {
           name='fName'
           onChange={updateFName}
           value={fName}
+          required={true}
         ></input>
       </div>
       <div>
@@ -86,6 +90,7 @@ const SignUpForm = () => {
           name='lName'
           onChange={updateLName}
           value={lName}
+          required={true}
         ></input>
       </div>
       <div>
@@ -95,6 +100,7 @@ const SignUpForm = () => {
           name='email'
           onChange={updateEmail}
           value={email}
+          required={true}
         ></input>
       </div>
       <div>
@@ -104,6 +110,7 @@ const SignUpForm = () => {
           name='password'
           onChange={updatePassword}
           value={password}
+          required={true}
         ></input>
       </div>
       <div>

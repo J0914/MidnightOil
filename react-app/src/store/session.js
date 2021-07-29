@@ -1,17 +1,34 @@
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
+const SET_NOTEBOOKS = 'session/SET_NOTEBOOKS';
+const SET_DECKS = 'session/SET_DECKS';
+const SET_CLASSMATES = 'session/SET_CLASSMATES';
 
 const setUser = (user) => ({
   type: SET_USER,
   payload: user
 });
 
+const setNotebooks = (notebooks) => ({
+  type: SET_NOTEBOOKS,
+  payload: notebooks
+});
+
+const setDecks = (decks) => ({
+  type: SET_DECKS,
+  payload: decks
+});
+
+const setClassmates = (classmates) => ({
+  type: SET_CLASSMATES,
+  payload: classmates
+});
+
 const removeUser = () => ({
   type: REMOVE_USER,
 })
 
-const initialState = { user: null };
 
 export const authenticate = () => async (dispatch) => {
   const response = await fetch('/api/auth/', {
@@ -24,7 +41,7 @@ export const authenticate = () => async (dispatch) => {
     if (data.errors) {
       return;
     }
-  
+    
     dispatch(setUser(data));
   }
 }
@@ -54,7 +71,7 @@ export const login = (email, password) => async (dispatch) => {
   } else {
     return ['An error occurred. Please try again.']
   }
-
+  
 }
 
 export const logout = () => async (dispatch) => {
@@ -63,7 +80,7 @@ export const logout = () => async (dispatch) => {
       'Content-Type': 'application/json',
     }
   });
-
+  
   if (response.ok) {
     dispatch(removeUser());
   }
@@ -99,13 +116,16 @@ export const signUp = (username, fName, lName, email, password) => async (dispat
   }
 }
 
+const initialState = { user: null };
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
       return { user: action.payload }
-    case REMOVE_USER:
-      return { user: null }
+      case REMOVE_USER:
+        return { user: null }
     default:
       return state;
+    }
   }
-}
+  

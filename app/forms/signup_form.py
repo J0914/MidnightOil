@@ -38,7 +38,7 @@ def email_length(form, field):
     email = form.email.data
     # checking if email and password are more than 3 and less than 255 chars.
     if len(email) < 3 or len(email) > 255:
-        raise ValidationError('Email be between 3 and 255 characters.')
+        raise ValidationError('Email must be between 3 and 255 characters.')
 
 def password_length(form, field):
     password = field.data

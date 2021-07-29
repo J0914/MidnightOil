@@ -44,6 +44,4 @@ class User(db.Model, UserMixin):
             'fName': self.fName,
             'lName': self.lName,
             'email': self.email,
-            'notebooks': {notebook.id: notebook.to_dict() for notebook in self.notebooks},
-            'decks': {deck.id: deck.to_dict() for deck in self.decks},
         }

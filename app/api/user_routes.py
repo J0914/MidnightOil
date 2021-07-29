@@ -23,6 +23,13 @@ def user(id):
 
 # <<<<< User Notebooks >>>>>
 
+# get current user notebooks
+@user_routes.route('/<int:userId>/notebooks')
+# @login_required
+def get_notebooks(userId):
+    notebooks = Notebook.query.filter_by(userId=userId).all()
+    return {'notebooks': [notebook.to_dict() for notebook in notebooks]}
+
 # create a new notebook
 @user_routes.route('/<int:userId>/notebooks', methods=['POST'])
 # @login_required
@@ -48,7 +55,7 @@ def patch_and_delete_notebooks(userId, notebookId):
     if request.method == 'PATCH':
         data = request.get_json()
         notebook = Notebook.query.get(notebookId)
-        if data['title']:
+        if 'title' in data.keys() and data['title'] != '':
             notebook.title = data['title']
         db.session.commit()
         notebooks = Notebook.query.filter_by(userId=userId).all()
@@ -64,6 +71,13 @@ def patch_and_delete_notebooks(userId, notebookId):
 
 # <<<<< User Notes >>>>>
 
+# get current notebooks notes
+@user_routes.route('/<int:userId>/notebooks/<int:notebookId>/notes')
+# @login_required
+def get_notes(userId,notebookId):
+    notes = Note.query.filter_by(userId=userId, notebookId=notebookId).all()
+    return {'notes': [note.to_dict() for note in notes]}
+
 # create a new note
 @user_routes.route('/<int:userId>/notebooks/<int:notebookId>/notes', methods=['POST'])
 # @login_required
@@ -76,8 +90,8 @@ def post_notes(userId, notebookId):
         note = Note(userId=userId, title=data['title'], body=data['body'], notebookId=notebookId, share=data['share'])
         db.session.add(note)
         db.session.commit()
-        notebooks = Notebook.query.filter_by(userId=userId).all()
-        return {'notebooks': [notebook.to_dict() for notebook in notebooks]}
+        notes = Note.query.filter_by(userId=userId, notebookId=notebookId).all()
+        return {'notes': [note.to_dict() for note in notes]}
     else: 
         return jsonify({'errors': form.errors})
 
@@ -88,25 +102,32 @@ def patch_and_delete_notes(userId, notebookId, noteId):
     if request.method == 'PATCH':
         data = request.get_json()
         note = Note.query.get(noteId)
-        if data['title']:
+        if 'title' in data.keys() and data['title'] != '':
             note.title = data['title']
-        if data['body']:
+        if 'body' in data.keys() and data['body'] != '':
             note.body = data['body']
-        if data['share']:
+        if 'share' in data.keys():
             note.share = data['share']
         db.session.commit()
-        notebooks = Notebook.query.filter_by(userId=userId).all()
-        return {'notebooks': [notebook.to_dict() for notebook in notebooks]}
+        notes = Note.query.filter_by(userId=userId, notebookId=notebookId).all()
+        return {'notes': [note.to_dict() for note in notes]}
     elif request.method == 'DELETE':
         note = Note.query.get(noteId)
         db.session.delete(note)
         db.session.commit()
-        notebooks = Notebook.query.filter_by(userId=userId).all()
-        return {'notebooks': [notebook.to_dict() for notebook in notebooks]}
+        notes = Note.query.filter_by(userId=userId, notebookId=notebookId).all()
+        return {'notes': [note.to_dict() for note in notes]}
     else:
         raise Exception('Invalid request method, try a different route')
 
 # <<<<< User Decks >>>>>
+
+# get current user decks
+@user_routes.route('/<int:userId>/decks')
+# @login_required
+def get_decks(userId):
+    decks = Deck.query.filter_by(userId=userId).all()
+    return {'decks': [deck.to_dict() for deck in decks]}
 
 # create a new deck
 @user_routes.route('/<int:userId>/decks', methods=['POST'])
@@ -132,9 +153,9 @@ def patch_and_delete_decks(userId, deckId):
     if request.method == 'PATCH':
         data = request.get_json()
         deck = Deck.query.get(deckId)
-        if data['title']:
+        if 'title' in data.keys() and data['title'] != '':
             deck.title = data['title']
-        if data['share']:
+        if 'share' in data.keys() and data['share'] != '':
             deck.share = data['share']
         db.session.commit()
         decks = Deck.query.filter_by(userId=userId).all()
@@ -150,6 +171,13 @@ def patch_and_delete_decks(userId, deckId):
 
 
 # <<<<< User Cards >>>>>
+
+# get current decks cards
+@user_routes.route('/<int:userId>/decks/<int:deckId>/cards')
+# @login_required
+def get_cards(userId, deckId):
+    cards = Card.query.filter_by(userId=userId, deckId=deckId).all()
+    return {'cards': [card.to_dict() for card in cards]}
 
 # create a new card
 @user_routes.route('/<int:userId>/decks/<int:deckId>/cards', methods=['POST'])
@@ -172,13 +200,13 @@ def post_cards(userId, deckId):
 # edit or delete a card
 @user_routes.route('/<int:userId>/decks/<int:deckId>/cards/<int:cardId>', methods=['PATCH', 'DELETE'])
 # @login_required
-def patch_and_delete_cards(userId, deckId, cardId):
+def patch_and_delete_cards(userId, cardId):
     if request.method == 'PATCH':
         data = request.get_json()
         card = Card.query.get(cardId)
-        if data['front']:
+        if 'front' in data.keys() and data['front'] != '':
             card.front = data['front']
-        if data['back']:
+        if 'back' in data.keys() and data['back'] != '':
             card.back = data['back']
         db.session.commit()
         decks = Deck.query.filter_by(userId=userId).all()
