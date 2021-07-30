@@ -6,6 +6,10 @@ body {
   font-family: Montserrat;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: Marcellus;
+}
+
 #root {
     z-index: 1;
     position: absolute;
@@ -25,11 +29,6 @@ button {
   border: none;
   font-family: Marcellus;
   box-sizing: border-box;
-}
-
-button:hover {
-  background-color: #16131E  ;
-  color: #C1BDBE ;
 }
 
 .title h1{
@@ -64,7 +63,7 @@ then on .twinkling we can add an animation property and use these rules for it. 
     to {background-position:-10000px 5000px;}
 }
 
-.stars, .twinkling {
+.stars, .twinkling, .smoke {
   margin: 0;
   padding: 0;
   position:absolute;
@@ -92,4 +91,16 @@ then on .twinkling we can add an animation property and use these rules for it. 
   /* this animation makes the twinkle pic infinitely move from top to bottom
   over .3seconds. If i want it to go faster or slower, change the time */
   animation:move-twink-back 300s linear infinite;
-}
+} 
+
+.smoke {
+  margin: 0;
+  padding: 0;
+  background:transparent url(https://i.ibb.co/b7NqqXL/Soft-clouds-of-colorful-smoke-dark-abstract-background.jpg) repeat top center;
+  z-index:1;
+  opacity: .12;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} 
