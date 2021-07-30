@@ -20,7 +20,7 @@ def email_exists_and_password_matches(form, field):
     if not user:
         raise ValidationError('No user with that email, check your spelling!')
     if not user.check_password(password):
-        raise ValidationError('Password was incorrect.')
+        raise ValidationError('Password is incorrect.')
 
 
 class LoginForm(FlaskForm):

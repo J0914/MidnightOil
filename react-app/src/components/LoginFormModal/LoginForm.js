@@ -58,6 +58,7 @@ const LoginForm = () => {
         ))}
       </div>
         <div id={styles.login_inputs__container}>
+            <div className={styles.login_organize_div}>
             <div className={styles.login_input__div}>
                 <label className={styles.login_label} htmlFor='email'>Email</label>
                 <input
@@ -66,6 +67,7 @@ const LoginForm = () => {
                 placeholder='Email'
                 value={email}
                 onChange={updateEmail}
+                required={true}
                 className={styles.login_input}
                 />
             </div>
@@ -77,8 +79,10 @@ const LoginForm = () => {
                 placeholder='Password'
                 value={password}
                 onChange={updatePassword}
+                required={true}
                 className={styles.login_input}
                 />
+            </div>
             </div>
         </div>
         <div id={styles.login_buttons__div}>

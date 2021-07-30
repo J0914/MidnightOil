@@ -51,6 +51,7 @@
     width: 100%;
     height: fit-content;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 5px;
@@ -91,4 +92,9 @@
 
 .error {
     color: red;
+}
+
+.login_organize_div {
+    width: 100%;
+    display: flex;
 }
