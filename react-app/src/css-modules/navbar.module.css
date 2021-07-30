@@ -1,0 +1,18 @@
+#nav {
+    background: linear-gradient(0.25turn, #020211, #13011B);
+    height: 50px;  
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%; 
+}
+
+.navlink {
+    color: #458fa7;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+.nav_active {
+    color: white;
+}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import SignupForm from './SignupForm';
 
-import styles from '../css-modules/auth.module.css'
+import styles from '../../css-modules/auth.module.css'
 
 function SignupFormModal() {
   const [showModal, setShowModal] = useState(false);

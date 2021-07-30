@@ -2,7 +2,7 @@ import React from 'react';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 
-import styles from '../css-modules/splash.module.css';
+import styles from '../../css-modules/splash.module.css';
 
 const Splash = () => {
     return (

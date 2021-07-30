@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 
-import styles from '../css-modules/loginform.module.css';
+import styles from '../../css-modules/loginform.module.css';
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
