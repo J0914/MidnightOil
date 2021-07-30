@@ -5,7 +5,6 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import NavBar from './components/NavBar';
 import Splash from './components/Splash';
 import ProfilePage from './components/ProfilePage';
-import User from './components/User';
 import { authenticate } from './store/session';
 
 function App() {
@@ -29,9 +28,6 @@ function App() {
         <ProtectedRoute path='/profile' exact={true} >
           <NavBar />
           <ProfilePage />
-        </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
         </ProtectedRoute>
         <Route path='/' exact={true} >
           <Splash />
