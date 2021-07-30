@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 
+import styles from '../css-modules/signupform.module.css';
+
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
@@ -52,78 +54,99 @@ const SignUpForm = () => {
   };
 
   if (user) {
-    return <Redirect to='/' />;
+    return <Redirect to='/profile' />;
   }
 
   return (
-    <form onSubmit={onSignUp}>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
-      </div>
-      <div>
-        <label>User Name</label>
-        <input
-          type='text'
-          name='username'
-          onChange={updateUsername}
-          value={username}
-          required={true}
-          placeholder='must be 3 - 40 '
-        ></input>
-      </div>
-      <div>
-        <label>First Name</label>
-        <input
-          type='text'
-          name='fName'
-          onChange={updateFName}
-          value={fName}
-          required={true}
-        ></input>
-      </div>
-      <div>
-        <label>Last Name</label>
-        <input
-          type='text'
-          name='lName'
-          onChange={updateLName}
-          value={lName}
-          required={true}
-        ></input>
-      </div>
-      <div>
-        <label>Email</label>
-        <input
-          type='text'
-          name='email'
-          onChange={updateEmail}
-          value={email}
-          required={true}
-        ></input>
-      </div>
-      <div>
-        <label>Password</label>
-        <input
-          type='password'
-          name='password'
-          onChange={updatePassword}
-          value={password}
-          required={true}
-        ></input>
-      </div>
-      <div>
-        <label>Repeat Password</label>
-        <input
-          type='password'
-          name='repeat_password'
-          onChange={updateRepeatPassword}
-          value={repeatPassword}
-          required={true}
-        ></input>
-      </div>
-      <button type='submit'>Sign Up</button>
+    <form id={styles.signup_form} onSubmit={onSignUp}>
+        <div id={styles.signup_content__wrapper}>
+            <div id={styles.signup_header__div}>
+                <h2 id={styles.signup_header}> Create an Account </h2>
+            </div>
+            <div id={styles.signup_errors}>
+                {errors.map((error, ind) => (
+                <li className={styles.error} key={ind}>{error}</li>
+                ))}
+            </div>
+            <div id={styles.signup_inputs__container}>
+                <div className={styles.signup_organize_div}>
+                <div className={styles.signup_input__div}>
+                    <label className={styles.signup_label}>First Name</label>
+                    <input
+                    type='text'
+                    name='fName'
+                    onChange={updateFName}
+                    value={fName}
+                    required={true}
+                    className={styles.signup_input}
+                    ></input>
+                </div>
+                <div className={styles.signup_input__div}>
+                    <label className={styles.signup_label}>Last Name</label>
+                    <input
+                    type='text'
+                    name='lName'
+                    onChange={updateLName}
+                    value={lName}
+                    required={true}
+                    className={styles.signup_input}
+                    ></input>
+                </div>
+                </div>
+                <div className={styles.signup_organize_div}>
+                    <div className={styles.signup_input__div}>
+                        <label className={styles.signup_label}>User Name</label>
+                        <input
+                        type='text'
+                        name='username'
+                        onChange={updateUsername}
+                        value={username}
+                        required={true}
+                        placeholder='must be 3 - 40 '
+                        className={styles.signup_input}
+                        ></input>
+                    </div>
+                    <div className={styles.signup_input__div}>
+                        <label className={styles.signup_label}>Email</label>
+                        <input
+                        type='text'
+                        name='email'
+                        onChange={updateEmail}
+                        value={email}
+                        required={true}
+                        className={styles.signup_input}
+                        ></input>
+                    </div>
+                </div>
+                <div className={styles.signup_organize_div}>
+                    <div className={styles.signup_input__div}>
+                        <label className={styles.signup_label}>Password</label>
+                        <input
+                        type='password'
+                        name='password'
+                        onChange={updatePassword}
+                        value={password}
+                        required={true}
+                        className={styles.signup_input}
+                        ></input>
+                    </div>
+                    <div className={styles.signup_input__div}>
+                        <label className={styles.signup_label}>Confirm</label>
+                        <input
+                        type='password'
+                        name='repeat_password'
+                        onChange={updateRepeatPassword}
+                        value={repeatPassword}
+                        required={true}
+                        className={styles.signup_input}
+                        ></input>
+                    </div>
+                </div>
+                <div id={styles.signup_buttons__div}>
+                <button className={styles.signup_btns} type='submit'>Sign Up</button>
+                </div>
+            </div>
+        </div>
     </form>
   );
 };

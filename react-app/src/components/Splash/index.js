@@ -18,9 +18,7 @@ const Splash = () => {
                 <div id={styles.auth_btns}>
                     <LoginFormModal />
                     <SignupFormModal />
-                    {/* <button id={styles.splash_login__btn}>Login</button> */}
-                    {/* <button id={styles.splash_signup__btn}>Signup</button> */}
-                </div>
+                    </div>
             </div>
         </div>
     )

@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import './index.css';
 import App from './App';
 import configureStore from './store';
+import { ModalProvider } from './context/Modal'
 import * as notebookActions from './store/notebooks'
 import * as deckActions from './store/decks'
 import * as classmateActions from './store/classmates'
@@ -19,7 +20,9 @@ if (process.env.NODE_ENV !== 'production') {
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
+      <ModalProvider>
         <App />
+      </ModalProvider>
       </Provider>
   </React.StrictMode>,
   document.getElementById('root')
