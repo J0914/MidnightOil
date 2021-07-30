@@ -1,0 +1,47 @@
+#modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+
+  .navLink:hover { 
+    background-color: #16131E  ;
+    color: #CED7E8 ;
+}
+.navLink {
+    font-family: Cinzel;
+    margin-left: 10px;
+    text-decoration: none;
+    background-color: #CED7E8 ;
+    color: #16131E ;
+    font-weight: 800;
+    border-radius: 5px;
+    border: none;
+    height: 40px;
+    width: auto;
+    display: flex;
+    box-sizing: border-box;
+    padding-left: 7px;
+    padding-right: 7px;
+    align-items: center;
+}
+  
+  #modal-background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+  
+  #modal-content {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0);
+  }

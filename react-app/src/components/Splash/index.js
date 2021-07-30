@@ -1,4 +1,6 @@
 import React from 'react';
+import LoginFormModal from '../LoginFormModal';
+import SignupFormModal from '../SignupFormModal';
 
 import styles from '../css-modules/splash.module.css';
 
@@ -14,8 +16,10 @@ const Splash = () => {
                     </div>
                 </div>
                 <div id={styles.auth_btns}>
-                    <button id={styles.splash_login__btn}>Login</button>
-                    <button id={styles.splash_signup__btn}>Signup</button>
+                    <LoginFormModal />
+                    <SignupFormModal />
+                    {/* <button id={styles.splash_login__btn}>Login</button> */}
+                    {/* <button id={styles.splash_signup__btn}>Signup</button> */}
                 </div>
             </div>
         </div>
