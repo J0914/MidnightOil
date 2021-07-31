@@ -8,6 +8,8 @@
     position: absolute;
     top: 60px;
     right: 0;
+    display: flex;
+    flex-direction: column;
     width: 300px;
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
     opacity: 0;
@@ -23,19 +25,13 @@
     transform: translateY(0);
 }
 
-.deck_menu ul {
+.deck_nav {
     list-style: none;
     padding: 0;
     margin: 0;
-}
-
-.deck_menu li {
     border-bottom: 1px solid #dddddd;
-}
-
-.deck_menu li NavLink {
     text-decoration: none;
-    color: white;
+    color: black;
     padding: 15px 20px;
     display: block;
 }
@@ -55,7 +51,7 @@
 }
 
 .deck_menu__trigger:hover {
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 8px 5px rgba(255, 255, 255, 0.3);
 }
 
 .deck_menu__trigger span {
