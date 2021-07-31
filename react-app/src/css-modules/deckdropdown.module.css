@@ -23,6 +23,8 @@
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+    overflow-y: auto;
+    max-height: 500px;
 }
 
 .deck_nav {

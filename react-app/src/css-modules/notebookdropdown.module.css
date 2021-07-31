@@ -28,6 +28,8 @@
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+    overflow-y: auto;
+    max-height: 500px;
 }
 
 .notebook_menu ul {
@@ -79,4 +81,18 @@
     font-size: 18px;
     font-weight: 700;
 
+}
+
+.notebook_container {
+    display: flex;
+
+}
+
+.add_note, .delete_notebook, .add_notebook {
+    background: none;
+}
+
+.notes_container {
+    overflow-y: auto;
+    height: 100px;
 }

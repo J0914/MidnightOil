@@ -1,0 +1,11 @@
+.error {
+    color: red;
+}
+
+.notebook_form__submit {
+    background: none;
+}
+
+.notebook_form__cancel {
+    background: none;
+}
