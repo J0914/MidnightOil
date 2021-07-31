@@ -1,0 +1,44 @@
+#nav {
+    background: linear-gradient(0.25turn, #020211, #13011B);
+    height: 50px;  
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%; 
+}
+
+.navlink {
+    color: #458fa7;
+    text-decoration: none;
+    font-size: 1.5rem;
+    background: none;
+    font-family: Marcellus;
+    font-weight: bold;
+}
+
+/* .nav_active {
+    color: white;
+} */
+
+.notebook_container {
+    background-color: green;
+    height: fit-content;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    z-index: 3;
+}
+
+.nav_container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+#notebook_div {
+    position: inherit;
+    top: 50px;
+}
