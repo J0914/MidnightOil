@@ -88,8 +88,10 @@
 
 }
 
-.add_note, .delete_notebook, .add_notebook {
+.add_note, .delete_notebook, .add_notebook, .edit_notebook {
     background: none;
+    text-decoration: none;
+    font-size: .9rem;
 }
 
 .notes_container {
