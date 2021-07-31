@@ -31,7 +31,7 @@ const DecksDropdownMenu = () => {
             </button>
             {isOpen && <div ref={dropdownRef} className={`${styles.deck_menu} ${isOpen ? styles.active : styles.inactive}`}>
                 {decks?.map((deck) => (
-                    <NavLink key={deck.id} to={`/decks/${deck.id}`}>{deck.title}</NavLink>
+                    <NavLink className={styles.deck_nav} key={deck.id} to={`/decks/${deck.id}`}>{deck.title}</NavLink>
                 ))}
             </div>}
         </div>

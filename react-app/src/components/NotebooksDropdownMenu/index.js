@@ -20,11 +20,11 @@ const NotebooksDropdownMenu = () => {
             {isOpen && <div ref={dropdownRef} className={`${styles.notebook_menu} ${isOpen ? styles.active : styles.inactive}`}>
                 {notebooks?.map((notebook) => (
                     <>
-                    <ul key={notebook.id}>{notebook.title}</ul>
+                    <ul className={styles.notebook_title} key={notebook.id}>{notebook.title}</ul>
                         {
                             Object.values(notebook.notes).map(note => {
                                 return (
-                                    <NavLink to={`/notebook/${notebook.id}/notes/${note.id}`} key={note.id}>{note.title}</NavLink>
+                                    <NavLink className={styles.note_nav}to={`/notebook/${notebook.id}/notes/${note.id}`} key={note.id}>{note.title}</NavLink>
                                 )
                             })
                         }
