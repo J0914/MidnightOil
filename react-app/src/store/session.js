@@ -1,28 +1,10 @@
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
-const SET_NOTEBOOKS = 'session/SET_NOTEBOOKS';
-const SET_DECKS = 'session/SET_DECKS';
-const SET_CLASSMATES = 'session/SET_CLASSMATES';
 
 const setUser = (user) => ({
   type: SET_USER,
   payload: user
-});
-
-const setNotebooks = (notebooks) => ({
-  type: SET_NOTEBOOKS,
-  payload: notebooks
-});
-
-const setDecks = (decks) => ({
-  type: SET_DECKS,
-  payload: decks
-});
-
-const setClassmates = (classmates) => ({
-  type: SET_CLASSMATES,
-  payload: classmates
 });
 
 const removeUser = () => ({

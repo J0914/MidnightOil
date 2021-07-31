@@ -37,7 +37,7 @@ def post_notebooks(userId):
     form = NotebookForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     form['userId'].data = userId
-    if form.validate_on_submit() and form.title_exists() and form.validate_title():
+    if form.validate_on_submit() and form.title_exists():
         data = request.get_json()
         notebook = Notebook(userId=userId, title=data['title'])
         db.session.add(notebook)

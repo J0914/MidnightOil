@@ -14,12 +14,7 @@ class NotebookForm(FlaskForm):
         if notebook:
             self.title.errors.append('Notebook with that title already exists.')
             return False
-        else:
-            return True
-
-    def validate_title(self):
-        title = self.title.data
-        if title == '':
+        elif title == '':
             self.title.errors.append('Please enter a value for the title of this notebook.')
             return False
         else:

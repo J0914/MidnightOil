@@ -1,8 +1,6 @@
 // constants
 const SET_NOTEBOOKS = 'notebooks/SET_NOTEBOOKS';
 const SET_NOTES = 'notebooks/SET_NOTES';
-const SET_NOTE_ERRORS = 'notebooks/SET_NOTE_ERRORS';
-const SET_NOTEBOOK_ERRORS = 'notebooks/SET_NOTEBOOK_ERRORS';
 
 const setNotebooks = (notebooks) => ({
   type: SET_NOTEBOOKS,
@@ -14,16 +12,6 @@ const setNotes = (notes) => ({
   payload: notes
 });
 
-const setNoteErrors = (noteErrors) => ({
-    type: SET_NOTE_ERRORS,
-    payload: noteErrors
-});
-
-const setNotebookErrors = (notebookErrors) => ({
-    type: SET_NOTEBOOK_ERRORS,
-    payload: notebookErrors
-});
-
 // get all user notebooks
 export const getNotebooks = (userId) => async (dispatch) => {
   const response = await fetch(`/api/users/${userId}/notebooks`)
@@ -31,7 +19,8 @@ export const getNotebooks = (userId) => async (dispatch) => {
   if (response.ok) {
     const notebooks = await response.json();
     if (notebooks.errors) {
-        dispatch(setNotebookErrors(notebooks.errors))
+      let errs = Object.values(notebooks.errors)
+      return errs
     } else {
         dispatch(setNotebooks(notebooks.notebooks))
     }
@@ -54,7 +43,8 @@ export const createNotebook = (userId, title) => async (dispatch) => {
     if (response.ok) {
       const notebooks = await response.json();
       if (notebooks.errors) {
-        dispatch(setNotebookErrors(notebooks.errors))
+        let errs = Object.values(notebooks.errors)
+        return errs
       } else {
           dispatch(setNotebooks(notebooks.notebooks))
       }
@@ -77,7 +67,8 @@ export const editNotebook = (userId, notebookId, title) => async (dispatch) => {
     if (response.ok) {
       const notebooks = await response.json();
       if (notebooks.errors) {
-        dispatch(setNotebookErrors(notebooks.errors))
+        let errs = Object.values(notebooks.errors)
+        return errs
       } else {
           dispatch(setNotebooks(notebooks.notebooks))
       }
@@ -96,7 +87,8 @@ export const deleteNotebook = (userId, notebookId) => async (dispatch) => {
     if (response.ok) {
       const notebooks = await response.json();
       if (notebooks.errors) {
-        dispatch(setNotebookErrors(notebooks.errors));
+        let errs = Object.values(notebooks.errors)
+        return errs
     } else {
         dispatch(setNotebooks(notebooks.notebooks))
     }
@@ -113,7 +105,8 @@ export const getNotes = (userId, notebookId) => async (dispatch) => {
   if (response.ok) {
     const notes = await response.json();
     if (notes.errors) {
-        dispatch(setNoteErrors(notes.errors));
+      let errs = Object.values(notes.errors)
+      return errs
     } else {
         dispatch(setNotes(notes.notes))
     }
@@ -138,7 +131,8 @@ export const createNote = (userId, notebookId, noteVals) => async (dispatch) => 
     if (response.ok) {
         const notes = await response.json();
         if (notes.errors) {
-            dispatch(setNoteErrors(notes.errors));
+          let errs = Object.values(notes.errors)
+          return errs
         } else {
             dispatch(setNotes(notes.notes))
       }
@@ -162,7 +156,8 @@ export const editNote = (userId, notebookId, noteId, noteVals) => async (dispatc
     if (response.ok) {
       const notes = await response.json();
       if (notes.errors) {
-          dispatch(setNoteErrors(notes.errors));
+        let errs = Object.values(notes.errors)
+        return errs
         } else {
             dispatch(setNotes(notes.notes))
         }
@@ -181,7 +176,8 @@ export const deleteNote = (userId, notebookId, noteId) => async (dispatch) => {
     if (response.ok) {
         const notes = await response.json();
         if (notes.errors) {
-            dispatch(setNoteErrors(notes.errors));
+          let errs = Object.values(notes.errors)
+          return errs
         } else {
             dispatch(setNotes(notes.notes))
       }
@@ -193,18 +189,14 @@ export const deleteNote = (userId, notebookId, noteId) => async (dispatch) => {
 
 // window.store.dispatch(window.notebookActions.createNote(1, 1, {title: 'hello', body: 'omg it worked', share: false}));
 
-const initialState = { notebooks: null, notebookErrors: null, notes: null, noteErrors: null};
+const initialState = { notebooks: null, notes: null};
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_NOTEBOOKS:
-      return { ...state, notebooks: action.payload, notebookErrors: null }
+      return { ...state, notebooks: action.payload }
     case SET_NOTES:
-        return { ...state, notes: action.payload, noteErrors: null }
-    case SET_NOTEBOOK_ERRORS:
-        return { ...state, notebookErrors: action.payload }
-    case SET_NOTE_ERRORS:
-        return { ...state, noteErrors: action.payload }
+        return { ...state, notes: action.payload }
     default:
       return state;
     }
