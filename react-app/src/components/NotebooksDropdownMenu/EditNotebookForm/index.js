@@ -1,31 +1,31 @@
 import React from 'react';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import * as notebookActions from '../../store/notebooks'
+import * as notebookActions from '../../../store/notebooks'
 import {BsCheck, BsX} from 'react-icons/bs'
 
-import styles from '../../css-modules/notebookform.module.css';
+import styles from '../../../css-modules/notebookform.module.css';
 
-const NotebookForm = ({setShowNotebookForm}) => {
-    const [title, setTitle] = useState('')
+const EditNotebookForm = ({setShowEditNotebookForm, currentTitle, notebookId}) => {
+    const [title, setTitle] = useState(currentTitle)
     const [errors, setErrors] = useState([])
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
 
-    const createNotebook = async (e) => {
+    const editNotebook = async (e) => {
         e.preventDefault();
         let userId;
         if (user) userId = user.id
-        const data = await dispatch(notebookActions.createNotebook(userId, title));
+        const data = await dispatch(notebookActions.editNotebook(userId, notebookId, title));
         if (data) {
           setErrors(data);
         } else {
-            setShowNotebookForm(false)
+            setShowEditNotebookForm(false)
         }
       };
 
     return (
-        <form id={styles.notebook_form} onSubmit={createNotebook}>
+        <form id={styles.notebook_form} onSubmit={editNotebook}>
                 {errors.map((error, ind) => (
                 <li className={styles.error} key={ind}>{error}</li>
                 ))}
@@ -38,9 +38,9 @@ const NotebookForm = ({setShowNotebookForm}) => {
                 required={true}
                 />
                 <button type="submit" className={styles.notebook_form__submit}><BsCheck /></button>
-                <button onClick={() => setShowNotebookForm(false)} className={styles.notebook_form__cancel}><BsX /></button>
+                <button onClick={() => setShowEditNotebookForm(false)} className={styles.notebook_form__cancel}><BsX /></button>
             </form>
     )
 }
 
-export default NotebookForm;
+export default EditNotebookForm;
