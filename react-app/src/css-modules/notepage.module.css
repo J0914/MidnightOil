@@ -1,0 +1,68 @@
+.note_wrapper {
+    height: fit-content;
+    min-height: 93vh;
+    width: 95vw;
+    max-width: 1200px;
+    background-color: rgba(2, 2, 17, 1);
+    margin: auto;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    margin-top: .5%;
+    margin-bottom: 50px;
+    display: grid;
+    grid-template-rows: 100px 3fr;
+    grid-template-columns: 1fr, 5fr;
+    grid-template-areas:
+    '. header'
+    'sidebar editor'
+}
+
+#note_page__header {
+    color: white;
+    margin: 0;
+    margin-bottom: 2px;
+}
+
+#note_sidebar {
+    grid-area: sidebar;
+    height: 100%;
+    width: 100%;
+    min-width: 240px;
+}
+
+#note_header__div {
+    grid-area: header;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-right: 15px;
+    align-items: flex-end;
+    font-size: 3rem;
+}
+
+.btn_wrapper {
+    display: flex;
+}
+
+#editor_container {
+    grid-area: editor;
+    height: 100%;
+    width: 875px;
+    background-color: white;
+}
+
+#note_contents {
+    color: white;
+}
+
+.edit_and_delete {
+    background: none;
+    color: white;
+    font-size: 2.5rem;
+}
+
+.radio_label {
+    font-size: 1.5rem;
+    color: white;
+}

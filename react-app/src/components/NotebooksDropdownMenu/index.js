@@ -2,10 +2,12 @@ import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {NavLink} from 'react-router-dom';
-import {BsPlusCircle, BsDashCircle, BsTrash, BsPencil} from 'react-icons/bs'
+import {BsPlusCircle, BsDashCircle, BsTrash, BsPencil, BsX} from 'react-icons/bs'
 import NotebookForm from './NotebookForm'
 import EditNotebookForm from './EditNotebookForm'
+import NoteForm from './NoteForm'
 import * as notebookActions from '../../store/notebooks'
+import { Redirect } from 'react-router-dom';
 
 import styles from '../../css-modules/notebookdropdown.module.css'
 
@@ -14,16 +16,13 @@ const NotebooksDropdownMenu = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [showNotebookForm, setShowNotebookForm] = useState(false);
     const [showEditNotebookForm, setShowEditNotebookForm] = useState(false);
+    const [showNoteForm, setShowNoteForm] = useState(false);
     const dispatch = useDispatch();
 
     const user = useSelector(state => state.session.user)
     const notebooks = useSelector(state => state.notebooks.notebooks);
 
     const handleClick = () => setIsOpen(!isOpen);
-
-    const createNote = () => {
-        return;
-    }
 
     const deleteNotebook = (notebookId) => {
         let userId;
@@ -41,20 +40,36 @@ const NotebooksDropdownMenu = () => {
             </button>
             {isOpen && <div ref={dropdownRef} className={`${styles.notebook_menu} ${isOpen ? styles.active : styles.inactive}`}>
             <button className={styles.add_notebook} onClick={() => setShowNotebookForm(!showNotebookForm)}>Create Notebook {!showNotebookForm ? <BsPlusCircle /> : <BsDashCircle />}</button>
-            {showNotebookForm && <NotebookForm setShowNotebookForm={setShowNotebookForm} />}
+            {showNotebookForm && 
+            <div className={styles.form__wrapper}>
+            <NotebookForm setShowNotebookForm={setShowNotebookForm} />
+            <button onClick={() => setShowNotebookForm(false)} className={styles.close}><BsX /></button>
+            </div>
+            }
+                
                 {notebooks?.map((notebook) => (
                     <div  key={notebook.id}>
                     <div className={styles.notebook_container}>
-                        {!showEditNotebookForm && <ul className={styles.notebook_title}>{notebook.title}</ul>}
-                        {showEditNotebookForm && <EditNotebookForm setShowEditNotebookForm={setShowEditNotebookForm} currentTitle={notebook.title} notebookId={notebook.id}/>}
-                        { !showEditNotebookForm &&
+                        {!showEditNotebookForm && 
                         <>
+                        <ul className={styles.notebook_title}>{notebook.title}</ul>
                         <button className={styles.edit_notebook} onClick={() => setShowEditNotebookForm(true)}><BsPencil /></button>
                         <button className={styles.delete_notebook} onClick={() => deleteNotebook(notebook.id)}><BsTrash /></button>
                         </>
                         }
+                        {showEditNotebookForm && 
+                        <div className={styles.form__wrapper}>
+                        <EditNotebookForm setShowEditNotebookForm={setShowEditNotebookForm} currentTitle={notebook.title} notebookId={notebook.id}/>
+                        <button onClick={() => setShowEditNotebookForm(false)} className={styles.close}><BsX /></button>
+                        </div>}
                     </div>
-                        <NavLink className={styles.add_note} to={`/notebooks/${notebook.id}/notes`}>Create Note <BsPlusCircle /></NavLink>
+                        <button className={styles.add_note} onClick={() => setShowNoteForm(!showNoteForm)}>Create Note {!showNoteForm ? <BsPlusCircle /> : <BsDashCircle />}</button>
+                        {showNoteForm && 
+                        <div className={styles.form__wrapper}>
+                        <NoteForm notebookId={notebook.id} setShowNoteForm={setShowNoteForm} setIsOpen={setIsOpen} />
+                        <button onClick={() => setShowNoteForm(false)} className={styles.close}><BsX /></button>
+                        </div>}
+                        
                         <div className={styles.notes_container}>
                         {
                             Object.values(notebook.notes).map(note => {

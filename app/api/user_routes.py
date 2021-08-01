@@ -80,6 +80,13 @@ def get_notes(userId,notebookId):
     notes = Note.query.filter_by(userId=userId, notebookId=notebookId).all()
     return {'notes': [note.to_dict() for note in notes]}
 
+# get current note
+@user_routes.route('/<int:userId>/notebooks/<int:notebookId>/notes/<int:noteId>')
+# @login_required
+def get_note(userId, notebookId, noteId):
+    note = Note.query.filter_by(id=noteId).first()
+    return note.to_dict()
+
 # create a new note
 @user_routes.route('/<int:userId>/notebooks/<int:notebookId>/notes', methods=['POST'])
 # @login_required
@@ -89,7 +96,7 @@ def post_notes(userId, notebookId):
     form['userId'].data = userId
     if form.validate_on_submit() and form.title_exists() and form.validate_title_and_body():
         data = request.get_json()
-        note = Note(userId=userId, title=data['title'], body=data['body'], notebookId=notebookId, share=data['share'])
+        note = Note(userId=userId, title=data['title'], body=data['body'], notebookId=notebookId)
         db.session.add(note)
         db.session.commit()
         notes = Note.query.filter_by(userId=userId, notebookId=notebookId).all()

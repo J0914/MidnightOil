@@ -38,7 +38,6 @@ const NotebookForm = ({setShowNotebookForm}) => {
                 required={true}
                 />
                 <button type="submit" className={styles.notebook_form__submit}><BsCheck /></button>
-                <button onClick={() => setShowNotebookForm(false)} className={styles.notebook_form__cancel}><BsX /></button>
             </form>
     )
 }
