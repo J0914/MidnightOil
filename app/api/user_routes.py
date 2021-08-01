@@ -94,6 +94,7 @@ def post_notes(userId, notebookId):
     form = NoteForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     form['userId'].data = userId
+    form['notebookId'].data = notebookId
     if form.validate_on_submit() and form.title_exists() and form.validate_title_and_body():
         data = request.get_json()
         note = Note(userId=userId, title=data['title'], body=data['body'], notebookId=notebookId)

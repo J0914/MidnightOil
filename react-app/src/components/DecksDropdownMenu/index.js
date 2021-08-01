@@ -11,15 +11,14 @@ const DecksDropdownMenu = () => {
     const decks = useSelector(state => state.decks.decks);
 
     useEffect(() => {
-        const pageClickEvent = (e) => {
-            console.log(e);
-            if (isOpen) {
-                window.addEventListener('click', pageClickEvent);
-            }
-            return () => {
-                window.removeEventListener('click', pageClickEvent);
-            }
-        }
+        // const pageClickEvent = (e) => {
+        //     if (isOpen) {
+        //         window.addEventListener('click', pageClickEvent);
+        //     }
+        //     return () => {
+        //         window.removeEventListener('click', pageClickEvent);
+        //     }
+        // }
     }, [isOpen]);
 
     const handleClick = () => setIsOpen(!isOpen);

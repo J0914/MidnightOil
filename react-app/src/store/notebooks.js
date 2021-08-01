@@ -128,7 +128,6 @@ export const getNote = (userId, notebookId, noteId) => async (dispatch) => {
   
   if (response.ok) {
     const note = await response.json();
-    console.log('The NOte jflkdsajkjfklds', note)
     if (note.errors) {
       let errs = Object.values(note.errors)
       return errs
@@ -160,8 +159,11 @@ export const createNote = (userId, notebookId, noteVals) => async (dispatch) => 
           return errs
         } else {
             dispatch(setNotes(notes.notes))
+            const noteArr = Object.values(notes.notes)
+            const note = noteArr[noteArr.length - 1]
+            dispatch(setNote(note))
+            return(note)
       }
-      return null;
     } else {
         return ['response not okay, try again with better info']
     }
@@ -184,8 +186,11 @@ export const editNote = (userId, notebookId, noteId, noteVals) => async (dispatc
         return errs
         } else {
             dispatch(setNotes(notes.notes))
+            const noteArr = Object.values(notes.notes)
+            const note = noteArr[noteArr.length - 1]
+            dispatch(setNote(note))
+            return(note)
         }
-        return null;
     } else {
         return ['response not okay, try again with better info']
     }

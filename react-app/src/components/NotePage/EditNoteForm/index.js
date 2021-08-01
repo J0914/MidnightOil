@@ -2,17 +2,16 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as noteActions from '../../../store/notebooks'
-import {BsCheck} from 'react-icons/bs'
+import {BsCheck, BsX} from 'react-icons/bs'
 import { useHistory } from 'react-router-dom';
 
-import styles from '../../../css-modules/noteform.module.css';
+import styles from '../../../css-modules/editnoteform.module.css';
 
 
-const NoteForm = ({setShowNoteForm, notebookId, setIsOpen}) => {
+const EditNoteForm = ({setShowEditNoteForm, notebookId, title, setTitle, noteId}) => {
     const [errors, setErrors] = useState([])
-    const [title, setTitle] = useState('')
+    const [originalTitle, setOriginalTitle ] = useState(null)
     const dispatch = useDispatch()
-    const history = useHistory()
     const user = useSelector(state => state.session.user)
 
     const createNote = async (e) => {
@@ -21,24 +20,23 @@ const NoteForm = ({setShowNoteForm, notebookId, setIsOpen}) => {
         if (user) userId = user.id
         const noteVals = {
             title: title,
-            body: 'New Note'
         }
-        const note = await dispatch(noteActions.createNote(userId, notebookId, noteVals));
+        const note = await dispatch(noteActions.editNote(userId, notebookId, noteId, noteVals));
         if (Array.isArray(note)) {
           setErrors(note);
         } else {
-            setShowNoteForm(false)
-            setIsOpen(false);
-            history.push(`/notebooks/${notebookId}/notes/${note.id}`);
+            setShowEditNoteForm(false)
         }
       };
 
-    // useEffect(() => {
-    //     if (notes) {
-    //         const note = notes[notes.length-1]
-    //         return <Redirect to={`/notebooks/${notebookId}/notes/${note.id}`} />;
-    //     }
-    // }, [notes, notebookId])
+    const close = () => {
+        setTitle(originalTitle);
+        setShowEditNoteForm(false)
+    }
+
+    useEffect(() => {
+        setOriginalTitle(title);
+    }, [])
 
     return (
         <form id={styles.note_form} onSubmit={createNote}>
@@ -52,10 +50,13 @@ const NoteForm = ({setShowNoteForm, notebookId, setIsOpen}) => {
             onChange={(e) => setTitle(e.target.value)}
             className={styles.note_name}
             required={true}
+            maxlength={20}
+            size={20}
             />
             <button type="submit" className={styles.note_form__btn}><BsCheck /></button>
+            <button onClick={close} className={styles.note_form__btn}><BsX /></button>
         </form>
     )
 }
 
-export default NoteForm;
+export default EditNoteForm;

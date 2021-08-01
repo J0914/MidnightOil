@@ -1,0 +1,10 @@
+.note_name {
+    line-height: 2em;
+    font-size: .5em;
+}
+
+.note_form__btn {
+    background: none;
+    font-size: 2rem;
+    color: white;
+}
