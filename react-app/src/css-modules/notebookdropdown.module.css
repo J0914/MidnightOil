@@ -98,3 +98,11 @@
     overflow-y: auto;
     height: 100px;
 }
+
+.form__wrapper {
+    display: flex;
+}
+
+.close {
+    background: none;
+}
