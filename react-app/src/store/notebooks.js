@@ -186,8 +186,11 @@ export const editNote = (userId, notebookId, noteId, noteVals) => async (dispatc
         return errs
         } else {
             dispatch(setNotes(notes.notes))
+            const noteArr = Object.values(notes.notes)
+            const note = noteArr[noteArr.length - 1]
+            dispatch(setNote(note))
+            return(note)
         }
-        return null;
     } else {
         return ['response not okay, try again with better info']
     }
