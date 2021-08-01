@@ -8,7 +8,7 @@ import { Redirect } from 'react-router-dom';
 import styles from '../../../css-modules/noteform.module.css';
 
 
-const NoteForm = ({setShowNoteForm, noteId, setIsOpen, title}) => {
+const NoteForm = ({setShowNoteForm, noteId, setIsOpen, title, setTitle}) => {
     const [errors, setErrors] = useState([])
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
