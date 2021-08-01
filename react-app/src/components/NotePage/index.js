@@ -22,7 +22,6 @@ const NotePage = () => {
     useEffect(() => {
         let userId;
         if (user) userId = user.id
-        console.log(userId, notebookId, noteId);
         dispatch(notebookActions.getNote( userId, notebookId, noteId))
     }, [user, dispatch]);
 
@@ -43,7 +42,7 @@ const NotePage = () => {
     return(
         <div className={styles.note_wrapper}>
             <div id={styles.logo}>
-                <img src="pic_trulli.jpg" alt="Italian Trulli"/>
+                {/* <img src="pic_trulli.jpg" alt="Italian Trulli"/> */}
             </div>
             <div id={styles.note_header__div}>
                 <h2 id={styles.note_page__header}>{note?.title}</h2>
@@ -63,7 +62,7 @@ const NotePage = () => {
             <div id={styles.note_sidebar}>
                 <ul id={styles.note_contents}>Contents</ul>
             </div>
-            <div id={styles.editor_container}>
+            <div id={styles.editor_container} className={isDark ? styles.dark : styles.light}>
                 <Editor
                 value={note ? note.body : ''}
                 id={styles.editor}

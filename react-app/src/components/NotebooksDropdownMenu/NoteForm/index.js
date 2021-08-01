@@ -3,41 +3,42 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as noteActions from '../../../store/notebooks'
 import {BsCheck} from 'react-icons/bs'
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import styles from '../../../css-modules/noteform.module.css';
 
 
-const NoteForm = ({setShowNoteForm, noteId, setIsOpen, title, setTitle}) => {
+const NoteForm = ({setShowNoteForm, notebookId, setIsOpen}) => {
     const [errors, setErrors] = useState([])
+    const [title, setTitle] = useState('')
     const dispatch = useDispatch()
+    const history = useHistory()
     const user = useSelector(state => state.session.user)
-    const notes = useSelector(state => state.notebooks.notes)
 
     const createNote = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
         let userId;
         if (user) userId = user.id
         const noteVals = {
             title: title,
-            userId: userId,
             body: 'New Note'
         }
-        const data = await dispatch(noteActions.createNote(userId, noteId, noteVals));
-        if (data) {
-          setErrors(data);
+        const note = await dispatch(noteActions.createNote(userId, notebookId, noteVals));
+        if (Array.isArray(note)) {
+          setErrors(note);
         } else {
             setShowNoteForm(false)
             setIsOpen(false);
+            history.push(`/notebooks/${notebookId}/notes/${note.id}`);
         }
       };
 
-    useEffect(() => {
-        if (notes) {
-            const note = notes[notes.length-1]
-            return <Redirect to={`/notes/${noteId}/notes/${note.id}`} />;
-        }
-    }, [notes, noteId])
+    // useEffect(() => {
+    //     if (notes) {
+    //         const note = notes[notes.length-1]
+    //         return <Redirect to={`/notebooks/${notebookId}/notes/${note.id}`} />;
+    //     }
+    // }, [notes, notebookId])
 
     return (
         <form id={styles.note_form} onSubmit={createNote}>

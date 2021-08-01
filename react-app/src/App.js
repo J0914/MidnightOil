@@ -18,10 +18,11 @@ function App() {
   useEffect(() => {
     (async() => {
       const data = await dispatch(authenticate());
-      if (data)
-      await dispatch(getClassmates(data.id));
-      await dispatch(getNotebooks(data.id));
-      await dispatch(getDecks(data.id));
+      if (data) {
+        await dispatch(getClassmates(data.id));
+        await dispatch(getNotebooks(data.id));
+        await dispatch(getDecks(data.id));
+      }
       setLoaded(true);
     })();
   }, [dispatch ]);
@@ -32,13 +33,12 @@ function App() {
 
   return (
     <BrowserRouter>
+      <NavBar />
       <Switch>
         <ProtectedRoute path='/profile' exact={true} >
-          <NavBar />
           <ProfilePage />
         </ProtectedRoute>
         <ProtectedRoute path='/notebooks/:notebookId/notes/:noteId' exact={true} >
-          <NavBar />
           <NotePage />
         </ProtectedRoute>
         <Route path='/' exact={true} >

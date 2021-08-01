@@ -1,3 +1,7 @@
 .note_form__btn {
     background: none;
 }
+
+.error {
+    color: red;
+}

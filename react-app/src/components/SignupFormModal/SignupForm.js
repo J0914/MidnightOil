@@ -15,7 +15,6 @@ const SignUpForm = () => {
   const [repeatPassword, setRepeatPassword] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
-  console.log(email)
 
   const onSignUp = async (e) => {
     e.preventDefault();
