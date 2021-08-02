@@ -85,6 +85,7 @@ def get_notes(userId,notebookId):
 # @login_required
 def get_note(userId, notebookId, noteId):
     note = Note.query.filter_by(id=noteId).first()
+    print(note)
     return note.to_dict()
 
 # create a new note

@@ -23,7 +23,7 @@ const NotebooksDropdownMenu = () => {
     const user = useSelector(state => state.session.user)
     const notebooks = useSelector(state => state.notebooks.notebooks);
 
-    const handleClick = () => setIsOpen(true);
+    const handleClick = () => setIsOpen(!isOpen);
 
     const handleEditNotebookClick = (id) => {
         setShowEditNotebookForm(true);
@@ -43,32 +43,33 @@ const NotebooksDropdownMenu = () => {
         }
     }
 
-    useEffect(() => {
-        function handleClickOutside (e) {
-            if (!dropdownRef.current) {
-                return;
-            }
+    // useEffect(() => {
+    //     function handleClickOutside (e) {
+    //         if (!dropdownRef.current) {
+    //             return;
+    //         }
 
-            if (!dropdownRef.current.contains(e.target)) {
-                setIsOpen(false);
-            }
-        }
-        window.addEventListener('click', handleClickOutside);
-        return () => {
-            window.removeEventListener('click', handleClickOutside);
-        }
-    }, [dropdownRef, isOpen])
+    //         if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+    //             setIsOpen(false);
+    //         }
+    //     }
+    //     window.addEventListener('click', handleClickOutside);
+    //     return () => {
+    //         window.removeEventListener('click', handleClickOutside);
+    //     }
+    // }, [dropdownRef, isOpen])
 
 
     return (
         <div ref={dropdownRef} className={styles.notebook_menu__container}>
+            <div className={styles.fixmyproblems}>
             <button onClick={handleClick} className={styles.notebook_menu__trigger}>
                 <span>Notebooks</span>
             </button>
             {isOpen && 
             <div className={`${styles.notebook_menu} ${isOpen ? styles.active : styles.inactive}`}>
                 <button className={styles.add_notebook} onClick={() => setShowNotebookForm(!showNotebookForm)}>Create Notebook {!showNotebookForm ? <BsPlusCircle /> : <BsDashCircle />}</button>
-                {showNotebookForm && 
+                {showNotebookForm &&  
                 <div className={styles.form__wrapper}>
                 <NotebookForm setShowNotebookForm={setShowNotebookForm} />
                 <button onClick={() => setShowNotebookForm(false)} className={styles.close}><BsX /></button>
@@ -80,7 +81,7 @@ const NotebooksDropdownMenu = () => {
                             {!showEditNotebookForm && 
                             <>
                             <ul id={notebook.id}className={styles.notebook_title}>{notebook.title}</ul>
-                            <button id={notebook.id} className={styles.edit_notebook} onClick={(e) => handleEditNotebookClick(e.target.id)}><BsPencil /></button>
+                            <button id={notebook.id} className={styles.edit_notebook} onClick={(e) => handleEditNotebookClick(notebook.id)}><BsPencil /></button>
                             <button className={styles.delete_notebook} onClick={() => deleteNotebook(notebook.id)}><BsTrash /></button>
                             </>
                             }
@@ -88,7 +89,15 @@ const NotebooksDropdownMenu = () => {
                             <div className={styles.form__wrapper}>
                             <EditNotebookForm setShowEditNotebookForm={setShowEditNotebookForm} currentTitle={notebook.title} notebookId={notebook.id}/>
                             <button onClick={() => setShowEditNotebookForm(false)} className={styles.close}><BsX /></button>
-                            </div>}
+                            </div>
+                            }
+                            {showEditNotebookForm && notebook.id !== currentEle &&
+                            <>
+                            <ul id={notebook.id}className={styles.notebook_title}>{notebook.title}</ul>
+                            <button id={notebook.id} className={styles.edit_notebook} onClick={(e) => handleEditNotebookClick(notebook.id)}><BsPencil /></button>
+                            <button className={styles.delete_notebook} onClick={() => deleteNotebook(notebook.id)}><BsTrash /></button>
+                            </>
+                            }
                         </div>
                         <button className={styles.add_note} onClick={() => setShowNoteForm(!showNoteForm)}>Create Note {!showNoteForm ? <BsPlusCircle /> : <BsDashCircle />}</button>
                         {showNoteForm && 
@@ -109,6 +118,7 @@ const NotebooksDropdownMenu = () => {
                     </div>
                 ))}
             </div>}
+            </div>
         </div>
     );
 };
