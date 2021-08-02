@@ -63,7 +63,7 @@ def patch_and_delete_notebooks(userId, notebookId):
         notebooks = Notebook.query.filter_by(userId=userId).all()
         return {'notebooks': [notebook.to_dict() for notebook in notebooks]}
     elif request.method == 'DELETE':
-        notebook = Notebook.query.get(notebookId)
+        notebook = Notebook.query.filter_by(id=notebookId).first()
         db.session.delete(notebook)
         db.session.commit()
         notebooks = Notebook.query.filter_by(userId=userId).all()
@@ -101,7 +101,8 @@ def post_notes(userId, notebookId):
         db.session.add(note)
         db.session.commit()
         notes = Note.query.filter_by(userId=userId, notebookId=notebookId).all()
-        return {'notes': [note.to_dict() for note in notes]}
+        notebooks = Notebook.query.filter_by(userId=userId).all()
+        return {'notebooks': [notebook.to_dict() for notebook in notebooks],'notes': [note.to_dict() for note in notes]}
     else: 
         return jsonify({'errors': form.errors})
 
@@ -124,13 +125,15 @@ def patch_and_delete_notes(userId, notebookId, noteId):
             note.share = data['share']
         db.session.commit()
         notes = Note.query.filter_by(userId=userId, notebookId=notebookId).all()
-        return {'notes': [note.to_dict() for note in notes]}
+        notebooks = Notebook.query.filter_by(userId=userId).all()
+        return {'notebooks': [notebook.to_dict() for notebook in notebooks],'notes': [note.to_dict() for note in notes]}
     elif request.method == 'DELETE':
         note = Note.query.get(noteId)
         db.session.delete(note)
         db.session.commit()
         notes = Note.query.filter_by(userId=userId, notebookId=notebookId).all()
-        return {'notes': [note.to_dict() for note in notes]}
+        notebooks = Notebook.query.filter_by(userId=userId).all()
+        return {'notebooks': [notebook.to_dict() for notebook in notebooks],'notes': [note.to_dict() for note in notes]}
     else:
         raise Exception('Invalid request method, try a different route')
 

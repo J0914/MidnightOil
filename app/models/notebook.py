@@ -9,7 +9,7 @@ class Notebook(db.Model):
     userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     createdAt = db.Column(db.DateTime, default=datetime.datetime.now())
     updatedAt = db.Column(db.DateTime, default=datetime.datetime.now())
-    notes = db.relationship('Note', backref='notebook', lazy=True)
+    notes = db.relationship('Note', cascade='all,delete', backref='notebook', lazy=True)
 
     def to_dict(self):
         return {

@@ -153,13 +153,14 @@ export const createNote = (userId, notebookId, noteVals) => async (dispatch) => 
     })
     
     if (response.ok) {
-        const notes = await response.json();
-        if (notes.errors) {
-          let errs = Object.values(notes.errors)
-          return errs
+        const data = await response.json();
+        if (data.errors) {
+          let errs = Object.values(data.errors)
+          return {errors: errs}
         } else {
-            dispatch(setNotes(notes.notes))
-            const noteArr = Object.values(notes.notes)
+            dispatch(setNotebooks(data.notebooks))
+            dispatch(setNotes(data.notes))
+            const noteArr = Object.values(data.notes)
             const note = noteArr[noteArr.length - 1]
             dispatch(setNote(note))
             return(note)
@@ -180,13 +181,14 @@ export const editNote = (userId, notebookId, noteId, noteVals) => async (dispatc
     })
     
     if (response.ok) {
-      const notes = await response.json();
-      if (notes.errors) {
-        let errs = Object.values(notes.errors)
-        return errs
+      const data = await response.json();
+      if (data.errors) {
+        let errs = Object.values(data.errors)
+        return {errors: errs}
         } else {
-            dispatch(setNotes(notes.notes))
-            const noteArr = Object.values(notes.notes)
+            dispatch(setNotebooks(data.notebooks))
+            dispatch(setNotes(data.notes))
+            const noteArr = Object.values(data.notes)
             const note = noteArr[noteArr.length - 1]
             dispatch(setNote(note))
             return(note)
@@ -203,14 +205,18 @@ export const deleteNote = (userId, notebookId, noteId) => async (dispatch) => {
     })
     
     if (response.ok) {
-        const notes = await response.json();
-        if (notes.errors) {
-          let errs = Object.values(notes.errors)
-          return errs
+        const data = await response.json();
+        if (data.errors) {
+          let errs = Object.values(data.errors)
+          return {errors: errs}
         } else {
-            dispatch(setNotes(notes.notes))
+          dispatch(setNotebooks(data.notebooks))
+          dispatch(setNotes(data.notes))
+          const noteArr = Object.values(data.notes)
+          const note = noteArr[noteArr.length - 1]
+          dispatch(setNote(note))
+          return(note)
       }
-      return null;
     } else {
         return ['response not okay, try again with better info']
     }

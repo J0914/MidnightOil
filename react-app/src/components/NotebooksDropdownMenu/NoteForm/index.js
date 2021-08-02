@@ -28,17 +28,12 @@ const NoteForm = ({setShowNoteForm, notebookId, setIsOpen}) => {
           setErrors(note);
         } else {
             setShowNoteForm(false)
-            setIsOpen(false);
+            if (setIsOpen) {
+                setIsOpen(false);
+            }
             history.push(`/notebooks/${notebookId}/notes/${note.id}`);
         }
       };
-
-    // useEffect(() => {
-    //     if (notes) {
-    //         const note = notes[notes.length-1]
-    //         return <Redirect to={`/notebooks/${notebookId}/notes/${note.id}`} />;
-    //     }
-    // }, [notes, notebookId])
 
     return (
         <form id={styles.note_form} onSubmit={createNote}>

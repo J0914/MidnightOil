@@ -12,10 +12,10 @@ class User(db.Model, UserMixin):
     lName = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    notebooks = db.relationship('Notebook', backref='user', lazy=True)
-    notes = db.relationship('Note', backref='user', lazy=True)
-    decks = db.relationship('Deck', backref='user', lazy=True)
-    cards = db.relationship('Card', backref='user', lazy=True)
+    notebooks = db.relationship('Notebook', cascade='all,delete', backref='user', lazy=True)
+    notes = db.relationship('Note', cascade='all,delete', backref='user', lazy=True)
+    decks = db.relationship('Deck', cascade='all,delete', backref='user', lazy=True)
+    cards = db.relationship('Card', cascade='all,delete', backref='user', lazy=True)
     
     friends = db.relationship(
         'User',
