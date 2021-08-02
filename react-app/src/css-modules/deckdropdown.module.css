@@ -62,3 +62,11 @@
     font-size: 14px;
     margin: 0 10px;
 }
+
+.add_deck {
+    background: none;
+}
+
+.form__wrapper {
+    display: flex;
+}
