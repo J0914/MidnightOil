@@ -1,0 +1,33 @@
+#deck_wrapper {
+    height: fit-content;
+    min-height: 93vh;
+    width: 95vw;
+    max-width: 1200px;
+    background-color: rgba(2, 2, 17, 1);
+    margin: auto;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    margin-top: .5%;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#header {
+    color: white;
+    width: 100%;
+    text-align: center;
+}
+
+.card_container {
+    height: 500px;
+    width: 700px;
+    background-color: white;
+}
+
+/* #slideshow {
+
+} */
