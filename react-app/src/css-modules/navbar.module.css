@@ -7,6 +7,16 @@
     width: 100%; 
 }
 
+#logo_div {
+    height: 50px;
+    width: 50px;
+}
+
+#logo {
+    height: 100%;
+    width: 100%;
+}
+
 .navlink {
     color: #458fa7;
     text-decoration: none;

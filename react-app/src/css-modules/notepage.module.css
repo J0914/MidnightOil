@@ -14,7 +14,7 @@
     grid-template-rows: 100px 3fr;
     grid-template-columns: 1fr, 5fr;
     grid-template-areas:
-    'logo header'
+    'sidebar header'
     'sidebar editor'
 }
 
@@ -130,4 +130,8 @@
     display: flex;
     align-items: flex-end;
 
+}
+
+.sticky {
+    position: fixed;
 }

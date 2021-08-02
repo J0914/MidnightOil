@@ -6,6 +6,7 @@ import NavBar from './components/NavBar';
 import Splash from './components/Splash';
 import ProfilePage from './components/ProfilePage';
 import NotePage from './components/NotePage';
+import DeckPage from './components/DeckPage';
 import { authenticate } from './store/session';
 import { getClassmates } from './store/classmates';
 import { getNotebooks } from './store/notebooks';
@@ -40,6 +41,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/notebooks/:notebookId/notes/:noteId' exact={true} >
           <NotePage />
+        </ProtectedRoute>
+        <ProtectedRoute path='/decks/:deckId' exact={true} >
+          <DeckPage />
         </ProtectedRoute>
         <Route path='/' exact={true} >
           <Splash />

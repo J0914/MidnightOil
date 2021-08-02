@@ -64,9 +64,7 @@ const NotePage = () => {
 
     return(
         <div className={styles.note_wrapper}>
-            <div id={styles.logo_div}>
-                <img id={styles.logo}src="https://i.ibb.co/RH80yCG/Midnight-Oil-Logo-No-Words-Transparent.png" alt="logo"/>
-            </div>
+            
             <div id={styles.note_header__div}>
                 { !showEditNoteForm ?
                 <div id={styles.header_container}>
@@ -107,16 +105,21 @@ const NotePage = () => {
             </div>
             </div>
             <div id={styles.note_sidebar}>
-                <h2 id={styles.sidebar_header}>{currentNotebook?.title}</h2>
-                {currentNotebook?.notes.map( thenote => {
-                    if (thenote.id !== note.id) {
-                        return (
-                            <div className={styles.note_link__wrapper}>
-                            <NavLink className={styles.note_link} key={thenote.id} to={`/notebooks/${thenote.notebookId}/notes/${thenote.id}`}>{thenote?.title}</NavLink>
-                            </div>
-                        )
-                    }
-                })}
+                <div className={styles.sticky}>
+                    <div id={styles.logo_div}>
+                        <img id={styles.logo}src="https://i.ibb.co/RH80yCG/Midnight-Oil-Logo-No-Words-Transparent.png" alt="logo"/>
+                    </div>
+                    <h2 id={styles.sidebar_header}>{currentNotebook?.title}</h2>
+                    {currentNotebook?.notes.map( thenote => {
+                        if (thenote.id !== note.id) {
+                            return (
+                                <div className={styles.note_link__wrapper}>
+                                <NavLink className={styles.note_link} key={thenote.id} to={`/notebooks/${thenote.notebookId}/notes/${thenote.id}`}>{thenote?.title}</NavLink>
+                                </div>
+                            )
+                        }
+                    })}
+                </div>
             </div>
             <div id={styles.editor_container} className={isDark ? styles.dark : styles.light}>
                 <Editor
@@ -126,6 +129,7 @@ const NotePage = () => {
                 readOnlyWriteCheckboxes={!isEditing}
                 dark={isDark}
                 onChange={(value) => setBody(value)}
+                autoFocus={true}
                 />
             </div>
         </div>
