@@ -38,15 +38,15 @@ const NotebooksDropdownMenu = () => {
             <button onClick={handleClick} className={styles.notebook_menu__trigger}>
                 <span>Notebooks</span>
             </button>
-            {isOpen && <div ref={dropdownRef} className={`${styles.notebook_menu} ${isOpen ? styles.active : styles.inactive}`}>
-            <button className={styles.add_notebook} onClick={() => setShowNotebookForm(!showNotebookForm)}>Create Notebook {!showNotebookForm ? <BsPlusCircle /> : <BsDashCircle />}</button>
-            {showNotebookForm && 
-            <div className={styles.form__wrapper}>
-            <NotebookForm setShowNotebookForm={setShowNotebookForm} />
-            <button onClick={() => setShowNotebookForm(false)} className={styles.close}><BsX /></button>
-            </div>
-            }
-                
+            {isOpen && 
+            <div ref={dropdownRef} className={`${styles.notebook_menu} ${isOpen ? styles.active : styles.inactive}`}>
+                <button className={styles.add_notebook} onClick={() => setShowNotebookForm(!showNotebookForm)}>Create Notebook {!showNotebookForm ? <BsPlusCircle /> : <BsDashCircle />}</button>
+                {showNotebookForm && 
+                <div className={styles.form__wrapper}>
+                <NotebookForm setShowNotebookForm={setShowNotebookForm} />
+                <button onClick={() => setShowNotebookForm(false)} className={styles.close}><BsX /></button>
+                </div>
+                }
                 {notebooks?.map((notebook) => (
                     <div  key={notebook.id}>
                     <div className={styles.notebook_container}>

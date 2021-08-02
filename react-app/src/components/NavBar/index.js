@@ -16,6 +16,9 @@ const NavBar = () => {
             Home
           </NavLink>
           <NotebooksDropdownMenu />
+          <div id={styles.logo_div}>
+              <img id={styles.logo}src="https://i.ibb.co/RH80yCG/Midnight-Oil-Logo-No-Words-Transparent.png" alt="logo"/>
+          </div>
           <DecksDropdownMenu />
           <LogoutButton />
       </div>
