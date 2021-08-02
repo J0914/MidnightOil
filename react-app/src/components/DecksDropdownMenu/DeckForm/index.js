@@ -3,14 +3,17 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as deckActions from '../../../store/decks'
 import {BsCheck, BsX} from 'react-icons/bs'
+import { useHistory } from 'react-router-dom'
 
 import styles from '../../../css-modules/deckform.module.css';
 
-const DeckForm = ({setShowDeckForm}) => {
+const DeckForm = ({setIsOpen, setShowDeckForm}) => {
     const [title, setTitle] = useState('')
     const [errors, setErrors] = useState([])
     const dispatch = useDispatch()
+    const history = useHistory()
     const user = useSelector(state => state.session.user)
+    const deck = useSelector(state => state.decks.currentDeck)
 
     const createDeck = async (e) => {
         e.preventDefault();
@@ -20,10 +23,14 @@ const DeckForm = ({setShowDeckForm}) => {
           title: title
         }
         const data = await dispatch(deckActions.createDeck(userId, deckVals));
-        if (data) {
+        if (Array.isArray(data)) {
           setErrors(data);
         } else {
             setShowDeckForm(false)
+            if (setIsOpen) {
+                setIsOpen(false);
+            }
+            history.push(`/decks/${data.id}`);
         }
       };
 

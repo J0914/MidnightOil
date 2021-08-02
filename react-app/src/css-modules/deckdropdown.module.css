@@ -65,8 +65,11 @@
 
 .add_deck {
     background: none;
+    font-size: .9rem;
 }
 
 .form__wrapper {
     display: flex;
+    width: 100%;
+    justify-content: center;
 }

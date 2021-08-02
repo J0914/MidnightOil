@@ -25,11 +25,11 @@ const DecksDropdownMenu = () => {
                 <button className={styles.add_deck} onClick={() => setShowDeckForm(!showDeckForm)}>Create Deck {!showDeckForm ? <BsPlusCircle /> : <BsDashCircle />}</button>
                 {showDeckForm && 
                 <div className={styles.form__wrapper}>
-                <DeckForm setShowDeckForm={setShowDeckForm} />
+                <DeckForm setIsOpen={setIsOpen} setShowDeckForm={setShowDeckForm} />
                 </div>
                 }
-                {decks?.map((deck) => (
-                    <NavLink className={styles.deck_nav} key={deck.id} to={`/decks/${deck.id}`}>{deck.title}</NavLink>
+                {Object.values(decks).reverse().map((deck) => (
+                    <NavLink onClick={() => setIsOpen(false)} className={styles.deck_nav} key={deck.id} to={`/decks/${deck.id}`}>{deck.title}</NavLink>
                 ))}
             </div>
             }

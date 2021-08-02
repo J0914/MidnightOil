@@ -1,10 +1,17 @@
 // constants
 const SET_DECKS = 'decks/SET_DECKS';
+const SET_DECK = 'decks/SET_DECK';
 const SET_CARDS = 'decks/SET_CARDS';
+
 
 const setDecks = (decks) => ({
   type: SET_DECKS,
   payload: decks
+});
+
+const setDeck = (deck) => ({
+  type: SET_DECK,
+  payload: deck
 });
 
 const setCards = (cards) => ({
@@ -17,14 +24,15 @@ export const getDecks = (userId) => async (dispatch) => {
   const response = await fetch(`/api/users/${userId}/decks`)
   
   if (response.ok) {
-    const decks = await response.json();
-    if (decks.errors) {
-      let errs = Object.values(decks.errors)
+    const data = await response.json();
+    if (data.errors) {
+      let errs = Object.values(data.errors)
       return errs
     } else {
-        dispatch(setDecks(decks.decks))
+      const decks = Object.assign({}, data.decks)
+        dispatch(setDecks(decks))
     }
-    return null;
+    return (data.deck);
   } else {
     return ['response not okay, try again with better info']
   }
@@ -41,16 +49,18 @@ export const createDeck = (userId, deckVals) => async (dispatch) => {
     })
     
     if (response.ok) {
-      const decks = await response.json();
-      if (decks.errors) {
-        let errs = Object.values(decks.errors)
+      const data = await response.json();
+      console.log('the data is', data)
+      if (data.errors) {
+        let errs = Object.values(data.errors)
         return errs
       } else {
-          dispatch(setDecks(decks.decks))
+          dispatch(setDecks(data.decks))
+          dispatch(setDeck(data.deck))
       }
-      return null;
+      return data.deck;
     } else {
-      return ['response not okay, try again with better info']
+      return response.errors
     }
   }
 
@@ -188,12 +198,14 @@ export const deleteCard = (userId, deckId, cardId) => async (dispatch) => {
 
 // window.store.dispatch(window.deckActions.createDeck(1, {title: 'hello', share: false}));
 
-const initialState = { decks: null, cards: null };
+const initialState = { decks: null, currentDeck: null, cards: null };
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case SET_DECKS:
         return { ...state, decks: action.payload }
+        case SET_DECK:
+        return { ...state, currentDeck: action.payload }
         case SET_CARDS:
             return { ...state, cards: action.payload }
         default:
