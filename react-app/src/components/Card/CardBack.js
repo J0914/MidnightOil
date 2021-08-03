@@ -1,19 +1,19 @@
 import React from 'react';
-import { BsPencil, BsTrash, BsX, BsArrowBarUp} from 'react-icons/bs'
-import {FiSave} from 'react-icons/fi'
+import {useDispatch} from 'react-redux'
+import { BsPencil, BsTrash, BsArrowBarUp} from 'react-icons/bs'
+import EditCardBackForm from './EditCardBackForm';
+import * as deckActions from '../../store/decks'
 
-import styles from '../../css-modules/card.module.css'
+import styles from '../../css-modules/card.module.css';
 
-const CardBack = ({body, handleClick, isDark}) => {
+const CardBack = ({i, body, handleClick, isDark, deckId, userId, cardId, front}) => {
     const [isEditing, setIsEditing] = React.useState(false);
-
-    const handleEdit = () => {
-        return;
-    }
+    const dispatch = useDispatch();
 
     const handleDelete = () => {
-        return;
+        dispatch(deckActions.deleteCard(userId, deckId, cardId));
     }
+    
     return (
         <div className={`${styles.card_back__wrapper} ${isDark ? styles.dark : styles.light}`}>
             {!isEditing && 
@@ -24,18 +24,14 @@ const CardBack = ({body, handleClick, isDark}) => {
                     <button className={`${styles.edit_and_delete__btn} ${isDark ? styles.dark : styles.light}`} onClick={handleDelete}><BsTrash /></button>
                 </div>
             </div>}
-            <div>
-                <label className={styles.label}>Back</label>
+            <div id={styles.body_wrapper}>
+                <label className={styles.label}>Back - Card #{i + 1}</label>
+                {!isEditing ?
                 <p className={styles.card_back__body}>{body}</p>
-            </div>
-            {isEditing &&
-            <div className={styles.btns_container}>
-                <div className={styles.editing_btns}>
-                    <button className={styles.save_and_delete__btn} onClick={handleEdit}><FiSave /></button>
-                    <button className={styles.save_and_delete__btn} onClick={() => setIsEditing(false)}><BsX /></button>
-                </div>
-            </div>
+                :
+                <EditCardBackForm isDark={isDark} front={front} cardId={cardId} deckId={deckId} userId={userId} setIsEditing={setIsEditing} body={body}/>
             }
+            </div>
         </div>
     )
 }

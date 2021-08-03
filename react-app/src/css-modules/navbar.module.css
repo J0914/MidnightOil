@@ -31,7 +31,6 @@
 } */
 
 .notebook_container {
-    background-color: green;
     height: fit-content;
     width: 200px;
     display: flex;

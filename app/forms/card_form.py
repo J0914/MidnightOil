@@ -9,16 +9,22 @@ class CardForm(FlaskForm):
     deckId = IntegerField('deckId')
     userId = IntegerField('userId')
 
-    def card_exists(self):
+    def front_exists(self):
         front = self.front.data
-        back = self.back.data
         deckId = self.deckId.data
-        front = Card.query.filter_by(deckId=deckId, front=front).first()
-        back = Card.query.filter_by(deckId=deckId, back=back).first()
-        if front:
+        checkfront = Card.query.filter_by(deckId=deckId, front=front).first()
+        if checkfront:
             self.front.errors.append('The front of this card is identical to another card in this deck.')
             return False
-        elif back:
+        else:
+            return True
+
+
+    def back_exists(self):
+        back = self.back.data
+        deckId = self.deckId.data
+        checkback = Card.query.filter_by(deckId=deckId, back=back).first()
+        if checkback:
             self.back.errors.append('The back of this card is identical to another card in this deck.')
             return False
         else:
@@ -27,10 +33,7 @@ class CardForm(FlaskForm):
     def validate_front_and_back(self):
         front = self.front.data
         back = self.back.data
-        if front == back:
-            self.back.errors.append('The front and back of this card are identical.')
-            return False
-        elif front == '':
+        if front == '':
             self.front.errors.append('Please enter a value for the front of this card.')
             return False
         elif back == '':
@@ -38,4 +41,3 @@ class CardForm(FlaskForm):
             return False
         else:
             return True
-        front = self.front.data
