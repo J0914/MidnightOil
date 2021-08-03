@@ -1,14 +1,17 @@
 import React from 'react';
+import {useDispatch } from 'react-redux'
 import { BsPencil, BsTrash, BsArrowBarUp} from 'react-icons/bs'
 import EditCardFrontForm from './EditCardFrontForm';
+import * as deckActions from '../../store/decks'
 
 import styles from '../../css-modules/card.module.css';
 
 const CardFront = ({body, handleClick, isDark, deckId, userId, cardId, back}) => {
     const [isEditing, setIsEditing] = React.useState(false);
+    const dispatch = useDispatch();
 
     const handleDelete = () => {
-        return;
+        dispatch(deckActions.deleteCard(userId, deckId, cardId));
     }
     
     return (
