@@ -42,6 +42,7 @@ const DeckPage = () => {
                 <input type="radio" id={styles.dark} name="theme" value={true} onChange={()=> setIsDark(true)}></input>
             </div>
             </div>
+            <div className={styles.slideshow}>
             <Slideshow 
             onChange={(i, slide) => setCurrentSlide(slide)} 
             infiniteLoop={true} 
@@ -50,6 +51,7 @@ const DeckPage = () => {
             showArrows={true}
             currentCards={currentCards}
             isDark={isDark} />
+            </div>
         </div>
     )
 }

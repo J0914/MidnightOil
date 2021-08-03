@@ -29,9 +29,9 @@
     background-color: white;
 }
 
-/* #theme_wrapper {
-
-} */
+.slideshow {
+    width: 80%;
+}
 
 .radio_label {
     color: white;
