@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useState, useRef } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {NavLink} from 'react-router-dom';
@@ -7,7 +7,6 @@ import NotebookForm from './NotebookForm'
 import EditNotebookForm from './EditNotebookForm'
 import NoteForm from './NoteForm'
 import * as notebookActions from '../../store/notebooks'
-import { Redirect } from 'react-router-dom';
 
 import styles from '../../css-modules/notebookdropdown.module.css'
 
@@ -42,23 +41,6 @@ const NotebooksDropdownMenu = () => {
             return;
         }
     }
-
-    // useEffect(() => {
-    //     function handleClickOutside (e) {
-    //         if (!dropdownRef.current) {
-    //             return;
-    //         }
-
-    //         if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-    //             setIsOpen(false);
-    //         }
-    //     }
-    //     window.addEventListener('click', handleClickOutside);
-    //     return () => {
-    //         window.removeEventListener('click', handleClickOutside);
-    //     }
-    // }, [dropdownRef, isOpen])
-
 
     return (
         <div ref={dropdownRef} className={styles.notebook_menu__container}>

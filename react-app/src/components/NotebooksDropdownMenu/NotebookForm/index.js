@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as notebookActions from '../../../store/notebooks'
-import {BsCheck, BsX} from 'react-icons/bs'
+import {BsCheck} from 'react-icons/bs'
 
 import styles from '../../../css-modules/notebookform.module.css';
 

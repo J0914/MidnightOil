@@ -13,7 +13,6 @@ const DeckForm = ({setIsOpen, setShowDeckForm}) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const user = useSelector(state => state.session.user)
-    const deck = useSelector(state => state.decks.currentDeck)
 
     const createDeck = async (e) => {
         e.preventDefault();

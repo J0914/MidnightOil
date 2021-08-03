@@ -37,6 +37,24 @@ export const getDecks = (userId) => async (dispatch) => {
     return ['response not okay, try again with better info']
   }
 }
+// get current deck
+export const getDeck = (userId, deckId) => async (dispatch) => {
+  const response = await fetch(`/api/users/${userId}/decks/${deckId}`)
+  
+  if (response.ok) {
+    const data = await response.json();
+    if (data.errors) {
+      let errs = Object.values(data.errors)
+      return errs
+    } else {
+      const deck = (data.deck)
+        dispatch(setDeck(deck))
+    }
+    return (data.deck);
+  } else {
+    return ['response not okay, try again with better info']
+  }
+}
 
 // create a new deck
 export const createDeck = (userId, deckVals) => async (dispatch) => {
@@ -113,14 +131,14 @@ export const getCards = (userId, deckId) => async (dispatch) => {
   const response = await fetch(`/api/users/${userId}/decks/${deckId}/cards`)
   
   if (response.ok) {
-    const cards = await response.json();
-    if (cards.errors) {
-      let errs = Object.values(cards.errors)
+    const data = await response.json();
+    if (data.errors) {
+      let errs = Object.values(data.errors)
       return errs
     } else {
-        dispatch(setCards(cards.cards))
+        dispatch(setCards(data.cards))
     }
-    return null;
+    return data.cards;
   } else {
     return ['response not okay, try again with better info']
   }

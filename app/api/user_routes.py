@@ -147,6 +147,13 @@ def get_decks(userId):
     decks = Deck.query.filter_by(userId=userId).all()
     return {'decks': [deck.to_dict() for deck in decks]}
 
+# get single deck
+@user_routes.route('/<int:userId>/decks/<int:deckId>')
+# @login_required
+def get_deck(userId, deckId):
+    deck = Deck.query.filter_by(userId=userId, id=deckId).first()
+    return {'deck': deck.to_dict()}
+
 # create a new deck
 @user_routes.route('/<int:userId>/decks', methods=['POST'])
 # @login_required

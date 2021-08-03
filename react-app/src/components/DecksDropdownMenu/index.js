@@ -1,8 +1,8 @@
 import React from 'react';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import {useSelector} from 'react-redux';
 import {NavLink} from 'react-router-dom';
-import {BsPlusCircle, BsDashCircle, BsX} from 'react-icons/bs';
+import {BsPlusCircle, BsDashCircle} from 'react-icons/bs';
 import DeckForm from './DeckForm'
 
 import styles from '../../css-modules/deckdropdown.module.css'
