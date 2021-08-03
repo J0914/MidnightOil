@@ -1,8 +1,8 @@
 import React from 'react';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import {useSelector} from 'react-redux';
 import {NavLink} from 'react-router-dom';
-import {BsPlusCircle, BsDashCircle, BsX} from 'react-icons/bs';
+import {BsPlusCircle, BsDashCircle} from 'react-icons/bs';
 import DeckForm from './DeckForm'
 
 import styles from '../../css-modules/deckdropdown.module.css'
@@ -25,11 +25,11 @@ const DecksDropdownMenu = () => {
                 <button className={styles.add_deck} onClick={() => setShowDeckForm(!showDeckForm)}>Create Deck {!showDeckForm ? <BsPlusCircle /> : <BsDashCircle />}</button>
                 {showDeckForm && 
                 <div className={styles.form__wrapper}>
-                <DeckForm setShowDeckForm={setShowDeckForm} />
+                <DeckForm setIsOpen={setIsOpen} setShowDeckForm={setShowDeckForm} />
                 </div>
                 }
-                {decks?.map((deck) => (
-                    <NavLink className={styles.deck_nav} key={deck.id} to={`/decks/${deck.id}`}>{deck.title}</NavLink>
+                {Object.values(decks).reverse().map((deck) => (
+                    <NavLink onClick={() => setIsOpen(false)} className={styles.deck_nav} key={deck.id} to={`/decks/${deck.id}`}>{deck.title}</NavLink>
                 ))}
             </div>
             }

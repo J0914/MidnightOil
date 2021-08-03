@@ -103,7 +103,7 @@ def post_notes(userId, notebookId):
         db.session.commit()
         notes = Note.query.filter_by(userId=userId, notebookId=notebookId).all()
         notebooks = Notebook.query.filter_by(userId=userId).all()
-        return {'notebooks': [notebook.to_dict() for notebook in notebooks],'notes': [note.to_dict() for note in notes]}
+        return {'note': note.to_dict(),'notebooks': [notebook.to_dict() for notebook in notebooks],'notes': [note.to_dict() for note in notes]}
     else: 
         return jsonify({'errors': form.errors})
 
@@ -147,6 +147,13 @@ def get_decks(userId):
     decks = Deck.query.filter_by(userId=userId).all()
     return {'decks': [deck.to_dict() for deck in decks]}
 
+# get single deck
+@user_routes.route('/<int:userId>/decks/<int:deckId>')
+# @login_required
+def get_deck(userId, deckId):
+    deck = Deck.query.filter_by(userId=userId, id=deckId).first()
+    return {'deck': deck.to_dict()}
+
 # create a new deck
 @user_routes.route('/<int:userId>/decks', methods=['POST'])
 # @login_required
@@ -160,7 +167,8 @@ def post_decks(userId):
         db.session.add(deck)
         db.session.commit()
         decks = Deck.query.filter_by(userId=userId).all()
-        return {'decks': [deck.to_dict() for deck in decks]}
+        deck = Deck.query.filter_by(userId=userId, title=data['title']).first()
+        return {'deck': deck.to_dict(), 'decks': [deck.to_dict() for deck in decks]}
     else: 
         return jsonify({'errors': form.errors})
 

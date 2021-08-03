@@ -16,7 +16,7 @@ const ProfilePage = () => {
                 await dispatch(getDecks(user.id))    
             })();
         }
-    }, [user]);
+    }, [user, dispatch]);
 
     return (
         <div className={styles.testdiv}>

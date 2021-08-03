@@ -20,6 +20,7 @@
     color: white;
     width: 100%;
     text-align: center;
+    font-size: 5em;
 }
 
 .card_container {
@@ -28,6 +29,11 @@
     background-color: white;
 }
 
-/* #slideshow {
+/* #theme_wrapper {
 
 } */
+
+.radio_label {
+    color: white;
+    font-size: 1.5em;
+}

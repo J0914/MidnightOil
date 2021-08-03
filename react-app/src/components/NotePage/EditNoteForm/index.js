@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as noteActions from '../../../store/notebooks'
 import {BsCheck, BsX} from 'react-icons/bs'
-import { useHistory } from 'react-router-dom';
 
 import styles from '../../../css-modules/editnoteform.module.css';
 
@@ -36,7 +35,7 @@ const EditNoteForm = ({setShowEditNoteForm, notebookId, title, setTitle, noteId}
 
     useEffect(() => {
         setOriginalTitle(title);
-    }, [])
+    }, [title])
 
     return (
         <form id={styles.note_form} onSubmit={createNote}>
@@ -50,7 +49,7 @@ const EditNoteForm = ({setShowEditNoteForm, notebookId, title, setTitle, noteId}
             onChange={(e) => setTitle(e.target.value)}
             className={styles.note_name}
             required={true}
-            maxlength={20}
+            maxLength={20}
             size={20}
             />
             <button type="submit" className={styles.note_form__btn}><BsCheck /></button>

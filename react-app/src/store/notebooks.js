@@ -160,10 +160,8 @@ export const createNote = (userId, notebookId, noteVals) => async (dispatch) => 
         } else {
             dispatch(setNotebooks(data.notebooks))
             dispatch(setNotes(data.notes))
-            const noteArr = Object.values(data.notes)
-            const note = noteArr[noteArr.length - 1]
-            dispatch(setNote(note))
-            return(note)
+            dispatch(setNote(data.note))
+            return(data.note)
       }
     } else {
         return ['response not okay, try again with better info']
