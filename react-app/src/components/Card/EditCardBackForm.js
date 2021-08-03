@@ -8,7 +8,7 @@ import * as deckActions from '../../store/decks';
 import styles from '../../css-modules/editcardform.module.css';
 
 
-const EditCardBackForm = ({setIsEditing, front, body, deckId, userId, cardId}) => {
+const EditCardBackForm = ({isDark, setIsEditing, front, body, deckId, userId, cardId}) => {
     const [errors, setErrors] = useState([])
     const [theBody, setTheBody] = React.useState(body);
     const dispatch = useDispatch()
@@ -47,7 +47,8 @@ const EditCardBackForm = ({setIsEditing, front, body, deckId, userId, cardId}) =
                 placeholder="Card Back Text" 
                 value={theBody}
                 onChange={(e) => setTheBody(e.target.value)}
-                className={styles.card_body}
+                id={styles.card_body}
+                className={isDark ? styles.dark : styles.light}
                 autoComplete={'on'}
                 autoFocus={true}
                 form='card_back__form'
@@ -57,8 +58,8 @@ const EditCardBackForm = ({setIsEditing, front, body, deckId, userId, cardId}) =
                 wrap={'soft'}
                 />
                 <div className={styles.card_btns__container}>
-                <button type="submit" className={styles.card_form__btn}><FiSave /></button>
-                <button onClick={close} className={styles.card_form__btn}><BsX /></button>
+                <button type="submit" className={`${styles.card_form__btn} ${isDark ? styles.dark : styles.light}`}><FiSave /></button>
+                <button onClick={close} className={`${styles.card_form__btn} ${isDark ? styles.dark : styles.light}`}><BsX /></button>
                 </div>
             </form>
         </div>

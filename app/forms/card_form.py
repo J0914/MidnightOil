@@ -33,10 +33,7 @@ class CardForm(FlaskForm):
     def validate_front_and_back(self):
         front = self.front.data
         back = self.back.data
-        if front == back:
-            self.back.errors.append('The front and back of this card are identical.')
-            return False
-        elif front == '':
+        if front == '':
             self.front.errors.append('Please enter a value for the front of this card.')
             return False
         elif back == '':

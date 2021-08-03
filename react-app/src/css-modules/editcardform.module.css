@@ -1,4 +1,4 @@
-.card_body {
+#card_body {
     padding: 20px;
     border: 1px solid #e5e5e5;
     font-size: 2rem;
@@ -31,9 +31,20 @@
 #card_front__form, #card_back__form {
     display: flex;
     width: 100%;
+    height: 100%;
 }
 
 .error {
     color: red;
     text-decoration: none;
+}
+
+.light {
+    background-color: white;
+    color: #181a1b;
+}
+
+.dark {
+    background-color: #181a1b;
+    color: white;
 }

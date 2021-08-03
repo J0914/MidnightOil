@@ -6,7 +6,7 @@ import * as deckActions from '../../store/decks'
 
 import styles from '../../css-modules/card.module.css';
 
-const CardFront = ({body, handleClick, isDark, deckId, userId, cardId, back}) => {
+const CardFront = ({ i, body, handleClick, isDark, deckId, userId, cardId, back }) => {
     const [isEditing, setIsEditing] = React.useState(false);
     const dispatch = useDispatch();
 
@@ -25,11 +25,11 @@ const CardFront = ({body, handleClick, isDark, deckId, userId, cardId, back}) =>
                 </div>
             </div>}
             <div id={styles.body_wrapper}>
-                <label className={styles.label}>Front</label>
+                <label className={styles.label}>Front - Card #{i + 1}</label>
                 {!isEditing ?
                 <p className={styles.card_front__body}>{body}</p>
                 :
-                <EditCardFrontForm back={back} cardId={cardId} deckId={deckId} userId={userId} setIsEditing={setIsEditing} body={body}/>
+                <EditCardFrontForm isDark={isDark} back={back} cardId={cardId} deckId={deckId} userId={userId} setIsEditing={setIsEditing} body={body}/>
             }
             </div>
         </div>
