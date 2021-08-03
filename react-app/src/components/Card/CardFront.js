@@ -1,15 +1,11 @@
 import React from 'react';
-import { BsPencil, BsTrash, BsX, BsArrowBarUp} from 'react-icons/bs'
-import {FiSave} from 'react-icons/fi'
+import { BsPencil, BsTrash, BsArrowBarUp} from 'react-icons/bs'
+import EditCardFrontForm from './EditCardFrontForm';
 
 import styles from '../../css-modules/card.module.css';
 
-const CardFront = ({body, handleClick, isDark}) => {
+const CardFront = ({body, handleClick, isDark, deckId, userId, cardId, back}) => {
     const [isEditing, setIsEditing] = React.useState(false);
-
-    const handleEdit = () => {
-        return;
-    }
 
     const handleDelete = () => {
         return;
@@ -25,18 +21,14 @@ const CardFront = ({body, handleClick, isDark}) => {
                     <button className={`${styles.edit_and_delete__btn} ${isDark ? styles.dark : styles.light}`} onClick={handleDelete}><BsTrash /></button>
                 </div>
             </div>}
-            <div>
+            <div id={styles.body_wrapper}>
                 <label className={styles.label}>Front</label>
+                {!isEditing ?
                 <p className={styles.card_front__body}>{body}</p>
-            </div>
-            {isEditing &&
-            <div className={styles.btns_container}>
-                <div className={styles.editing_btns}>
-                    <button className={styles.save_and_delete__btn} onClick={handleEdit}><FiSave /></button>
-                    <button className={styles.save_and_delete__btn} onClick={() => setIsEditing(false)}><BsX /></button>
-                </div>
-            </div>
+                :
+                <EditCardFrontForm back={back} cardId={cardId} deckId={deckId} userId={userId} setIsEditing={setIsEditing} body={body}/>
             }
+            </div>
         </div>
     )
 }

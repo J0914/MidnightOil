@@ -13,7 +13,14 @@ const DeckPage = () => {
     const [isDark, setIsDark] = useState(false);
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
+    const cards = useSelector(state => state.decks.cards);
     const { deckId } = useParams();
+
+    useEffect(() => {
+        if (cards) {
+            setCurrentCards(cards.reverse());
+        }
+    }, [cards])
 
     useEffect(() => {
 
@@ -50,7 +57,10 @@ const DeckPage = () => {
             centerSlidePercentage={80} 
             showArrows={true}
             currentCards={currentCards}
-            isDark={isDark} />
+            isDark={isDark}
+            deckId={deckId}
+            userId={user?.id}
+            />
             </div>
         </div>
     )
