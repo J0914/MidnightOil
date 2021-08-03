@@ -1,7 +1,7 @@
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import Card from '../Card'
+import Card from '../../Card'
 
 const Slideshow = ({setShowCreateCardForm, currentCards, isDark, deckId, userId}) => {
 

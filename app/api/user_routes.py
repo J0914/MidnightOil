@@ -215,7 +215,7 @@ def post_cards(userId, deckId):
     form['csrf_token'].data = request.cookies['csrf_token']
     form['userId'].data = userId
     form['deckId'].data = deckId
-    if form.validate_on_submit() and form.front_exists() and form.back_exists() and form.validate_front_and_back():
+    if form.validate_on_submit() and form.validate_front_and_back():
         data = request.get_json()
         card = Card(front=data['front'], back=data['back'], userId=userId,  deckId=deckId)
         db.session.add(card)
@@ -238,7 +238,7 @@ def patch_and_delete_cards(userId, deckId, cardId):
         data = request.get_json()
 
         if data['editFront'] == True:
-            if form.validate_on_submit() and form.front_exists():
+            if form.validate_on_submit() and form.validate_front_and_back():
                 card = Card.query.get(cardId)
                 if 'front' in data.keys():
                     card.front = data['front']

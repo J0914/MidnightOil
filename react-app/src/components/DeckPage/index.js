@@ -4,6 +4,7 @@ import {useParams} from 'react-router-dom'
 import Slideshow from './Slideshow'
 import * as deckActions from '../../store/decks'
 import {BsPlusCircle, BsDashCircle, BsPencil, BsTrash} from 'react-icons/bs'
+import EditDeckForm from './EditDeckForm'
 
 import styles from '../../css-modules/deckpage.module.css'
 
@@ -41,8 +42,7 @@ const DeckPage = () => {
 
     const createCard = () => {
         const cardVals = {
-            front: `Edit me! ------------------------------------------
-            by the way, You can only create one new card at a time. :)`,
+            front: `Edit me!`,
             back: 'Edit me!'
         }
         dispatch(deckActions.createCard(userId, deckId, cardVals));
@@ -51,13 +51,25 @@ const DeckPage = () => {
     return (
         <div id={styles.deck_wrapper}>
             <div id={styles.deck_header__div}>
-            <h1 id={styles.header}>{currentDeck?.title}
+            {!isEditing ?
+            <h1 id={styles.header}>
+                {currentDeck?.title}
             <div className={styles.editing_btns}>
                     <button className={`${styles.edit_and_delete__btn} ${isDark ? styles.dark : styles.light}`} onClick={() => setIsEditing(true)}><BsPencil /></button>
                     <button className={`${styles.edit_and_delete__btn} ${isDark ? styles.dark : styles.light}`} ><BsTrash /></button>
                 </div>
             </h1>
-            
+            :
+            <div id={styles.header}>
+                <>
+                <EditDeckForm />
+                </>
+            <div className={styles.editing_btns}>
+                    <button className={`${styles.edit_and_delete__btn} ${isDark ? styles.dark : styles.light}`} onClick={() => setIsEditing(true)}><BsPencil /></button>
+                    <button className={`${styles.edit_and_delete__btn} ${isDark ? styles.dark : styles.light}`} ><BsTrash /></button>
+                </div>
+            </div>
+            }
             </div>
             <div id={styles.body}>
             <div id={styles.above_card}>
