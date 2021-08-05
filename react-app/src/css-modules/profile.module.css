@@ -1,8 +1,8 @@
-.testh1 {
+#profile_header {
     color: white;
 }
 
-.testdiv {
+#profile_wrapper {
     height: 93vh;
     width: 95vw;
     max-width: 1200px;
@@ -11,4 +11,60 @@
     overflow-y: auto;
     position: relative;
     margin-top: .5%;
+    display: grid;
+    grid-template-rows: 75px 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1px;
+    grid-template-areas:
+    'header header'
+    'friends friends'
+    'fshare ushare';
+}
+
+#user_share__wrapper {
+    grid-area: ushare;
+}
+
+#friends_share__wrapper {
+    grid-area: fshare;
+}
+
+#friends_wrapper {
+    grid-area: friends;
+}
+
+#header_wrapper {
+    grid-area: header;
+}
+
+#friends_wrapper {
+    background-color: #181a1b;
+    display: grid;
+    grid-template-rows: 50px auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+    'fhead fhead fhead search'
+    'accepted pending incoming search';
+    padding: 15px;
+}
+
+.friends_header {
+    grid-area: fhead;
+    margin-top: 0;
+}
+
+.accepted_wrapper {
+    grid-area: accepted;
+}
+
+.pending_wrapper {
+    grid-area: pending;
+}
+
+.incoming_wrapper {
+    grid-area: incoming;
+}
+
+.search_wrapper {
+    grid-area: search;
 }

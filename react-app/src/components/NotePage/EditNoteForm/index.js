@@ -52,7 +52,7 @@ const EditNoteForm = ({setShowEditNoteForm, notebookId, body, title, setTitle, n
             onChange={(e) => setTitle(e.target.value)}
             className={styles.note_name}
             required={true}
-            maxLength={20}
+            maxLength={19}
             size={20}
             />
             <button type="submit" className={styles.note_form__btn}><BsCheck /></button>

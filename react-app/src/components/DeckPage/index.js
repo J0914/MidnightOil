@@ -96,6 +96,9 @@ const DeckPage = () => {
                 </>
             </div>
             }
+            <div>
+                <p>(hint: you can use your keyboard arrows to change cards!)</p>
+            </div>
             </div>
             {currentCards?.length ?
             <div id={styles.body}>

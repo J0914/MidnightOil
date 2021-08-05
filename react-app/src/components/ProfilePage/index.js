@@ -1,26 +1,25 @@
 import React, { useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {getNotebooks} from '../../store/notebooks'
-import {getDecks} from '../../store/decks'
+import Friends from './Friends';
+import SharedByUser from './SharedByUser';
+import SharedByFriends from './SharedByFriends';
 
 import styles from '../../css-modules/profile.module.css';
 
 const ProfilePage = () => {
+    const accepted = useSelector(state => state.classmates.acceptedDetail);
+    const incoming = useSelector(state => state.classmates.incomingDetail);
+    const pending = useSelector(state => state.classmates.pendingDetail);
     const user = useSelector(state => state.session.user);
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        if (user) {
-            (async() => {
-                await dispatch(getNotebooks(user.id))
-                await dispatch(getDecks(user.id))    
-            })();
-        }
-    }, [user, dispatch]);
 
     return (
-        <div className={styles.testdiv}>
-            <h1 className={styles.testh1}>Welcome back username! (this feature is a work in progress)</h1>
+        <div id={styles.profile_wrapper}>
+            <div id={styles.header_wrapper}>
+            <h1 id={styles.profile_header}>Welcome Back {user?.fName}!</h1>
+            </div>
+            <Friends accepted={accepted} pending={pending} incoming={incoming} />
+            <SharedByFriends />
+            <SharedByUser />
         </div>
     )
 }

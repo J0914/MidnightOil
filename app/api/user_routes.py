@@ -9,7 +9,7 @@ user_routes = Blueprint('users', __name__)
 
 # get all users
 @user_routes.route('/')
-@login_required
+# @login_required
 def users():
     users = User.query.all()
     return {'users': [user.to_dict() for user in users]}
@@ -98,7 +98,6 @@ def get_notes(userId,notebookId):
 @login_required
 def get_note(userId, notebookId, noteId):
     note = Note.query.filter_by(id=noteId).first()
-    print(note)
     return note.to_dict()
 
 # create a new note
@@ -126,7 +125,6 @@ def post_notes(userId, notebookId):
 def patch_and_delete_notes(userId, notebookId, noteId):
 
     if request.method == 'PATCH':
-        print('got to the patch route')
         form = NoteForm()
         form['csrf_token'].data = request.cookies['csrf_token']
         form['userId'].data = userId
@@ -220,7 +218,6 @@ def patch_and_delete_decks(userId, deckId):
                 if 'share' in data.keys():
                     deck.share = data['share']
                 db.session.commit()
-                print(deck)
                 decks = Deck.query.filter_by(userId=userId).all()
                 return {'deck': deck.to_dict(), 'decks': [deck.to_dict() for deck in decks]}
             else: 
@@ -316,12 +313,21 @@ def patch_and_delete_cards(userId, deckId, cardId):
 
 # <<<<< User Classmates >>>>>
 
-# get classmates
+# get all classmates
 @user_routes.route('/<int:userId>/classmates')
 @login_required
-def classmate(userId):
+def get_classmates(userId):
     classmates = Classmate.query.filter_by(user1=userId).all()
     return {'classmates': [classmate.to_dict() for classmate in classmates]}
+
+
+# get single classmate
+@user_routes.route('/classmates/<int:classmateId>')
+@login_required
+def get_classmate(classmateId):
+    classmate = User.query.filter_by(id=classmateId).first()
+    return classmate.to_dict()
+
 
 # send a friend request to classmate, accept/refuse friend request, remove a classmate from list.
 @user_routes.route('/<int:userId>/classmates/<int:classmateId>', methods=['POST', 'PATCH', 'DELETE'])

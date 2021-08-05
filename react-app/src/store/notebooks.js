@@ -205,7 +205,6 @@ export const editNote = (userId, notebookId, noteId, noteVals) => async (dispatc
     
     if (response.ok) {
       const data = await response.json();
-      console.log('the store note is', data.note)
       if (data.errors) {
         let errs = Object.values(data.errors)
         return {errors: errs}
