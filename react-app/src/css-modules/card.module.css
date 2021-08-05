@@ -29,6 +29,10 @@
     margin-right: 15px;
 }
 
+.front_btn:hover, .back_btn:hover {
+    color: rgb(173, 125, 173);
+}
+
 .light {
     background-color: white;
     color: #181a1b;
@@ -54,6 +58,10 @@
 .edit_and_delete__btn, .save_and_delete__btn {
     background: none;
     font-size: 2.5rem;
+}
+
+.edit_and_delete__btn:hover, .save_and_delete__btn:hover {
+    color: rgb(173, 125, 173);
 }
 
 .editing_btns {

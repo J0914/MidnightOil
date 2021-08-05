@@ -18,12 +18,31 @@
 }
 
 .navlink {
-    color: #458fa7;
-    text-decoration: none;
-    font-size: 1.5rem;
-    background: none;
-    font-family: Marcellus;
+    background: #ffffff;
+    font-family: Montserrat;
     font-weight: bold;
+    font-size: .9rem;
+    color: black;
+    text-decoration: none;
+    border-radius: 90px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 6px;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+    border: none;
+    vertical-align: middle;
+    transition: box-shadow 0.4s ease;
+    padding: 0 15px;
+    height: 25px;
+    box-sizing: border-box;
+
+}
+
+.navlink:hover {
+    background-color: rgb(173, 125, 173);
+    box-shadow: 0 1px 8px 5px rgba(255, 255, 255, 0.3);
 }
 
 /* .nav_active {

@@ -187,6 +187,7 @@ export const editNote = (userId, notebookId, noteId, noteVals) => async (dispatc
           dispatch(setNotebooks(data.notebooks))
           dispatch(setNotes(data.notes))
           dispatch(setNote(data.note))
+          console.log(data.note, '<<<<< in the store')
           return data.note
       }
     } else {

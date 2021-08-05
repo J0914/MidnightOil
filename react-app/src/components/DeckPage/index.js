@@ -101,17 +101,16 @@ const DeckPage = () => {
             <div id={styles.body}>
             <div id={styles.above_card}>
                 <div id={styles.create_btn__wrapper}>
-                    <label className={styles.add_card_label}>Create Card</label>
-                    <button className={styles.add_card} onClick={createCard}>{!showCreateCardForm ? <BsPlusCircle /> : <BsDashCircle />}</button>
+                    <button id='create-card' className={styles.add_card} onClick={createCard}>Create Card   {!showCreateCardForm ? <BsPlusCircle /> : <BsDashCircle />}</button>
                 </div>
                 <h5 id={styles.card_count}>
                     {currentCards?.length} cards
                 </h5>
                 <div id={styles.theme_wrapper}>
-                    <label className={styles.radio_label}>Light Theme</label>
-                    <input type="radio" id={styles.light} name="theme" checked={isDark === false} onChange={()=> setIsDark(false)}></input>
-                    <label className={styles.radio_label}>Dark Theme</label>
-                    <input type="radio" id={styles.dark} name="theme" checked={isDark === true} onChange={()=> setIsDark(true)}></input>
+                    <label for='light' className={styles.radio_label}>Light Theme</label>
+                    <input type="radio" id='light' name="theme" checked={isDark === false} onChange={()=> setIsDark(false)}></input>
+                    <label for='dark' className={styles.radio_label}>Dark Theme</label>
+                    <input type="radio" id='dark' name="theme" checked={isDark === true} onChange={()=> setIsDark(true)}></input>
                 </div>
             </div>
             <div className={styles.slideshow}>
