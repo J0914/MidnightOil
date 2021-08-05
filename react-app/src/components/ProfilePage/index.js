@@ -20,7 +20,7 @@ const ProfilePage = () => {
 
     return (
         <div className={styles.testdiv}>
-            <h1 className={styles.testh1}>Welcome back username!</h1>
+            <h1 className={styles.testh1}>Welcome back username! (this feature is a work in progress)</h1>
         </div>
     )
 }

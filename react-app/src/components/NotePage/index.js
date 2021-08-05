@@ -13,12 +13,17 @@ import styles from '../../css-modules/notepage.module.css';
 
 const NotePage = () => {
     const user = useSelector(state => state.session.user);
-    const note = useSelector(state => state.notebooks.currentNote)
+    let note = useSelector(state => state.notebooks.currentNote)
     const notebooks = useSelector(state => state.notebooks.notebooks)
 
-    const [ share, setShare ] = useState(note?.share || false);
-    const [ body, setBody ] = useState(note?.body || '');
-    const [ title, setTitle ] = useState(note?.title || '');
+    useEffect(() => {
+        setCurrentNote(note);
+    }, [note])
+
+    const [currentNote, setCurrentNote] = useState(note);
+    const [ share, setShare ] = useState(currentNote?.share || false);
+    const [ body, setBody ] = useState(currentNote?.body || '');
+    const [ title, setTitle ] = useState(currentNote?.title || '');
     const [ isDark, setIsDark ] = useState(false);
     const [ isEditing, setIsEditing ] = useState(false);
     const [ currentNotebook, setCurrentNotebook ] = useState(null);
@@ -29,6 +34,7 @@ const NotePage = () => {
     const dispatch = useDispatch();
     const history = useHistory()
     const {notebookId, noteId} = useParams();
+    console.log(noteId);
 
     useEffect(() => {
         setIsEditing(false);
@@ -36,7 +42,7 @@ const NotePage = () => {
 
     useEffect(() => {
         setIsEditing(false);
-    }, [note])
+    }, [currentNote])
     
     useEffect(() => {
         let userId;
@@ -45,18 +51,18 @@ const NotePage = () => {
     }, [user, dispatch, notebookId, noteId]);
 
     useEffect(() => {
-        if (note) {
-            setTitle(note.title);
-            setBody(note.body);
-            setShare(note.share);
+        if (currentNote) {
+            setTitle(currentNote.title);
+            setBody(currentNote.body);
+            setShare(currentNote.share);
             if (notebooks) {
-                const notebook = notebooks.find(notebook => notebook.id === note.notebookId)
+                const notebook = notebooks.find(notebook => notebook.id === currentNote.notebookId)
                 const notes = Object.values(notebook.notes)
                 notebook.notes = notes;
                 setCurrentNotebook(notebook)
             }
         }
-    }, [note, notebooks]);
+    }, [currentNote, notebooks]);
 
     const editNote = (e) => {
         e.preventDefault();
@@ -73,6 +79,7 @@ const NotePage = () => {
         if (data.errors) {
             setErrors(data.errors)
         } else {
+            setCurrentNote(data);
             setIsEditing(!isEditing);
         }
     }
@@ -124,7 +131,7 @@ const NotePage = () => {
                     <button className={styles.edit_note__title} onClick={() => {setShowEditNoteForm(!showEditNoteForm)}}><BsPencil /></button>
                     </div>
                     :
-                    <EditNoteForm body={body} noteId={note.id}notebookId={currentNotebook.id} title={title} setTitle={setTitle} setShowEditNoteForm={setShowEditNoteForm}/>
+                    <EditNoteForm body={body} noteId={currentNote?.id}notebookId={currentNotebook?.id} title={title} setTitle={setTitle} setShowEditNoteForm={setShowEditNoteForm}/>
                     }
                 <div id={styles.under_note__title}> 
                 {!isEditing && 
@@ -134,10 +141,10 @@ const NotePage = () => {
                     <button className={styles.edit_and_delete} onClick={deleteNote}><BsTrash /></button>
                 </div>
                 <div id={styles.theme_wrapper}>
-                    <label className={styles.radio_label}>Light Theme</label>
-                    <input type="radio" id={styles.light} name="theme" checked={!isDark} value={false} onChange={()=> setIsDark(false)}></input>
-                    <label className={styles.radio_label}>Dark Theme</label>
-                    <input type="radio" id={styles.dark} name="theme" value={true} onChange={()=> setIsDark(true)}></input>
+                    <label for='light' className={styles.radio_label}>Light Theme</label>
+                    <input type="radio" id='light' name="theme" checked={!isDark} value={false} onChange={()=> setIsDark(false)}></input>
+                    <label for='dark' className={styles.radio_label}>Dark Theme</label>
+                    <input type="radio" id='dark' name="theme" value={true} onChange={()=> setIsDark(true)}></input>
                 </div>
                 </>}
                 {isEditing && 
@@ -179,7 +186,7 @@ const NotePage = () => {
                 </div>
                 <div id={styles.editor_container} className={isDark ? styles.dark : styles.light}>
                     <Editor
-                    value={note?.body}
+                    value={currentNote?.body}
                     id={styles.editor}
                     readOnly={!isEditing}
                     readOnlyWriteCheckboxes={!isEditing}

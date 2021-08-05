@@ -72,9 +72,21 @@
     font-size: 2.5rem;
 }
 
+.edit_and_delete:hover {
+    color: rgb(173, 125, 173);   
+}
+
 .radio_label {
     font-size: 1.5rem;
     color: white;
+}
+
+.radio_label:hover {
+    color: rgb(173, 125, 173); 
+}
+
+.error {
+    color: red;
 }
 
 #note_sidebar {
@@ -98,6 +110,10 @@
     text-decoration: none;
     color: white;
     font-size: 1.5rem;
+}
+
+.note_link:hover {
+    color: rgb(173, 125, 173); 
 }
 
 #logo_div {
@@ -128,6 +144,10 @@
     font-size: 2rem;
 }
 
+.edit_note__title:hover {
+    color: rgb(173, 125, 173); 
+}
+
 #header_container {
     display: flex;
     align-items: flex-end;
@@ -146,6 +166,10 @@
     font-size: 1.3rem;
 }
 
+.add_note:hover {
+    color: rgb(173, 125, 173);  
+}
+
 .form__wrapper {
     display: flex;
     background-color: white;
@@ -156,6 +180,10 @@
 
 .close {
     background: none;
+}
+
+.close:hover {
+    color: rgb(173, 125, 173);  
 }
 
 .note_body {

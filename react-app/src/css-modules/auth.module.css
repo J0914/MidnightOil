@@ -10,7 +10,7 @@
 }
 
 #splash_login__btn:hover, #splash_signup__btn:hover {
-    background-color: #180437;
+    background-color: rgb(143, 80, 143);
     box-shadow: 0.0625rem 0.0625rem 0.325rem -2px #2c0863;
 
 }

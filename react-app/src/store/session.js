@@ -99,6 +99,15 @@ export const signUp = (username, fName, lName, email, password) => async (dispat
   }
 }
 
+// export const getQuote = () => async (dispatch) => {
+//   const response = await fetch('https://zenquotes.io/api/today')
+//   if (response.ok) {
+//     const data = await response.json();
+//     console.log(data.q)
+//     // dispatch(setQuote())
+//   }
+// }
+
 const initialState = { user: null };
 
 export default function reducer(state = initialState, action) {

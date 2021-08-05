@@ -127,7 +127,7 @@ def patch_and_delete_notes(userId, notebookId, noteId):
                 db.session.commit()
                 notes = Note.query.filter_by(userId=userId, notebookId=notebookId).all()
                 notebooks = Notebook.query.filter_by(userId=userId).all()
-                return {'notebooks': [notebook.to_dict() for notebook in notebooks],'notes': [note.to_dict() for note in notes]}
+                return {'note': note.to_dict(), 'notebooks': [notebook.to_dict() for notebook in notebooks],'notes': [note.to_dict() for note in notes]}
             else: 
                 return jsonify({'errors': form.errors})
 

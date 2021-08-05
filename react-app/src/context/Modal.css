@@ -11,14 +11,14 @@
   }
 
   .navLink:hover { 
-    background-color: #16131E  ;
-    color: #CED7E8 ;
+    background-color: rgb(173, 125, 173);
+    color: white ;
 }
 .navLink {
     font-family: Cinzel;
     margin-left: 10px;
     text-decoration: none;
-    background-color: #CED7E8 ;
+    background-color: white ;
     color: #16131E ;
     font-weight: 800;
     border-radius: 5px;

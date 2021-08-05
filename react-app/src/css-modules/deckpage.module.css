@@ -31,6 +31,10 @@
     color: white;
 }
 
+.edit_and_delete__btn:hover {
+    color: rgb(173, 125, 173);
+}
+
 #header {
     display: flex;
     /* flex-direction: column; */
@@ -65,10 +69,18 @@
     font-size: 1.5em;
 }
 
+.radio_label:hover {
+    color: rgb(173, 125, 173); 
+}
+
 .create_btn {
     background: none;
     color: white;
     font-size: 3rem;
+}
+
+.create_btn:hover {
+     color: rgb(173, 125, 173); 
 }
 
 #card_count {
@@ -131,7 +143,7 @@
 
 .add_card_label {
     color: white;
-    font-size: 1.5em;
+    font-size: 1.5rem;
     white-space: nowrap;
 
 }
@@ -141,6 +153,15 @@
     background: none;
     color: white;
     font-size: 1.3rem;
+    white-space: nowrap;
     
+}
+
+.add_card:hover {
+    color: rgb(173, 125, 173);
+}
+
+.add_card_label:hover {
+    color: rgb(173, 125, 173);
 }
 

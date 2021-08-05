@@ -15,6 +15,10 @@
     font-size: 2.5rem;
 }
 
+.card_form__btn:hover {
+    color: rgb(173, 125, 173);
+}
+
 .card_btns__container {
     display: flex;
     width: 10%;
