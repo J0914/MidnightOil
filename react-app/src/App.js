@@ -12,6 +12,8 @@ import { authenticate } from './store/session';
 import { getClassmates } from './store/classmates';
 import { getNotebooks } from './store/notebooks';
 import { getDecks } from './store/decks';
+import {getUsers} from './store/session'
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -24,6 +26,8 @@ function App() {
         await dispatch(getClassmates(data.id));
         await dispatch(getNotebooks(data.id));
         await dispatch(getDecks(data.id));
+        await dispatch(getClassmates(data.id)) 
+        await dispatch(getUsers()); 
       }
       setLoaded(true);
     })();
