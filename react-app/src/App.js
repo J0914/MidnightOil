@@ -41,7 +41,7 @@ function App() {
           <ProfilePage />
         </ProtectedRoute>
         <ProtectedRoute path='/notebooks/:notebookId/notes/:noteId' exact={true} >
-          <NotePage />
+          <NotePage loaded={loaded} />
         </ProtectedRoute>
         <ProtectedRoute path='/decks/:deckId' exact={true} >
           <DeckPage />

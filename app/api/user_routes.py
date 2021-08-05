@@ -30,6 +30,14 @@ def get_notebooks(userId):
     notebooks = Notebook.query.filter_by(userId=userId).all()
     return {'notebooks': [notebook.to_dict() for notebook in notebooks]}
 
+# get current user notebook
+@user_routes.route('/<int:userId>/notebooks/<int:notebookId>')
+@login_required
+def get_notebook(userId, notebookId):
+    notebook = Notebook.query.filter_by(userId=userId, id=notebookId).first()
+    notes = Note.query.filter_by(notebookId=notebookId).all()
+    return {'notebook': notebook.to_dict(), 'notes': [note.to_dict() for note in notes]}
+
 # create a new notebook
 @user_routes.route('/<int:userId>/notebooks', methods=['POST'])
 @login_required

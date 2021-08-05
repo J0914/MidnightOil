@@ -12,21 +12,20 @@ import NoteForm from '../NotebooksDropdownMenu/NoteForm'
 import styles from '../../css-modules/notepage.module.css';
 
 const NotePage = () => {
-    const user = useSelector(state => state.session.user);
-    let note = useSelector(state => state.notebooks.currentNote)
-    const notebooks = useSelector(state => state.notebooks.notebooks)
+    
+    const userId = useSelector(state => state.session.user?.id);
+    const notebook = useSelector(state => state.notebooks.currentNotebook);
+    const note = useSelector(state => state.notebooks.currentNote);
+    const notes = useSelector(state => state.notebooks.notes);
 
-    useEffect(() => {
-        setCurrentNote(note);
-    }, [note])
-
-    const [currentNote, setCurrentNote] = useState(note);
-    const [ share, setShare ] = useState(currentNote?.share || false);
-    const [ body, setBody ] = useState(currentNote?.body || '');
-    const [ title, setTitle ] = useState(currentNote?.title || '');
-    const [ isDark, setIsDark ] = useState(false);
-    const [ isEditing, setIsEditing ] = useState(false);
     const [ currentNotebook, setCurrentNotebook ] = useState(null);
+    const [ currentNotebookNotes, setCurrentNotebookNotes ] = useState(null);
+    const [ currentNote, setCurrentNote ] = useState(note);
+    const [ title, setTitle ] = useState(currentNote?.title || '');
+    const [ body, setBody ] = useState(currentNote?.body || '');
+    const [ share, setShare ] = useState(currentNote?.share || false);
+    const [ isEditing, setIsEditing ] = useState(false);
+    const [ isDark, setIsDark ] = useState(false);
     const [ showEditNoteForm, setShowEditNoteForm ] = useState(false);
     const [ showNoteForm, setShowNoteForm] = useState(false);
     const [ errors, setErrors] = useState([]);
@@ -34,40 +33,27 @@ const NotePage = () => {
     const dispatch = useDispatch();
     const history = useHistory()
     const {notebookId, noteId} = useParams();
-    console.log(noteId);
 
     useEffect(() => {
-        setIsEditing(false);
-    }, [])
+        setCurrentNotebook(notebook)
+        setCurrentNote(note);
+        setCurrentNotebookNotes(notes);
+    }, [note, notebook, notes])
 
     useEffect(() => {
+        dispatch(notebookActions.getNote( userId, notebookId, noteId ))
+        dispatch(notebookActions.getNotebook( userId, notebookId ))
+    }, [dispatch, userId, notebookId, noteId]);
+
+    useEffect(() => {
+        setTitle(currentNote?.title);
+        setBody(currentNote?.body);
+        setShare(currentNote?.share);
         setIsEditing(false);
     }, [currentNote])
-    
-    useEffect(() => {
-        let userId;
-        if (user) userId = user.id
-        dispatch(notebookActions.getNote( userId, notebookId, noteId))
-    }, [user, dispatch, notebookId, noteId]);
-
-    useEffect(() => {
-        if (currentNote) {
-            setTitle(currentNote.title);
-            setBody(currentNote.body);
-            setShare(currentNote.share);
-            if (notebooks) {
-                const notebook = notebooks.find(notebook => notebook.id === currentNote.notebookId)
-                const notes = Object.values(notebook.notes)
-                notebook.notes = notes;
-                setCurrentNotebook(notebook)
-            }
-        }
-    }, [currentNote, notebooks]);
 
     const editNote = (e) => {
         e.preventDefault();
-        let userId;
-        if (user) userId = user.id
         const noteVals = {
             title: title,
             body: body,
@@ -75,21 +61,20 @@ const NotePage = () => {
             editBody: true,
             editTitle: false
         }
-        const data = dispatch(notebookActions.editNote( userId, notebookId, noteId, noteVals))
-        if (data.errors) {
-            setErrors(data.errors)
+        const note = dispatch(notebookActions.editNote( userId, notebookId, noteId, noteVals))
+        if (note.errors) {
+            setErrors(note.errors)
         } else {
-            setCurrentNote(data);
+            setCurrentNote(note);
             setIsEditing(!isEditing);
         }
     }
 
     const deleteNote = () => {
-        let userId;
-        if (user) userId = user.id
+
         let answer = window.confirm(`Are you sure you want to delete this note?`)
         if (answer) {
-            if (currentNotebook.notes.length <= 1) {
+            if (currentNotebookNotes?.length <= 1) {
                 dispatch(notebookActions.deleteNote(userId, notebookId,noteId))
                 history.push('/profile')
             } else {
@@ -97,7 +82,7 @@ const NotePage = () => {
                 if (data.errors) {
                     setErrors(data.errors)
                 } else {
-                    history.push(`/notebooks/${notebookId}/notes/${currentNotebook.notes[0].id}`)
+                    history.push(`/notebooks/${notebookId}/notes/${currentNotebookNotes[0].id}`)
                 }
             }
         } else {
@@ -131,13 +116,13 @@ const NotePage = () => {
                     <button className={styles.edit_note__title} onClick={() => {setShowEditNoteForm(!showEditNoteForm)}}><BsPencil /></button>
                     </div>
                     :
-                    <EditNoteForm body={body} noteId={currentNote?.id}notebookId={currentNotebook?.id} title={title} setTitle={setTitle} setShowEditNoteForm={setShowEditNoteForm}/>
+                    <EditNoteForm body={body} noteId={noteId}notebookId={notebookId} title={title} setTitle={setTitle} setShowEditNoteForm={setShowEditNoteForm}/>
                     }
                 <div id={styles.under_note__title}> 
                 {!isEditing && 
                 <>
                 <div className={styles.btn_wrapper}>
-                    <button className={styles.edit_and_delete} onClick={() => setIsEditing(true)}><BsPencil /></button>
+                    <button className={styles.edit_and_delete} onClick={() => setIsEditing(true)}>Edit Note <BsPencil /></button>
                     <button className={styles.edit_and_delete} onClick={deleteNote}><BsTrash /></button>
                 </div>
                 <div id={styles.theme_wrapper}>
@@ -150,7 +135,7 @@ const NotePage = () => {
                 {isEditing && 
                 <>
                 <div className={styles.btn_wrapper}>
-                    <button type='submit' form='edit_note__form' className={styles.edit_and_delete} ><FiSave /></button>
+                    <button type='submit' form='edit_note__form' className={styles.edit_and_delete} >Save Changes <FiSave /></button>
                     <button className={styles.edit_and_delete} onClick={() => setIsEditing(false)}><BsX /></button>
                 </div>
                 <div id={styles.share_wrapper}>
@@ -176,7 +161,7 @@ const NotePage = () => {
                         <button onClick={() => setShowNoteForm(false)} className={styles.close}><BsX /></button>
                         </div>}
                         <div id={styles.note_sidebar}>
-                            {currentNotebook?.notes.map(thenote => (
+                            {currentNotebookNotes?.map(thenote => (
                                 <div key={thenote.id} className={styles.note_link__wrapper}>
                                 <NavLink className={styles.note_link} key={thenote.id} to={`/notebooks/${thenote.notebookId}/notes/${thenote.id}`}>{thenote?.title}</NavLink>
                                 </div>

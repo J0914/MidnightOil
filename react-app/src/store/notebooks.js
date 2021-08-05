@@ -1,11 +1,17 @@
 // constants
 const SET_NOTEBOOKS = 'notebooks/SET_NOTEBOOKS';
+const SET_NOTEBOOK = 'notebooks/SET_NOTEBOOK';
 const SET_NOTES = 'notebooks/SET_NOTES';
 const SET_NOTE = 'notebooks/SET_NOTE'
 
 const setNotebooks = (notebooks) => ({
   type: SET_NOTEBOOKS,
   payload: notebooks
+});
+
+const setNotebook = (notebook) => ({
+  type: SET_NOTEBOOK,
+  payload: notebook
 });
 
 const setNotes = (notes) => ({
@@ -31,6 +37,25 @@ export const getNotebooks = (userId) => async (dispatch) => {
         dispatch(setNotebooks(notebooks.notebooks))
     }
     return null;
+  } else {
+    return ['response not okay, try again with better info']
+  }
+}
+
+// get current user notebook
+export const getNotebook = (userId, notebookId) => async (dispatch) => {
+  const response = await fetch(`/api/users/${userId}/notebooks/${notebookId}`)
+  
+  if (response.ok) {
+    const notebook = await response.json();
+    if (notebook.errors) {
+      let errs = Object.values(notebook.errors)
+      return errs
+    } else {
+        dispatch(setNotebook(notebook.notebook))
+        dispatch(setNotes(notebook.notes))
+    }
+    return notebook;
   } else {
     return ['response not okay, try again with better info']
   }
@@ -134,7 +159,7 @@ export const getNote = (userId, notebookId, noteId) => async (dispatch) => {
     } else {
         dispatch(setNote(note))
     }
-    return null;
+    return note;
   } else {
     return ['response not okay, try again with better info']
   }
@@ -180,6 +205,7 @@ export const editNote = (userId, notebookId, noteId, noteVals) => async (dispatc
     
     if (response.ok) {
       const data = await response.json();
+      console.log('the store note is', data.note)
       if (data.errors) {
         let errs = Object.values(data.errors)
         return {errors: errs}
@@ -187,7 +213,6 @@ export const editNote = (userId, notebookId, noteId, noteVals) => async (dispatc
           dispatch(setNotebooks(data.notebooks))
           dispatch(setNotes(data.notes))
           dispatch(setNote(data.note))
-          console.log(data.note, '<<<<< in the store')
           return data.note
       }
     } else {
@@ -221,12 +246,14 @@ export const deleteNote = (userId, notebookId, noteId) => async (dispatch) => {
 
 // window.store.dispatch(window.notebookActions.createNote(1, 1, {title: 'hello', body: 'omg it worked', share: false}));
 
-const initialState = { notebooks: null, notes: null, currentNote: null};
+const initialState = { notebooks: null, notes: null, currentNotebook: null, currentNote: null};
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_NOTEBOOKS:
       return { ...state, notebooks: action.payload }
+    case SET_NOTEBOOK:
+      return { ...state, currentNotebook: action.payload }
     case SET_NOTES:
         return { ...state, notes: action.payload }
     case SET_NOTE:
