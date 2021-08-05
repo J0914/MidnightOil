@@ -34,7 +34,7 @@ const DeckForm = ({setIsOpen, setShowDeckForm}) => {
       };
 
     return (
-        <form id={styles.deck_form} onSubmit={createDeck}>
+        <form id={styles.deck_dropdown__form} onSubmit={createDeck}>
                 {errors.map((error, ind) => (
                 <li className={styles.error} key={ind}>{error}</li>
                 ))}
@@ -43,11 +43,11 @@ const DeckForm = ({setIsOpen, setShowDeckForm}) => {
                 placeholder="Deck Name" 
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className={styles.deck_name}
+                className={styles.deck_dropdown__name}
                 required={true}
                 />
-                <button type="submit" className={styles.deck_form__btn}><BsCheck /></button>
-                <button onClick={() => setShowDeckForm(false)} className={styles.close}><BsX /></button>
+                <button type="submit" className={styles.dropdown_deck_form__btn}><BsCheck /></button>
+                <button onClick={() => setShowDeckForm(false)} className={styles.dropdown_deck_form__btn}><BsX /></button>
             </form>
     )
 }

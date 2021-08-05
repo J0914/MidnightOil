@@ -14,7 +14,6 @@ const NoteForm = ({setShowNoteForm, notebookId, setIsOpen}) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const user = useSelector(state => state.session.user)
-    const currentNote = useSelector(state => state.notebooks.currentNote)
 
     const createNote = async (e) => {
         e.preventDefault()
@@ -32,7 +31,7 @@ const NoteForm = ({setShowNoteForm, notebookId, setIsOpen}) => {
             if (setIsOpen) {
                 setIsOpen(false);
             }
-            history.push(`/notebooks/${notebookId}/notes/${currentNote.id}`);
+            history.push(`/notebooks/${notebookId}/notes/${note.id}`);
         }
       };
 

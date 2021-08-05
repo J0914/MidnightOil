@@ -54,7 +54,7 @@ export const createNotebook = (userId, title) => async (dispatch) => {
       } else {
           dispatch(setNotebooks(notebooks.notebooks))
       }
-      return null;
+      return notebooks.notebook;
     } else {
       return ['response not okay, try again with better info']
     }
@@ -183,14 +183,12 @@ export const editNote = (userId, notebookId, noteId, noteVals) => async (dispatc
       if (data.errors) {
         let errs = Object.values(data.errors)
         return {errors: errs}
-        } else {
-            dispatch(setNotebooks(data.notebooks))
-            dispatch(setNotes(data.notes))
-            const noteArr = Object.values(data.notes)
-            const note = noteArr[noteArr.length - 1]
-            dispatch(setNote(note))
-            return(note)
-        }
+      } else {
+          dispatch(setNotebooks(data.notebooks))
+          dispatch(setNotes(data.notes))
+          dispatch(setNote(data.note))
+          return data.note
+      }
     } else {
         return ['response not okay, try again with better info']
     }

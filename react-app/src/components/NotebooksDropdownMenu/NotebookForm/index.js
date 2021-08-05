@@ -1,26 +1,39 @@
 import React from 'react';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 import * as notebookActions from '../../../store/notebooks'
 import {BsCheck} from 'react-icons/bs'
 
 import styles from '../../../css-modules/notebookform.module.css';
 
-const NotebookForm = ({setShowNotebookForm}) => {
-    const [title, setTitle] = useState('')
-    const [errors, setErrors] = useState([])
-    const dispatch = useDispatch()
-    const user = useSelector(state => state.session.user)
+const NotebookForm = ({setIsOpen, setShowNotebookForm}) => {
+    const [title, setTitle] = useState('');
+    const [errors, setErrors] = useState([]);
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const user = useSelector(state => state.session.user);
 
     const createNotebook = async (e) => {
         e.preventDefault();
         let userId;
         if (user) userId = user.id
-        const data = await dispatch(notebookActions.createNotebook(userId, title));
-        if (data) {
-          setErrors(data);
+        const notebook = await dispatch(notebookActions.createNotebook(userId, title));
+        if (Array.isArray(notebook)) {
+          setErrors(notebook);
         } else {
+          const noteVals = {
+            title: 'New Note',
+            body: 'New Note'
+          }
+          const note = dispatch(notebookActions.createNote(userId, notebook.id, noteVals))
+          if (Array.isArray(note)) {
+            setErrors(note)
+          } else {
             setShowNotebookForm(false)
+            setIsOpen(false)
+            history.push(`/notebooks/${notebook.id}/notes/${note.id}`)
+          }
         }
       };
 

@@ -1,10 +1,18 @@
 import React from 'react';
+import {useDispatch} from 'react-redux'
+import * as sessionActions from '../../store/session'
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 
 import styles from '../../css-modules/splash.module.css';
 
 const Splash = () => {
+    const dispatch = useDispatch();
+
+    React.useEffect(() => {
+        dispatch(sessionActions.logout());
+    }, [dispatch])
+    
     return (
         <div className={styles.splash_container}>
             <div id={styles.splash_center}>

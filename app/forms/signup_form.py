@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField
-from wtforms.validators import DataRequired, Email, ValidationError
+from wtforms.validators import DataRequired, ValidationError
 from app.models import User
 
 
@@ -39,6 +39,8 @@ def email_length(form, field):
     # checking if email and password are more than 3 and less than 255 chars.
     if len(email) < 3 or len(email) > 255:
         raise ValidationError('Email must be between 3 and 255 characters.')
+    elif '@' not in email:
+        raise ValidationError('Please enter a valid email!.')
 
 def password_length(form, field):
     password = field.data

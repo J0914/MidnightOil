@@ -1,11 +1,61 @@
 .deck_form__btn {
     background: none;
+    color: white;
+    font-size: 3rem;
+    height: fit-content;
+}
+
+.radio_label {
+    font-size: 2rem;
+}
+
+#share_wrapper {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.dropdown_deck_form__btn {
+    background: none;
+    color: black;
 }
 
 .error {
     color: red;
+    font-size: 1rem;
 }
 
 .close {
     background: none;
+}
+
+.deck_name {
+    font-size: 2rem;
+    padding: 2px;
+    height: fit-content;
+}
+
+.deck_dropdown__name {
+    padding: 2px;
+    margin: 0;
+    height: fit-content;
+    position: relative;
+}
+
+#deck_form, #deck_dropdown__form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+}
+
+#deck_dropdown__form {
+    height: 30px;
+}
+
+.form_container {
+    display: flex;
+
 }

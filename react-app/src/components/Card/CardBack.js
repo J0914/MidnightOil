@@ -3,10 +3,12 @@ import {useDispatch} from 'react-redux'
 import { BsPencil, BsTrash, BsArrowBarUp} from 'react-icons/bs'
 import EditCardBackForm from './EditCardBackForm';
 import * as deckActions from '../../store/decks'
+import {Prompt} from 'react-router'
+
 
 import styles from '../../css-modules/card.module.css';
 
-const CardBack = ({i, body, handleClick, isDark, deckId, userId, cardId, front}) => {
+const CardBack = ({ isDark, i, body, handleClick,  deckId, userId, cardId, front}) => {
     const [isEditing, setIsEditing] = React.useState(false);
     const dispatch = useDispatch();
 
@@ -15,6 +17,11 @@ const CardBack = ({i, body, handleClick, isDark, deckId, userId, cardId, front})
     }
     
     return (
+        <>
+        <Prompt 
+        when={isEditing}
+        message="Are you sure you want to leave without saving?"
+        />
         <div className={`${styles.card_back__wrapper} ${isDark ? styles.dark : styles.light}`}>
             {!isEditing && 
             <div className={styles.btns_container}>
@@ -25,7 +32,9 @@ const CardBack = ({i, body, handleClick, isDark, deckId, userId, cardId, front})
                 </div>
             </div>}
             <div id={styles.body_wrapper}>
-                <label className={styles.label}>Back - Card #{i + 1}</label>
+                <div id={styles.title_div}>
+                    <label className={styles.label}>Back - Card #{i + 1}</label>
+                </div>
                 {!isEditing ?
                 <p className={styles.card_back__body}>{body}</p>
                 :
@@ -33,6 +42,7 @@ const CardBack = ({i, body, handleClick, isDark, deckId, userId, cardId, front})
             }
             </div>
         </div>
+        </>
     )
 }
 

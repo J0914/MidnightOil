@@ -1,0 +1,62 @@
+#footer_wrapper {
+    height: 50px;
+    width: 100%;
+    margin-top: 20px;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(0.25turn, #020211, #13011B);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-evenly;
+}
+
+.footer_text {
+    font-size: 1.5rem;
+    color: white;
+    white-space: nowrap;
+}
+
+.footer_link {
+    background: none;
+    font-size: 2rem;
+    color: white;
+    margin-top: 7px;
+}
+
+#footer_content {
+    width: 30%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#youtube_wrapper {
+    width: 20%;
+    position: relative;
+    bottom: 0;
+    right: 0;
+    z-index: 1;
+    display: flex;
+    align-items: flex-end;
+}
+
+#music_label__div {
+    height: 50px;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.beats.visible {
+    visibility: visible;
+}
+
+.beats.hidden {
+    visibility: hidden;
+}
+
+.beats {
+    width: 300px;
+}
