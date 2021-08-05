@@ -21,8 +21,8 @@ const Footer = () => {
         <div id={styles.footer_wrapper}>
             <div id={styles.footer_content}>
                 <label className={styles.footer_text}>Created by: Jordyn Sechrist</label>
-                <a className={styles.footer_link} href='https://github.com/J0914'><DiGithubBadge /></a>
-                <a className={styles.footer_link} href='https://www.linkedin.com/in/jordyn-sechrist-87710b207/'><FaLinkedin /></a>
+                <a rel='noreferrer' target="_blank" className={styles.footer_link} href='https://github.com/J0914'><DiGithubBadge /></a>
+                <a rel='noreferrer' target="_blank" className={styles.footer_link} href='https://www.linkedin.com/in/jordyn-sechrist-87710b207/'><FaLinkedin /></a>
             </div>
             <div id={styles.youtube_wrapper}>
                 <div id={styles.music_label__div}>

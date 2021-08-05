@@ -13,7 +13,7 @@ const NavBar = () => {
     <nav id={styles.nav}>
       <div className={styles.nav_container}>
           <NavLink to='/profile' exact={true} className={styles.navlink} activeClassName={styles.nav_active}>
-            Dashboard
+            Profile
           </NavLink>
           <NotebooksDropdownMenu />
           <div id={styles.logo_div}>

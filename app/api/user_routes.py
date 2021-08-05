@@ -30,6 +30,14 @@ def get_notebooks(userId):
     notebooks = Notebook.query.filter_by(userId=userId).all()
     return {'notebooks': [notebook.to_dict() for notebook in notebooks]}
 
+# get current user notebook
+@user_routes.route('/<int:userId>/notebooks/<int:notebookId>')
+@login_required
+def get_notebook(userId, notebookId):
+    notebook = Notebook.query.filter_by(userId=userId, id=notebookId).first()
+    notes = Note.query.filter_by(notebookId=notebookId).all()
+    return {'notebook': notebook.to_dict(), 'notes': [note.to_dict() for note in notes]}
+
 # create a new notebook
 @user_routes.route('/<int:userId>/notebooks', methods=['POST'])
 @login_required
@@ -52,16 +60,21 @@ def post_notebooks(userId):
 @user_routes.route('/<int:userId>/notebooks/<int:notebookId>', methods=['PATCH', 'DELETE'])
 @login_required
 def patch_and_delete_notebooks(userId, notebookId):
+    
     if request.method == 'PATCH':
-        data = request.get_json()
-        notebook = Notebook.query.get(notebookId)
-        if 'title' in data.keys() and data['title'] != '':
-            notebook.title = data['title']
-        elif 'title' in data.keys() and data['title'] == '':
-            return {'errors': 'Title cannot be blank'}
-        db.session.commit()
-        notebooks = Notebook.query.filter_by(userId=userId).all()
-        return {'notebooks': [notebook.to_dict() for notebook in notebooks]}
+        form = NotebookForm()
+        form['csrf_token'].data = request.cookies['csrf_token']
+        form['userId'].data = userId
+        if form.validate_on_submit() and form.title_exists():
+            data = request.get_json()
+            notebook = Notebook.query.get(notebookId)
+            if 'title' in data.keys() and data['title'] != '':
+                notebook.title = data['title']
+            db.session.commit()
+            notebooks = Notebook.query.filter_by(userId=userId).all()
+            return {'notebooks': [notebook.to_dict() for notebook in notebooks]}
+        else:
+            return jsonify({'errors': form.errors})
     elif request.method == 'DELETE':
         notebook = Notebook.query.filter_by(id=notebookId).first()
         db.session.delete(notebook)

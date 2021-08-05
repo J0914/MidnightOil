@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useRef } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {NavLink} from 'react-router-dom';
+import {NavLink, useHistory} from 'react-router-dom';
 import {BsPlusCircle, BsDashCircle, BsTrash, BsPencil, BsX} from 'react-icons/bs'
 import NotebookForm from './NotebookForm'
 import EditNotebookForm from './EditNotebookForm'
@@ -18,6 +18,7 @@ const NotebooksDropdownMenu = () => {
     const [showNoteForm, setShowNoteForm] = useState(false);
     const [currentEle, setCurrentEle] = useState(null);
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const user = useSelector(state => state.session.user)
     const notebooks = useSelector(state => state.notebooks.notebooks);
@@ -42,6 +43,7 @@ const NotebooksDropdownMenu = () => {
         let answer = window.confirm(`Are you sure you want to delete this notebook?`)
         if (answer) {
         dispatch(notebookActions.deleteNotebook(userId, notebookId))
+        history.push('/profile')
         } else {
             return;
         }

@@ -99,11 +99,13 @@ export const signUp = (username, fName, lName, email, password) => async (dispat
   }
 }
 
+
+// try this again without the thunk, maybe that's what's breaking it.
+
 // export const getQuote = () => async (dispatch) => {
 //   const response = await fetch('https://zenquotes.io/api/today')
 //   if (response.ok) {
 //     const data = await response.json();
-//     console.log(data.q)
 //     // dispatch(setQuote())
 //   }
 // }
