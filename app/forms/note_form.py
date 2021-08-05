@@ -21,14 +21,10 @@ class NoteForm(FlaskForm):
         else:
             return True
 
-    def validate_title_and_body(self):
+    def validate_title_only(self):
         title = self.title.data
-        body = self.body.data
         if title == '':
             self.title.errors.append('Please enter a value for the title of this note.')
-            return False
-        elif body == '':
-            self.body.errors.append('Please enter a value for the body of this note.')
             return False
         else:
             return True

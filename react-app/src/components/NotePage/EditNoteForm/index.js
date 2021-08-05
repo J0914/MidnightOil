@@ -7,7 +7,7 @@ import {BsCheck, BsX} from 'react-icons/bs'
 import styles from '../../../css-modules/editnoteform.module.css';
 
 
-const EditNoteForm = ({setShowEditNoteForm, notebookId, title, setTitle, noteId}) => {
+const EditNoteForm = ({setShowEditNoteForm, notebookId, body, title, setTitle, noteId}) => {
     const [errors, setErrors] = useState([])
     const [originalTitle, setOriginalTitle ] = useState(null)
     const dispatch = useDispatch()
@@ -19,6 +19,9 @@ const EditNoteForm = ({setShowEditNoteForm, notebookId, title, setTitle, noteId}
         if (user) userId = user.id
         const noteVals = {
             title: title,
+            body: body,
+            editTitle: true,
+            editBody: false
         }
         const note = await dispatch(noteActions.editNote(userId, notebookId, noteId, noteVals));
         if (Array.isArray(note)) {

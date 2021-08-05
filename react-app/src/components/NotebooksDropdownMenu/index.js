@@ -29,6 +29,11 @@ const NotebooksDropdownMenu = () => {
         setCurrentEle(id)
     }
 
+    const openNoteForm = (id) => {
+        setShowNoteForm(!showNoteForm)
+        setCurrentEle(id)
+    }
+
     const deleteNotebook = (notebookId) => {
         let userId;
         if (user) {
@@ -53,7 +58,7 @@ const NotebooksDropdownMenu = () => {
                 <button className={styles.add_notebook} onClick={() => setShowNotebookForm(!showNotebookForm)}>Create Notebook {!showNotebookForm ? <BsPlusCircle /> : <BsDashCircle />}</button>
                 {showNotebookForm &&  
                 <div className={styles.form__wrapper}>
-                <NotebookForm setShowNotebookForm={setShowNotebookForm} />
+                <NotebookForm setIsOpen={setIsOpen} setShowNotebookForm={setShowNotebookForm} />
                 <button onClick={() => setShowNotebookForm(false)} className={styles.close}><BsX /></button>
                 </div>
                 }
@@ -81,8 +86,8 @@ const NotebooksDropdownMenu = () => {
                             </>
                             }
                         </div>
-                        <button className={styles.add_note} onClick={() => setShowNoteForm(!showNoteForm)}>Create Note {!showNoteForm ? <BsPlusCircle /> : <BsDashCircle />}</button>
-                        {showNoteForm && 
+                        <button className={styles.add_note} onClick={() => openNoteForm(notebook.id)}>Create Note {!showNoteForm ? <BsPlusCircle /> : <BsDashCircle />}</button>
+                        {showNoteForm && notebook.id === currentEle &&
                         <div className={styles.form__wrapper}>
                         <NoteForm notebookId={notebook.id} setShowNoteForm={setShowNoteForm} setIsOpen={setIsOpen} />
                         <button onClick={() => setShowNoteForm(false)} className={styles.close}><BsX /></button>

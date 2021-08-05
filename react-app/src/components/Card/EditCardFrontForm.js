@@ -21,13 +21,10 @@ const EditCardFrontForm = ({setIsEditing, isDark, back, body, deckId, userId, ca
             editFront: true,
             editBack: false
         }
-        console.log('above the dispatch')
         const data = await dispatch(deckActions.editCard(userId, deckId, cardId, cardVals));
         if (Array.isArray(data)) {
           setErrors(data);
-          console.log('the errors are', data);
         } else {
-            console.log('the else')
             setIsEditing(false)
         }
     };

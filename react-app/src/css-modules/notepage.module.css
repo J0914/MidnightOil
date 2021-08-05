@@ -107,7 +107,9 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    margin: auto;
+    position: relative;
+    margin: 0 auto;
+    top: 0;
 }
 
 #logo {
@@ -134,6 +136,7 @@
 
 .sticky {
     position: fixed;
+    top: 200px;
 }
 
 .add_note {
@@ -153,4 +156,8 @@
 
 .close {
     background: none;
+}
+
+.note_body {
+    display: none;
 }

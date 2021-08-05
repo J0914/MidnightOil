@@ -68,7 +68,6 @@ export const createDeck = (userId, deckVals) => async (dispatch) => {
     
     if (response.ok) {
       const data = await response.json();
-      console.log('the data is', data)
       if (data.errors) {
         let errs = Object.values(data.errors)
         return errs
@@ -98,11 +97,12 @@ export const editDeck = (userId, deckId, deckVals) => async (dispatch) => {
         let errs = Object.values(decks.errors)
         return errs
       } else {
-          dispatch(setDecks(decks.decks))
+          dispatch(setDecks(decks.decks));
+          dispatch(setDeck(decks.deck));
       }
-      return null;
+      return decks.deck;
     } else {
-      return ['response not okay, try again with better info']
+      return response.errors
     }
   }
 

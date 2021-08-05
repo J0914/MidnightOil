@@ -7,6 +7,7 @@ import Splash from './components/Splash';
 import ProfilePage from './components/ProfilePage';
 import NotePage from './components/NotePage';
 import DeckPage from './components/DeckPage';
+import Footer from './components/Footer'
 import { authenticate } from './store/session';
 import { getClassmates } from './store/classmates';
 import { getNotebooks } from './store/notebooks';
@@ -49,6 +50,7 @@ function App() {
           <Splash />
         </Route>
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 }

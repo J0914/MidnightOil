@@ -43,7 +43,7 @@ def post_notebooks(userId):
         db.session.add(notebook)
         db.session.commit()
         notebooks = Notebook.query.filter_by(userId=userId).all()
-        return {'notebooks': [notebook.to_dict() for notebook in notebooks]}
+        return {'notebook': notebook.to_dict(), 'notebooks': [notebook.to_dict() for notebook in notebooks]}
     else: 
         return jsonify({'errors': form.errors})
 
@@ -96,7 +96,7 @@ def post_notes(userId, notebookId):
     form['csrf_token'].data = request.cookies['csrf_token']
     form['userId'].data = userId
     form['notebookId'].data = notebookId
-    if form.validate_on_submit() and form.title_exists() and form.validate_title_and_body():
+    if form.validate_on_submit() and form.title_exists() and form.validate_title_only():
         data = request.get_json()
         note = Note(userId=userId, title=data['title'], body=data['body'], notebookId=notebookId)
         db.session.add(note)
@@ -111,23 +111,39 @@ def post_notes(userId, notebookId):
 @user_routes.route('/<int:userId>/notebooks/<int:notebookId>/notes/<int:noteId>', methods=['PATCH', 'DELETE'])
 @login_required
 def patch_and_delete_notes(userId, notebookId, noteId):
+
     if request.method == 'PATCH':
+        print('got to the patch route')
+        form = NoteForm()
+        form['csrf_token'].data = request.cookies['csrf_token']
+        form['userId'].data = userId
+        form['notebookId'].data = notebookId
         data = request.get_json()
-        note = Note.query.get(noteId)
-        if 'title' in data.keys() and data['title'] != '':
-            note.title = data['title']
-        elif 'title' in data.keys() and data['title'] == '':
-            return {'errors': 'Title cannot be blank'}
-        if 'body' in data.keys() and data['body'] != '':
-            note.body = data['body']
-        elif 'body' in data.keys() and data['body'] == '':
-            return {'errors': 'Body cannot be blank'}
-        if 'share' in data.keys():
-            note.share = data['share']
-        db.session.commit()
-        notes = Note.query.filter_by(userId=userId, notebookId=notebookId).all()
-        notebooks = Notebook.query.filter_by(userId=userId).all()
-        return {'notebooks': [notebook.to_dict() for notebook in notebooks],'notes': [note.to_dict() for note in notes]}
+
+        if data['editTitle'] == True:
+            if form.validate_on_submit() and form.title_exists() and form.validate_title_only():
+                note = Note.query.get(noteId)
+                note.title = data['title']
+                db.session.commit()
+                notes = Note.query.filter_by(userId=userId, notebookId=notebookId).all()
+                notebooks = Notebook.query.filter_by(userId=userId).all()
+                return {'notebooks': [notebook.to_dict() for notebook in notebooks],'notes': [note.to_dict() for note in notes]}
+            else: 
+                return jsonify({'errors': form.errors})
+
+        elif data['editBody'] == True:
+
+            if form.validate_on_submit():
+                note = Note.query.get(noteId)
+                note.body = data['body']
+                note.share = data['share']
+                db.session.commit()
+                notes = Note.query.filter_by(userId=userId, notebookId=notebookId).all()
+                notebooks = Notebook.query.filter_by(userId=userId).all()
+                return {'note': note.to_dict(), 'notebooks': [notebook.to_dict() for notebook in notebooks],'notes': [note.to_dict() for note in notes]}
+            else: 
+                return jsonify({'errors': form.errors})
+
     elif request.method == 'DELETE':
         note = Note.query.get(noteId)
         db.session.delete(note)
@@ -135,6 +151,7 @@ def patch_and_delete_notes(userId, notebookId, noteId):
         notes = Note.query.filter_by(userId=userId, notebookId=notebookId).all()
         notebooks = Notebook.query.filter_by(userId=userId).all()
         return {'notebooks': [notebook.to_dict() for notebook in notebooks],'notes': [note.to_dict() for note in notes]}
+    
     else:
         raise Exception('Invalid request method, try a different route')
 
@@ -176,18 +193,33 @@ def post_decks(userId):
 @user_routes.route('/<int:userId>/decks/<int:deckId>', methods=['PATCH', 'DELETE'])
 @login_required
 def patch_and_delete_decks(userId, deckId):
+
     if request.method == 'PATCH':
+        form = DeckForm()
+        form['csrf_token'].data = request.cookies['csrf_token']
+        form['userId'].data = userId
         data = request.get_json()
-        deck = Deck.query.get(deckId)
-        if 'title' in data.keys() and data['title'] != '':
-            deck.title = data['title']
-        elif 'title' in data.keys() and data['title'] == '':
-            return jsonify({'errors': 'title of deck cannot be blank'})
-        if 'share' in data.keys() and data['share'] != '':
-            deck.share = data['share']
-        db.session.commit()
-        decks = Deck.query.filter_by(userId=userId).all()
-        return {'decks': [deck.to_dict() for deck in decks]}
+        if data['onlyShare'] == False:
+            if form.validate_on_submit() and form.title_exists():
+                deck = Deck.query.get(deckId)
+                if 'title' in data.keys():
+                    deck.title = data['title']
+                if 'share' in data.keys():
+                    deck.share = data['share']
+                db.session.commit()
+                print(deck)
+                decks = Deck.query.filter_by(userId=userId).all()
+                return {'deck': deck.to_dict(), 'decks': [deck.to_dict() for deck in decks]}
+            else: 
+                return jsonify({'errors': form.errors}) 
+        else:
+            deck = Deck.query.get(deckId)
+            if 'share' in data.keys():
+                deck.share = data['share']
+            db.session.commit()
+            decks = Deck.query.filter_by(userId=userId).all()
+            return {'deck': deck.to_dict(), 'decks': [deck.to_dict() for deck in decks]}
+              
     elif request.method == 'DELETE':
         deck = Deck.query.get(deckId)
         db.session.delete(deck)
