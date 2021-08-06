@@ -3,7 +3,7 @@
 }
 
 #profile_wrapper {
-    height: 93vh;
+    min-height: 93vh;
     width: 95vw;
     max-width: 1200px;
     background-color: rgba(2, 2, 17, 1);
@@ -12,13 +12,14 @@
     position: relative;
     margin-top: .5%;
     display: grid;
-    grid-template-rows: 75px 1fr 1fr;
+    grid-template-rows: auto auto auto;
     grid-template-columns: 1fr 1fr;
     grid-gap: 1px;
     grid-template-areas:
     'header header'
     'friends friends'
     'fshare ushare';
+
 }
 
 #user_share__wrapper {
@@ -35,10 +36,41 @@
 
 #header_wrapper {
     grid-area: header;
+    height: fit-content;
+    display: flex;
+    /* flex-direction: column; */
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.logo {
+   width: 400px; 
+   position: relative;
+}
+
+#theme_wrapper {
+    margin-bottom: 100px;
+}
+
+#welcome {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    top: 0;
+    margin: 0;
+}
+
+.radio_label {
+    color: white;
+    font-size: 1.5rem;
 }
 
 #friends_wrapper {
-    background-color: #181a1b;
+    margin: 20px;
+    height: 500px;
     display: grid;
     grid-template-rows: 50px auto;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -47,6 +79,25 @@
     'accepted pending incoming search';
     padding: 15px;
 }
+
+.light {
+    background-color: #ffffffe1;
+    color: black;
+}
+
+.dark {
+    background-color: #181a1b;
+    color: white;
+}
+
+.logo_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 420px;
+}
+
 
 .friends_header {
     grid-area: fhead;
