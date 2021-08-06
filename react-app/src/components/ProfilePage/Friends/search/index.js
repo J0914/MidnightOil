@@ -29,8 +29,6 @@ const Search = (currentAccepted) => {
         setCurrentUsers(users)
     }, [users])
 
-    console.log(currentAccepted)
-
     return (
         <div className={styles.search_wrapper}>
             <input className={styles.search_input} type="text" value={searchText} onChange={handleSearch} placeholder="Search for a user" />

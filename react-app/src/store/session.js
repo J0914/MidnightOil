@@ -18,7 +18,7 @@ const removeUser = () => ({
 })
 
 export const getUsers = () => async (dispatch) => {
-  const response = await fetch('/api/users')
+  const response = await fetch('/api/users/')
   if (response.ok) {
     const data = await response.json();
     if (data.errors) {
