@@ -15,7 +15,7 @@ const Search = (currentAccepted) => {
         setSearchText(e.target.value)
 
         if (e.target.value.length > 0) {
-            setSearchResults(users.filter(user => user.username.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1))
+            setSearchResults(users?.filter(user => user.username.toLowerCase().indexOf(e.target.value.toLowerCase()) > -1))
         } else {
             setSearchResults(null)
         }
@@ -39,7 +39,7 @@ const Search = (currentAccepted) => {
                 <ul className={styles.search_ul}>
                 {searchResults.map(user =>
                     <li className={styles.search_result} key={user.id}>
-                        {currentAccepted.currentAccepted.filter(friend => friend.username === user.username).length > 0 ?
+                        {currentAccepted.currentAccepted?.filter(friend => friend.username === user.username).length > 0 ?
                             <button className={styles.search_btns} ><BsFillPersonCheckFill /></button>
                         :
                             <button className={styles.search_btns} onClick={sendFriendRequest}><BsFillPersonPlusFill /></button>
