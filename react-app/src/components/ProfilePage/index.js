@@ -24,6 +24,7 @@ const ProfilePage = () => {
     return (
         <div id={styles.profile_wrapper}>
             <div id={styles.header_wrapper}>
+<<<<<<< HEAD
                     <h1 id={styles.profile_header}>Welcome Back {user?.fName}!</h1>
             <div className={styles.logo_wrapper}>
                 <img src={'https://i.ibb.co/BrBCh1Q/Midnight-Oil-Logo.png'} alt="logo" className={styles.logo} />
@@ -34,6 +35,9 @@ const ProfilePage = () => {
                     <input type="radio" id='dark' name="theme" checked={isDark === true} onChange={()=> setIsDark(true)}></input>
                 </div> */}
             </div>
+=======
+            <h1 id={styles.profile_header}>Welcome Back {user?.fName}!</h1>
+>>>>>>> parent of c8ad10d... bug fixes and style fixes
             </div>
             <Friends accepted={accepted} pending={pending} incoming={incoming} />
             <SharedByFriends />

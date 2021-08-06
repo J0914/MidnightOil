@@ -4,7 +4,7 @@
 }
 
 .notebook_menu {
-    background: #ffffffea;
+    background: white;
     border-radius: 8px;
     position: absolute;
     top: 60px;
@@ -12,10 +12,11 @@
     display: flex;
     flex-direction: column;
     width: 300px;
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
     opacity: 0;
     visibility: hidden;
     transform: translateY(-20px);
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
     z-index: 1;
     padding: 5px;
     overflow-y: auto;
@@ -66,7 +67,6 @@
 
 .notebook_menu__trigger:hover {
     background-color: rgb(173, 125, 173);
-    color: white;
     box-shadow: 0 1px 8px 5px rgba(255, 255, 255, 0.3);
 }
 

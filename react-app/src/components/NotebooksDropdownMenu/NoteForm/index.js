@@ -46,7 +46,6 @@ const NoteForm = ({setShowNoteForm, notebookId, setIsOpen}) => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             className={styles.note_name}
-            maxLength={20}
             required={true}
             />
             <button type="submit" className={styles.note_form__btn}><BsCheck /></button>

@@ -7,7 +7,7 @@ import {removeClassmate} from '../../../store/classmates'
 
 import styles from '../../../css-modules/profile.module.css';
 
-const Friends = ({isDark, accepted, incoming, pending}) => {
+const Friends = ({accepted, incoming, pending}) => {
     // debugger
     const [ currentAccepted, setCurrentAccepted ] = React.useState(accepted);
     const [ currentIncoming, setCurrentIncoming ] = React.useState(incoming);
@@ -31,8 +31,13 @@ const Friends = ({isDark, accepted, incoming, pending}) => {
     
     // debugger
     return (
+<<<<<<< HEAD
         <div id={styles.friends_wrapper} className={isDark ? styles.dark : styles.light}>
             <div className={styles.friends_header__div}>
+=======
+        <div id={styles.friends_wrapper}>
+            <div className={styles.friends_header}>
+>>>>>>> parent of c8ad10d... bug fixes and style fixes
                 <h2 className={styles.friends_header}>Classmates</h2>
             </div>
             <div className={styles.accepted_wrapper}>
@@ -57,6 +62,7 @@ const Friends = ({isDark, accepted, incoming, pending}) => {
             <div className={styles.friends_header}>
                 <h2 className={`${styles.friends_header} ${styles.small_header}`}>Pending Requests</h2>
             </div>
+<<<<<<< HEAD
             <div className={styles.classmate_wrapper}>
             {!currentPending ?
             <div className={styles.none}>
@@ -72,11 +78,14 @@ const Friends = ({isDark, accepted, incoming, pending}) => {
             ))
             }
             </div>
+=======
+>>>>>>> parent of c8ad10d... bug fixes and style fixes
         </div>
         <div className={styles.incoming_wrapper}>
             <div className={styles.friends_header}>
                 <h2 className={`${styles.friends_header} ${styles.small_header}`}>Incoming Requests</h2>
             </div>
+<<<<<<< HEAD
             {!currentIncoming ?
             <div className={styles.none}>
                 <p className={styles.inner_text}>No incoming requests.</p>
@@ -84,6 +93,8 @@ const Friends = ({isDark, accepted, incoming, pending}) => {
             :
             null
             }
+=======
+>>>>>>> parent of c8ad10d... bug fixes and style fixes
         </div>
         <div className={styles.search_wrapper}>
             <div className={styles.friends_header}>
