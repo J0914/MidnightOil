@@ -3,6 +3,7 @@ const SET_NOTEBOOKS = 'notebooks/SET_NOTEBOOKS';
 const SET_NOTEBOOK = 'notebooks/SET_NOTEBOOK';
 const SET_NOTES = 'notebooks/SET_NOTES';
 const SET_NOTE = 'notebooks/SET_NOTE'
+const CLEAR_NOTEBOOKS = 'notebooks/CLEAR_NOTEBOOKS'
 
 const setNotebooks = (notebooks) => ({
   type: SET_NOTEBOOKS,
@@ -22,6 +23,10 @@ const setNotes = (notes) => ({
 const setNote = (note) => ({
   type: SET_NOTE,
   payload: note
+})
+
+export const clearNotebooks = () => ({
+  type: 'CLEAR_NOTEBOOKS'
 })
 
 // get all user notebooks
@@ -257,6 +262,8 @@ export default function reducer(state = initialState, action) {
         return { ...state, notes: action.payload }
     case SET_NOTE:
         return { ...state, currentNote: action.payload }
+    case CLEAR_NOTEBOOKS:
+        return { ...initialState }
     default:
       return state;
     }

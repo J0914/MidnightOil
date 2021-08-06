@@ -1,6 +1,7 @@
 .search_wrapper {
-    min-width: 100%;  
-    max-height: 190px;
+    min-width: 325px;
+    max-width: 325px;  
+    max-height: 300px;
     overflow-y: auto;
     overflow-x: hidden;
     background: #ffffffe1;
@@ -8,14 +9,20 @@
 }
 
 .search_input {
-    width: 286px;
+    min-width: 320px;
+    max-width: 320px;
     font-size: 1.3rem;
+    margin: 0;
+    padding: 0;
     /* position: fixed; */
 }
 
 .search_ul {
     margin: 0;
     height: fit-content;
+    max-width: 295px;
+    min-width: 295px;
+    /* padding: 0; */
 }
 
 .search_result {
@@ -24,13 +31,30 @@
     justify-content: flex-start;
 }
 
+
+
 .search_btns {
     background: none;
     font-size: 1.4rem;
     color: black;
 }
 
+.search_btns:hover {
+    color: rgb(173, 125, 173);
+}
+
 .username {
     color: black;
     font-size: 1.3rem;
+}
+
+.search_results {
+    min-width: 305px;
+}
+
+.error {
+    list-style: none;
+    color: red;
+    width: 100%;
+    text-align: center;
 }

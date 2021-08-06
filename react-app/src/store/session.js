@@ -1,3 +1,7 @@
+import {clearNotebooks} from './notebooks'
+import {clearDecks } from './decks'
+import {clearClassmates} from './classmates'
+
 // constants
 const SET_USER = 'session/SET_USER';
 const SET_USERS = 'session/SET_USERS';
@@ -84,6 +88,9 @@ export const logout = () => async (dispatch) => {
   
   if (response.ok) {
     dispatch(removeUser());
+    dispatch(clearNotebooks());
+    dispatch(clearDecks());
+    dispatch(clearClassmates());
   }
 };
 

@@ -5,6 +5,7 @@ const SET_INCOMING = 'classmates/SET_INCOMING';
 const SET_ACCEPTED_DETAIL = 'classmates/SET_ACCEPTED_DETAIL';
 const SET_PENDING_DETAIL = 'classmates/SET_PENDING_DETAIL';
 const SET_INCOMING_DETAIL = 'classmates/SET_INCOMING_DETAIL';
+const CLEAR_CLASSMATES = 'classmates/CLEAR_CLASSMATES'
 
 
 const setAccepted = (accepted) => ({
@@ -36,6 +37,10 @@ const setIncomingDetail = (incomingDetail) => ({
   type: SET_INCOMING_DETAIL,
   payload: incomingDetail
 });
+
+export const clearClassmates = () => ({
+    type: CLEAR_CLASSMATES
+})
 
 
 // get all classmates for current user
@@ -115,6 +120,7 @@ export const getClassmate = (classmateId) => async (dispatch) => {
 
 // send a friend request
 export const sendFriendRequest = (userId, classmateId) => async (dispatch) => {
+    console.log('got to the thunk')
     const response = await fetch(`/api/users/${userId}/classmates/${classmateId}`, {
         method: 'POST',
         headers: {
@@ -340,6 +346,8 @@ export default function reducer(state = initialState, action) {
             return { ...state, pendingDetail: action.payload }
         case SET_INCOMING_DETAIL:
             return { ...state, incomingDetail: action.payload }
+        case CLEAR_CLASSMATES:
+            return { initialState }
         default:
         return state;
     }

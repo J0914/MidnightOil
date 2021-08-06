@@ -122,9 +122,9 @@ const DeckPage = () => {
             <div className={styles.under_header}>
                 <p className={styles.hint}>(hint: if you click on a card, you can use your keyboard arrows to change cards!)</p>
                 <div id={styles.share_wrapper}>
-                    <label for='public' className={styles.radio_label}>Public</label>
+                    <label htmlFor='public' className={styles.radio_label}>Public</label>
                     <input type="radio" id='public' name="share-btn" checked={currentDeck?.share} value={true} onChange={editShareTrue}></input>
-                    <label for='private' className={styles.radio_label}>Private</label>
+                    <label htmlFor='private' className={styles.radio_label}>Private</label>
                     <input type="radio" id='private' name="share-btn" checked={!currentDeck?.share} value={false} onChange={editShareFalse}></input>
                 </div>
             </div>
@@ -139,9 +139,9 @@ const DeckPage = () => {
                     {currentCards?.length} cards
                 </h5>
                 <div id={styles.theme_wrapper}>
-                    <label for='light' className={styles.radio_label}>Light Theme</label>
+                    <label htmlFor='light' className={styles.radio_label}>Light Theme</label>
                     <input type="radio" id='light' name="theme" checked={isDark === false} onChange={()=> setIsDark(false)}></input>
-                    <label for='dark' className={styles.radio_label}>Dark Theme</label>
+                    <label htmlFor='dark' className={styles.radio_label}>Dark Theme</label>
                     <input type="radio" id='dark' name="theme" checked={isDark === true} onChange={()=> setIsDark(true)}></input>
                 </div>
             </div>

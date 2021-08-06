@@ -12,12 +12,12 @@ import { authenticate } from './store/session';
 import { getClassmates } from './store/classmates';
 import { getNotebooks } from './store/notebooks';
 import { getDecks } from './store/decks';
-import {getUsers} from './store/session'
-
 
 function App() {
-  const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const [loaded, setLoaded] = useState(false);
+
+  
 
   useEffect(() => {
     (async() => {
@@ -30,7 +30,7 @@ function App() {
       }
       setLoaded(true);
     })();
-  }, [dispatch ]);
+  }, [dispatch]);
 
   if (!loaded) {
     return null;

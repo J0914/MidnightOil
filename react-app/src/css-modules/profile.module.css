@@ -22,6 +22,17 @@
 
 }
 
+.classmate_wrapper {
+    box-sizing: border-box;
+    background: white;
+    min-height: 170px;
+    max-height: 170px;
+    border-radius: 3px;
+    overflow-y: auto;
+    overflow-x: auto;
+    padding: 3px;
+}
+
 #user_share__wrapper {
     grid-area: ushare;
 }
@@ -68,15 +79,17 @@
     font-size: 1.5rem;
 }
 
+
 #friends_wrapper {
     margin: 20px;
     height: 500px;
     display: grid;
-    grid-template-rows: 50px auto;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 50px auto auto;
+    grid-template-columns: 1fr 1fr 1fr ;
     grid-template-areas:
-    'fhead fhead fhead search'
-    'accepted pending incoming search';
+    'fhead fhead fhead fhead'
+    'incoming accepted accepted search'
+    'pending accepted accepted search';
     padding: 15px;
 }
 
@@ -98,24 +111,120 @@
     height: 420px;
 }
 
+#friends_list {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 0;
+    width: 93%;
+    height: 98%;
+    padding: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: white;
+
+}
+
+.accepted_li {
+    color: black;
+    text-decoration: none;
+    list-style: none;
+    font-size: 1.5rem;
+    width: 45%;
+    margin-top: 3px;
+}
+
+.friends_header__div {
+    grid-area: fhead;
+    background: #181a1b;
+    margin: 3px 4px;
+    
+}
 
 .friends_header {
-    grid-area: fhead;
-    margin-top: 0;
+    margin: 0;
+    font-size: 2rem;
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+
+.friends_search__header {
+    color: black;
+}
+
+.inner_text {
+    margin: 0;
+}
+
+.small_header {
+    font-size: 1.5rem;
+    color: white;
+    margin: 3px 0;
+}
+
+.none {
+    background:white;
+    height: 75%;
+    border-radius: 3px;
+    padding: 7px;
+
+}
+
+.search_input {
+    width: 100%;
+}
+
+.search_wrapper {
+    margin: 0 3px;
+}
+
+.accepted_wrapper, .pending_wrapper, .incoming_wrapper {
+    margin: 0 3px;
+    padding: 10px;
+    border-radius: 3px;
 }
 
 .accepted_wrapper {
     grid-area: accepted;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #181a1b;
 }
 
 .pending_wrapper {
     grid-area: pending;
+    background: #181a1b;
+    min-height: 205px;
+    max-height: 205px;
 }
 
 .incoming_wrapper {
+    margin-bottom: 2px;
     grid-area: incoming;
+    background: #181a1b;
+    min-height: 205px;
+    max-height: 205px;
 }
 
 .search_wrapper {
     grid-area: search;
+}
+
+.classmate_container {
+    display: flex;
+}
+
+.remove_friend {
+    color: black;
+    background: none;
+    font-size: 1.5rem;
+    margin: 0 2px;
+}
+
+.remove_friend:hover {
+    color: rgb(173, 125, 173);
 }
