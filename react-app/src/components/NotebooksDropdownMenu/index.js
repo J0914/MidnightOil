@@ -97,7 +97,7 @@ const NotebooksDropdownMenu = () => {
                         
                         <div className={styles.notes_container}>
                         {
-                            Object.values(notebook.notes).map(note => {
+                            Object.values(notebook.notes).reverse().map(note => {
                                 return (
                                     <NavLink onClick={() => setIsOpen(false)} className={styles.note_nav}to={`/notebooks/${notebook.id}/notes/${note.id}`} key={note.id}>{note.title}</NavLink>
                                 )

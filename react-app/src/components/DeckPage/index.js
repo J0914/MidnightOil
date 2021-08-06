@@ -277,6 +277,7 @@ const DeckPage = () => {
                 </>
             </div>
             }
+<<<<<<< HEAD
             <div className={styles.under_header}>
                 <p className={styles.hint}>(hint: if you click on a card, you can use your keyboard arrows to change cards!)</p>
                 <div id={styles.share_wrapper}>
@@ -286,6 +287,8 @@ const DeckPage = () => {
                     <input type="radio" id='private' name="share-btn" checked={!currentDeck?.share} value={false} onChange={editShareFalse}></input>
                 </div>
             </div>
+=======
+>>>>>>> parent of 5c88887... basic setup for profile page and classmates
             </div>
             {currentCards?.length ?
             <div id={styles.body}>

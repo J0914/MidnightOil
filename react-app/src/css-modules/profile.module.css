@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #profile_header {
     color: white;
 }
@@ -207,6 +208,14 @@
 
 #profile_wrapper {
     min-height: 93vh;
+=======
+.testh1 {
+    color: white;
+}
+
+.testdiv {
+    height: 93vh;
+>>>>>>> parent of 5c88887... basic setup for profile page and classmates
     width: 95vw;
     max-width: 1200px;
     background-color: rgba(2, 2, 17, 1);
@@ -214,6 +223,7 @@
     overflow-y: auto;
     position: relative;
     margin-top: .5%;
+<<<<<<< HEAD
     display: grid;
     grid-template-rows: auto auto auto;
     grid-template-columns: 1fr 1fr;
@@ -322,4 +332,6 @@
 .search_wrapper {
     grid-area: search;
 >>>>>>> parent of f1895e1... not finished, reverting main
+=======
+>>>>>>> parent of 5c88887... basic setup for profile page and classmates
 }

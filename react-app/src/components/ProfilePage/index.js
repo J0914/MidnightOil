@@ -50,19 +50,22 @@ const ProfilePage = () => {
 =======
 import React, { useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+<<<<<<< HEAD
 import Friends from './Friends';
 import SharedByUser from './SharedByUser';
 import SharedByFriends from './SharedByFriends';
 import {getUsers} from '../../store/session';
+=======
+import {getNotebooks} from '../../store/notebooks'
+import {getDecks} from '../../store/decks'
+>>>>>>> parent of 5c88887... basic setup for profile page and classmates
 
 import styles from '../../css-modules/profile.module.css';
 
 const ProfilePage = () => {
-    const accepted = useSelector(state => state.classmates.acceptedDetail);
-    const incoming = useSelector(state => state.classmates.incomingDetail);
-    const pending = useSelector(state => state.classmates.pendingDetail);
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
+<<<<<<< HEAD
     // const [isDark, setIsDark] = React.useState(false);
 
     useEffect(() => {
@@ -89,6 +92,21 @@ const ProfilePage = () => {
             <Friends accepted={accepted} pending={pending} incoming={incoming} />
             <SharedByFriends />
             <SharedByUser />
+=======
+
+    useEffect(() => {
+        if (user) {
+            (async() => {
+                await dispatch(getNotebooks(user.id))
+                await dispatch(getDecks(user.id))    
+            })();
+        }
+    }, [user, dispatch]);
+
+    return (
+        <div className={styles.testdiv}>
+            <h1 className={styles.testh1}>Welcome back username! (this feature is a work in progress)</h1>
+>>>>>>> parent of 5c88887... basic setup for profile page and classmates
         </div>
     )
 }
