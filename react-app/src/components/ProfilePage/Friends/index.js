@@ -16,8 +16,6 @@ const Friends = ({accepted, incoming, pending}) => {
         setCurrentIncoming(incoming);
         setCurrentPending(pending);
     }, [accepted, incoming, pending])
-
-    console.log(currentAccepted)
     
     // debugger
     return (

@@ -27,7 +27,6 @@ function App() {
         await dispatch(getNotebooks(data.id));
         await dispatch(getDecks(data.id));
         await dispatch(getClassmates(data.id)) 
-        await dispatch(getUsers()); 
       }
       setLoaded(true);
     })();
