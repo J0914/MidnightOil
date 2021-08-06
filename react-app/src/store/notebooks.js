@@ -207,7 +207,7 @@ export const editNote = (userId, notebookId, noteId, noteVals) => async (dispatc
       const data = await response.json();
       if (data.errors) {
         let errs = Object.values(data.errors)
-        return {errors: errs}
+        return errs
       } else {
           dispatch(setNotebooks(data.notebooks))
           dispatch(setNotes(data.notes))

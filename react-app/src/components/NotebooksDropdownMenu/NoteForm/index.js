@@ -24,8 +24,10 @@ const NoteForm = ({setShowNoteForm, notebookId, setIsOpen}) => {
             body: 'New Note'
         }
         const note = await dispatch(noteActions.createNote(userId, notebookId, noteVals));
-        if (Array.isArray(note)) {
-          setErrors(note);
+        console.log(note)
+        if (note.errors) {
+          setErrors(note.errors);
+          return;
         } else {
             setShowNoteForm(false)
             if (setIsOpen) {

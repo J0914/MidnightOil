@@ -138,12 +138,12 @@ const NotePage = () => {
                     <button type='submit' form='edit_note__form' className={styles.edit_and_delete} >Save Changes <FiSave /></button>
                     <button className={styles.edit_and_delete} onClick={() => setIsEditing(false)}><BsX /></button>
                 </div>
-                <div id={styles.share_wrapper}>
+                {/* <div id={styles.share_wrapper}>
                     <label for='public' className={styles.radio_label}>Public</label>
                     <input type="radio" id='public' name="share" checked={share} value={true} onChange={(e)=> setShare(true)}></input>
                     <label for='private' className={styles.radio_label}>Private</label>
                     <input type="radio" id='private' name="share" checked={!share} value={false} onChange={(e)=> setShare(false)}></input>
-                </div>
+                </div> */}
                 </>
                 }
                 </div>
