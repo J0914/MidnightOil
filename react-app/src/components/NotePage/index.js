@@ -126,9 +126,9 @@ const NotePage = () => {
                     <button className={styles.edit_and_delete} onClick={deleteNote}><BsTrash /></button>
                 </div>
                 <div id={styles.theme_wrapper}>
-                    <label htmlFor='light' className={styles.radio_label}>Light Theme</label>
+                    <label for='light' className={styles.radio_label}>Light Theme</label>
                     <input type="radio" id='light' name="theme" checked={!isDark} value={false} onChange={()=> setIsDark(false)}></input>
-                    <label htmlFor='dark' className={styles.radio_label}>Dark Theme</label>
+                    <label for='dark' className={styles.radio_label}>Dark Theme</label>
                     <input type="radio" id='dark' name="theme" value={true} onChange={()=> setIsDark(true)}></input>
                 </div>
                 </>}
@@ -139,9 +139,9 @@ const NotePage = () => {
                     <button className={styles.edit_and_delete} onClick={() => setIsEditing(false)}><BsX /></button>
                 </div>
                 <div id={styles.share_wrapper}>
-                    <label htmlFor='public' className={styles.radio_label}>Public</label>
+                    <label for='public' className={styles.radio_label}>Public</label>
                     <input type="radio" id='public' name="share" checked={share} value={true} onChange={(e)=> setShare(true)}></input>
-                    <label htmlFor='private' className={styles.radio_label}>Private</label>
+                    <label for='private' className={styles.radio_label}>Private</label>
                     <input type="radio" id='private' name="share" checked={!share} value={false} onChange={(e)=> setShare(false)}></input>
                 </div>
                 </>

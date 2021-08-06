@@ -2,7 +2,6 @@
 const SET_DECKS = 'decks/SET_DECKS';
 const SET_DECK = 'decks/SET_DECK';
 const SET_CARDS = 'decks/SET_CARDS';
-const CLEAR_DECKS = 'decks/CLEAR_DECKS';
 
 
 const setDecks = (decks) => ({
@@ -19,10 +18,6 @@ const setCards = (cards) => ({
   type: SET_CARDS,
   payload: cards
 });
-
-export const clearDecks = () => ({
-  type: CLEAR_DECKS
-})
 
 // get all user decks
 export const getDecks = (userId) => async (dispatch) => {
@@ -231,8 +226,6 @@ export default function reducer(state = initialState, action) {
         return { ...state, currentDeck: action.payload }
         case SET_CARDS:
             return { ...state, cards: action.payload }
-        case CLEAR_DECKS:
-          return { ...initialState }
         default:
         return state;
     }

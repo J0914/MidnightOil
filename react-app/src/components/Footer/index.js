@@ -26,7 +26,7 @@ const Footer = () => {
             </div>
             <div id={styles.youtube_wrapper}>
                 <div id={styles.music_label__div}>
-                    <label htmlFor='music-btn' className={styles.footer_text}>Study Beats</label>
+                    <label for='music-btn' className={styles.footer_text}>Study Beats</label>
                 </div>
                 <button id='music-btn' className={styles.footer_link} onClick={startMusic}>{showYoutube? <BsX /> : <FaMusic />}</button>
                 {showYoutube &&

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .search_wrapper {
 <<<<<<< HEAD
     min-width: 325px;
@@ -70,4 +71,41 @@
     color: red;
     width: 100%;
     text-align: center;
+=======
+.search_wrapper {
+    min-width: 100%;  
+    max-height: 190px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: #ffffffe1;
+    border-radius: 5px;
+}
+
+.search_input {
+    width: 286px;
+    font-size: 1.3rem;
+    /* position: fixed; */
+}
+
+.search_ul {
+    margin: 0;
+    height: fit-content;
+}
+
+.search_result {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.search_btns {
+    background: none;
+    font-size: 1.4rem;
+    color: black;
+}
+
+.username {
+    color: black;
+    font-size: 1.3rem;
+>>>>>>> parent of f1895e1... not finished, reverting main
 }
