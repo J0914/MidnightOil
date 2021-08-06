@@ -20,7 +20,7 @@ const Splash = () => {
                     <img src="https://i.ibb.co/DCS5pqY/Midnight-Oil-Logo.png" alt="Midnight-Oil-Logo" border="0" id={styles.logo}></img>
                     <div id={styles.splash_p__div}>
                     <p className={styles.splash_p} >➼ Set yourself up for success with custom notebooks and flash card decks!</p>
-                    <p className={styles.splash_p} >➼ Be there for your classmates with the option to share the knowlege!</p>
+                    <p className={styles.splash_p} >➼ (coming soon!) Be there for your classmates with the option to share the knowlege!</p>
                     </div>
                 </div>
                 <div id={styles.auth_btns}>

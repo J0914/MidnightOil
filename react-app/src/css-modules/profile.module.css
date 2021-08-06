@@ -2,6 +2,128 @@
     color: white;
 }
 
+.content_wrapper {
+    grid-area: body;
+    background: #13011B;
+    margin: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 75px 300px auto;
+    grid-template-areas:
+    'contenthead contenthead'
+    'notebooks decks'
+    'reminders reminders';
+    border-radius: 10px;
+}
+
+.reminders_wrapper {
+    grid-area: reminders;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.profile_h1 {
+    grid-area: contenthead;
+    color: white;
+    font-size: 2rem;
+    width: 100%;
+    text-align: center;
+}
+
+.notebook_wrapper, .deck_wrapper, .reminders_wrapper {
+    background: rgb(233, 232, 233);
+    margin: 15px;
+    padding: 15px;
+    height: 200px;
+}
+
+#placeholder {
+    width: 3px;
+}
+
+.deck_item, .notebook_item {
+    width: 75%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.notebook_h2, .deck_h2, .reminders_h2 {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+}
+
+.notebook_wrapper {
+    grid-area: notebooks;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.deck_wrapper {
+    grid-area: decks;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+
+}
+
+.deck_list, .notebook_list, .reminders_list {
+    background: white;
+    margin: 10px;
+    height: 120px;
+    width: 80%;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 1);
+    padding: 5px;
+    overflow-y: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.reminders_list {
+    height: 125px;
+    padding: 15px;
+    width: 55%;
+    overflow: hidden;
+}
+
+.profile_text {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+    margin: 3px 3px;
+    width: 100%
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+}
+
+.link:hover {
+    color:rgb(173, 125, 173);
+}
+
+.img {
+    width: 400px;
+}
+
+.profile_header {
+    /* font-size: 1.2em; */
+    font-weight: bold;
+    color: white;
+
+}
+
 #profile_wrapper {
     min-height: 93vh;
     width: 95vw;
@@ -12,14 +134,12 @@
     position: relative;
     margin-top: .5%;
     display: grid;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: 420px auto;
     grid-template-columns: 1fr 1fr;
     grid-gap: 1px;
     grid-template-areas:
     'header header'
-    'friends friends'
-    'fshare ushare';
-
+    'body body';
 }
 
 #user_share__wrapper {

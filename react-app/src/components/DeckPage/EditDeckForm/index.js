@@ -55,10 +55,10 @@ const EditDeckForm = ({currentDeck, setIsEditing, currentTitle, setCurrentTitle,
 
     return (
         <div className={styles.form_container}>
+            <form id={styles.deck_form} onSubmit={editDeck}>
                 {errors.map((error, ind) => (
                 <li className={styles.error} key={ind}>{error}</li>
                 ))}
-            <form id={styles.deck_form} onSubmit={editDeck}>
                 
                 <input 
                 type="text" 
