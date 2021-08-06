@@ -5,7 +5,7 @@ import Search from './search'
 
 import styles from '../../../css-modules/profile.module.css';
 
-const Friends = ({accepted, incoming, pending}) => {
+const Friends = ({isDark, accepted, incoming, pending}) => {
     // debugger
     const [ currentAccepted, setCurrentAccepted ] = React.useState(accepted);
     const [ currentIncoming, setCurrentIncoming ] = React.useState(incoming);
@@ -19,7 +19,7 @@ const Friends = ({accepted, incoming, pending}) => {
     
     // debugger
     return (
-        <div id={styles.friends_wrapper}>
+        <div id={styles.friends_wrapper} className={isDark ? styles.dark : styles.light}>
             <div className={styles.friends_header}>
                 <h2 className={styles.friends_header}>Classmates</h2>
             </div>
@@ -39,11 +39,25 @@ const Friends = ({accepted, incoming, pending}) => {
             <div className={styles.friends_header}>
                 <h2 className={styles.friends_header}>Pending Requests</h2>
             </div>
+            {!currentPending ?
+            <div>
+                <p>No pending requests.</p>
+            </div>
+            :
+            null
+            }
         </div>
         <div className={styles.incoming_wrapper}>
             <div className={styles.friends_header}>
                 <h2 className={styles.friends_header}>Incoming Requests</h2>
             </div>
+            {!currentIncoming ?
+            <div>
+                <p>No incoming requests.</p>
+            </div>
+            :
+            null
+            }
         </div>
         <div className={styles.search_wrapper}>
             <div className={styles.friends_header}>

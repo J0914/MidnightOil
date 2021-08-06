@@ -18,6 +18,26 @@
     'footer';
 }
 
+.hint_wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.hint {
+    color: white;
+    margin: 0;
+    margin-top: 5px;
+}
+
+.under_header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
 #create_btn__wrapper {
     display: flex;
     justify-content: center;

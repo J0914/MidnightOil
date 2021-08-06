@@ -1,21 +1,21 @@
 .search_wrapper {
-    width: 100%;  
+    min-width: 100%;  
     max-height: 190px;
     overflow-y: auto;
     overflow-x: hidden;
-    background: white;
+    background: #ffffffe1;
     border-radius: 5px;
 }
 
 .search_input {
     width: 286px;
     font-size: 1.3rem;
-    position: fixed;
+    /* position: fixed; */
 }
 
 .search_ul {
     margin: 0;
-    margin-top: 15px;
+    height: fit-content;
 }
 
 .search_result {

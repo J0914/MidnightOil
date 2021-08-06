@@ -35,24 +35,6 @@ const EditDeckForm = ({currentDeck, setIsEditing, currentTitle, setCurrentTitle,
         setIsEditing(false);
     }
 
-    const editShareTrue = async (e) => {
-        e.preventDefault();
-        let userId;
-        if (user) userId = user.id
-        const deckVals = {
-            title: title,
-            share: true,
-            onlyShare: true
-        }
-        const deck = await dispatch(deckActions.editDeck(userId, deckId, deckVals));
-        if (Array.isArray(deck)) {
-          setErrors(deck);
-        } else {
-            setCurrentDeck(deck)
-            setCurrentTitle(title);
-        }
-    }
-
     const editShareFalse = async (e) => {
         e.preventDefault();
         let userId;
@@ -77,12 +59,7 @@ const EditDeckForm = ({currentDeck, setIsEditing, currentTitle, setCurrentTitle,
                 <li className={styles.error} key={ind}>{error}</li>
                 ))}
             <form id={styles.deck_form} onSubmit={editDeck}>
-                <div id={styles.share_wrapper}>
-                    <label for='public' className={styles.radio_label}>Public</label>
-                    <input type="radio" id='public' name="share-btn" checked={currentDeck?.share} value={true} onChange={editShareTrue}></input>
-                    <label for='private' className={styles.radio_label}>Private</label>
-                    <input type="radio" id='private' name="share-btn" checked={!currentDeck?.share} value={false} onChange={editShareFalse}></input>
-                </div>
+                
                 <input 
                 type="text" 
                 placeholder="Deck Name" 

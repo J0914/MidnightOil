@@ -73,6 +73,29 @@ const DeckPage = () => {
         </div>)
     ))
 
+    const editShareTrue = async (e) => {
+        e.preventDefault();
+        const deckVals = {
+            title: currentTitle,
+            share: true,
+            onlyShare: true
+        }
+        const deck = await dispatch(deckActions.editDeck(userId, deckId, deckVals));
+        setCurrentDeck(deck)
+        setCurrentTitle(currentTitle); 
+    }
+
+    const editShareFalse = async (e) => {
+        e.preventDefault();
+        const deckVals = {
+            title: currentTitle,
+            share: false,
+            onlyShare: true
+        }
+        const deck = await dispatch(deckActions.editDeck(userId, deckId, deckVals));
+        setCurrentDeck(deck)
+    }
+
     return (
         <>
         <Prompt 
@@ -96,8 +119,14 @@ const DeckPage = () => {
                 </>
             </div>
             }
-            <div>
-                <p>(hint: you can use your keyboard arrows to change cards!)</p>
+            <div className={styles.under_header}>
+                <p className={styles.hint}>(hint: if you click on a card, you can use your keyboard arrows to change cards!)</p>
+                <div id={styles.share_wrapper}>
+                    <label for='public' className={styles.radio_label}>Public</label>
+                    <input type="radio" id='public' name="share-btn" checked={currentDeck?.share} value={true} onChange={editShareTrue}></input>
+                    <label for='private' className={styles.radio_label}>Private</label>
+                    <input type="radio" id='private' name="share-btn" checked={!currentDeck?.share} value={false} onChange={editShareFalse}></input>
+                </div>
             </div>
             </div>
             {currentCards?.length ?
@@ -138,6 +167,9 @@ const DeckPage = () => {
             :
             <button onClick={createCard} className={styles.create_btn}>Create Your First Card! <BsPlusCircle /></button>
             }
+            <div className={styles.hint_wrapper}>
+            <p className={styles.hint}>(new cards go to the front of the deck!)</p>
+            </div>
         </div>
         </>
     )

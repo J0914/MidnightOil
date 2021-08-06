@@ -13,6 +13,7 @@ const ProfilePage = () => {
     const pending = useSelector(state => state.classmates.pendingDetail);
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
+    // const [isDark, setIsDark] = React.useState(false);
 
     useEffect(() => {
         if (user) {
@@ -24,7 +25,16 @@ const ProfilePage = () => {
     return (
         <div id={styles.profile_wrapper}>
             <div id={styles.header_wrapper}>
-            <h1 id={styles.profile_header}>Welcome Back {user?.fName}!</h1>
+                    <h1 id={styles.profile_header}>Welcome Back {user?.fName}!</h1>
+            <div className={styles.logo_wrapper}>
+                <img src={'https://i.ibb.co/BrBCh1Q/Midnight-Oil-Logo.png'} alt="logo" className={styles.logo} />
+                {/* <div id={styles.theme_wrapper}>
+                    <label for='light' className={styles.radio_label}>Light Theme</label>
+                    <input type="radio" id='light' name="theme" checked={isDark === false} onChange={()=> setIsDark(false)}></input>
+                    <label for='dark' className={styles.radio_label}>Dark Theme</label>
+                    <input type="radio" id='dark' name="theme" checked={isDark === true} onChange={()=> setIsDark(true)}></input>
+                </div> */}
+            </div>
             </div>
             <Friends accepted={accepted} pending={pending} incoming={incoming} />
             <SharedByFriends />
