@@ -28,10 +28,12 @@ const ProfilePage = () => {
     }, [dispatch, user])
 
     useEffect(() => {
+        if (notebooks)
         setCurrentNotebooks(notebooks);
     }, [notebooks])
 
     useEffect(() => {
+        if (decks)
         setCurrentDecks(Object.values(decks));
     }, [decks])
 
