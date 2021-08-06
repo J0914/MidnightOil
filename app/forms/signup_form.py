@@ -35,16 +35,10 @@ def fName_lName_length(form, field):
     elif len(fName) > 50 or len(lName) > 50:
         raise ValidationError('First and Last Name must be between 3 and 50 characters.')
 
-def password_length(form, field):
-    password = field.data
-    # checking if password is more than 3 and less than 255 chars.
-    if len(password) < 3 or len(password) > 255:
-        raise ValidationError('Password must be between 3 and 255 characters.')
-
 class SignUpForm(FlaskForm):
     username = StringField(
         'username', validators=[DataRequired(), username_exists, username_length])
     email = EmailField('email', validators=[DataRequired(), user_exists])
     fName = StringField('fName', validators=[DataRequired(), fName_lName_length])
     lName = StringField('lName', validators=[DataRequired(), fName_lName_length])
-    password = StringField('password', validators=[DataRequired(), password_length])
+    password = StringField('password', validators=[DataRequired()])
