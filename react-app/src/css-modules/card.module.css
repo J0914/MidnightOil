@@ -1,20 +1,33 @@
 .card_front__wrapper, .card_back__wrapper {
     display: flex;
     height: 400px;
-    width: 90%;
-    margin: 30px;
+    width: 100%;
+    margin: 0;
     padding: 10px;
     box-sizing: border-box;
     border-radius: 5px;
     box-shadow: 0.0625rem 0.0625rem 0.625rem -2px #13011B;
+    padding: auto;
+    animation: slideIn .3s cubic-bezier(0.7, 0, 0.3, 1) 0s 1 forwards;
+}
 
+@keyframes slideIn{
+    0%{
+        transform: translate(0px, 10px) rotate3d(1, 2.0, 3.0, 5deg) scale(.8);
+
+      }
+      100%{
+        transform: translate(0px, 0px) scale(1);
+      }
 }
 
 .card_front__body, .card_back__body {
+    box-sizing: border-box;
     padding: 20px;
     border: 1px solid #e5e5e5;
     font-size: 2rem;
-    height: 300px;
+    height: 315px;
+    width: 100%;
     overflow: auto;
     margin: 0;
     margin-top: 10px;
@@ -73,8 +86,15 @@
 .label {
     font-size: 1.5rem;
     margin: 0;
+    width: 100%;
+    text-align: center;
 }
 
 #body_wrapper {
     width: 100%;
+    height: fit-content;
+    max-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

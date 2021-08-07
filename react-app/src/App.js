@@ -12,7 +12,6 @@ import { authenticate } from './store/session';
 import { getClassmates } from './store/classmates';
 import { getNotebooks } from './store/notebooks';
 import { getDecks } from './store/decks';
-import {getUsers} from './store/session'
 
 
 function App() {

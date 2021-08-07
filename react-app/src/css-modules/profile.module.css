@@ -4,7 +4,9 @@
 
 .content_wrapper {
     grid-area: body;
-    background: #13011B;
+    position: relative;
+    top: -50px;
+    /* background: #13011B; */
     margin: 10px;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -16,14 +18,7 @@
     border-radius: 10px;
 }
 
-.reminders_wrapper {
-    grid-area: reminders;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-}
+
 
 .profile_h1 {
     grid-area: contenthead;
@@ -83,6 +78,7 @@
     flex-direction: column;
     box-shadow: 0 1px 8px rgba(0, 0, 0, 1);
     padding: 5px;
+    overflow-x: hidden;
     overflow-y: auto;
     justify-content: center;
     align-items: center;
@@ -238,4 +234,15 @@
 
 .search_wrapper {
     grid-area: search;
+}
+
+.reminders_wrapper {
+    grid-area: reminders;
+    width: 60%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
 }

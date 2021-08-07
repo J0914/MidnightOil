@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux'
 import {useParams, useHistory} from 'react-router-dom'
 import Slideshow from './Slideshow'
+import MySlideshow from '../MySlideshow'
 import * as deckActions from '../../store/decks'
 import {BsPlusCircle, BsDashCircle, BsPencil, BsTrash} from 'react-icons/bs'
 import EditDeckForm from './EditDeckForm'
@@ -17,12 +18,20 @@ const DeckPage = () => {
     const [currentTitle, setCurrentTitle] = useState(null);
     const [showCreateCardForm, setShowCreateCardForm] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
+    const [studyMode, setStudyMode] = useState(false);
+    const [slideInterval, setSlideInterval] = useState(20000);
+    const [cardInterval, setCardInterval] = useState(slideInterval/2);
+
     const dispatch = useDispatch();
     const history = useHistory();
     const user = useSelector(state => state.session.user);
     const cards = useSelector(state => state.decks.cards);
     const { deckId } = useParams();
     const userId = user?.id
+
+    useEffect(() => {
+        setCardInterval(slideInterval/2);
+    }, [slideInterval])
 
 
     useEffect(() => {
@@ -68,8 +77,8 @@ const DeckPage = () => {
     }
 
     const theCards = currentCards?.map((card, i) => (
-        (<div key={card.id}>
-            <Card isDark={isDark} setIsDark={setIsDark} i={i} deckId={deckId} userId={userId} card={card}/>
+        (<div className={styles.card_wrapper} key={card.id}>
+            <Card cardInterval={cardInterval} studyMode={studyMode} isDark={isDark} setIsDark={setIsDark} i={i} deckId={deckId} userId={userId} card={card}/>
         </div>)
     ))
 
@@ -119,15 +128,23 @@ const DeckPage = () => {
                 </>
             </div>
             }
-            {/* <div className={styles.under_header}>
-                <p className={styles.hint}>(hint: if you click on a card, you can use your keyboard arrows to change cards!)</p>
+            <div className={styles.under_header}>
+                <div id={styles.time_div}>
+                    <label className={styles.seconds_label}>Set Study Mode Interval</label>
+                    <input id={styles.seconds} value={slideInterval/1000} onChange={(e) => setSlideInterval(e.target.value*1000)} type='number' placeHolder='seconds' />
+                    <label className={styles.seconds_label}>Seconds</label>
+                </div>
+                <div>
+                    <label className={styles.seconds_label}>(Card will flip in half as many seconds as the Study Mode Interval)</label>}
+                </div>
+                {/* <p className={styles.hint}>(hint: if you click on a card, you can use your keyboard arrows to change cards!)</p>
                 <div id={styles.share_wrapper}>
                     <label for='public' className={styles.radio_label}>Public</label>
                     <input type="radio" id='public' name="share-btn" checked={currentDeck?.share} value={true} onChange={editShareTrue}></input>
                     <label for='private' className={styles.radio_label}>Private</label>
                     <input type="radio" id='private' name="share-btn" checked={!currentDeck?.share} value={false} onChange={editShareFalse}></input>
-                </div>
-            </div> */}
+                </div> */}
+            </div>
             </div>
             {currentCards?.length ?
             <div id={styles.body}>
@@ -147,19 +164,12 @@ const DeckPage = () => {
             </div>
             <div className={styles.slideshow}>
                 <div id={styles.shader}>
-                <Slideshow  
-                infiniteLoop={true} 
-                centerMode={true} 
-                centerSlidePercentage={80} 
-                showArrows={true}
-                currentCards={currentCards}
-                setShowCreateCardForm={setShowCreateCardForm}
-                deckId={deckId}
-                userId={user?.id}
-                isYoutube={false}
-                isDark={isDark}
-                setIsDark={setIsDark}
+                <MySlideshow
                 cards={theCards}
+                studyMode={studyMode}
+                setStudyMode={setStudyMode}
+                slideInterval={slideInterval}
+                setSlideInterval={setSlideInterval}
                 />
                 </div>
                 </div>

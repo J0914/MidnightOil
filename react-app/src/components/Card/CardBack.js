@@ -13,7 +13,7 @@ const CardBack = ({ isDark, i, body, handleClick,  deckId, userId, cardId, front
     const dispatch = useDispatch();
 
     const handleDelete = () => {
-        let answer = window.confirm(`Are you sure you want to delete this deck?`)
+        let answer = window.confirm(`Are you sure you want to delete this card?`)
         if (answer) {
         dispatch(deckActions.deleteCard(userId, deckId, cardId));
         }

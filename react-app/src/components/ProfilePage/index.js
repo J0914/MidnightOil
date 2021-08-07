@@ -18,7 +18,7 @@ const ProfilePage = () => {
     const notebooks = useSelector(state => state.notebooks.notebooks);
     const decks = useSelector(state => state.decks.decks);
 
-    const [ currentNotebooks, setCurrentNotebooks ] = useState(notebooks);
+    const [ currentNotes, setCurrentNotes ] = useState(null);
     const [ currentDecks, setCurrentDecks ] = useState(null);
 
     useEffect(() => {
@@ -28,8 +28,14 @@ const ProfilePage = () => {
     }, [dispatch, user])
 
     useEffect(() => {
-        if (notebooks)
-        setCurrentNotebooks(notebooks);
+        if (notebooks) {
+            const thenotebook = notebooks[notebooks.length-1];
+            console.log(thenotebook)
+            const thenotes = Object.values(thenotebook.notes)
+            setCurrentNotes(thenotes);
+        }
+        
+        // console.log(currentNotes)
     }, [notebooks])
 
     useEffect(() => {
@@ -53,19 +59,18 @@ const ProfilePage = () => {
             </div>
             </div>
             <div className={styles.content_wrapper}>
-                    <h1 className={styles.profile_h1}>Get back to work! Select a notebook or flash card deck to get started.</h1>
+                    <h1 className={styles.profile_h1}>Get back to work! Select a note or flash card deck to get started.</h1>
                 <div className={styles.notebook_wrapper}>
                     <h2 className={styles.notebook_h2}>Recent Notes</h2>
                     <div className={styles.notebook_list}>
-                        {currentNotebooks?.slice(0, 3).map((notebook, index) => (
-                            <div key={index} className={styles.notebook_item}>
-                                {Object.values(notebook.notes).map((note) => (
-                                    <div className={styles.profile_text}><Link className={styles.note_link} to={`/notebooks/${notebook.id}/notes/${note.id}`} className={styles.link} >{note.title}</Link></div>
-                                ))}
-                                <div id={styles.placeholder}></div>
-                                
+                        {currentNotes?.length > 0 ? currentNotes.slice(0, 3).map((note) => (
+                            <div key={note.id} className={styles.notebook_item}>
+                                <div className={styles.profile_text}><Link className={styles.note_link} to={`/notebooks/${note.notebookId}/notes/${note.id}`} className={styles.link} >{note.title}</Link></div>
                             </div>
-                        ))}
+                        ))
+                        :
+                        <p className={styles.profile_text}>Your most recent notebook is empty!</p>
+                        }
                     </div>
                 </div>
                 <div className={styles.deck_wrapper}>
