@@ -2,6 +2,7 @@
 const SET_DECKS = 'decks/SET_DECKS';
 const SET_DECK = 'decks/SET_DECK';
 const SET_CARDS = 'decks/SET_CARDS';
+const REMOVE_DECKS = 'decks/REMOVE_DECKS'
 
 
 const setDecks = (decks) => ({
@@ -18,6 +19,14 @@ const setCards = (cards) => ({
   type: SET_CARDS,
   payload: cards
 });
+
+const removeDecks = () => ({
+  type: REMOVE_DECKS
+})
+
+export const resetDecks = () => async (dispatch) => {
+  dispatch(removeDecks())
+}
 
 // get all user decks
 export const getDecks = (userId) => async (dispatch) => {
@@ -226,6 +235,8 @@ export default function reducer(state = initialState, action) {
         return { ...state, currentDeck: action.payload }
         case SET_CARDS:
             return { ...state, cards: action.payload }
+        case REMOVE_DECKS:
+            return { decks: null, currentDeck: null, cards: null }
         default:
         return state;
     }

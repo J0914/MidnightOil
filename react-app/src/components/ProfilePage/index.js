@@ -5,6 +5,9 @@ import {Link} from 'react-router-dom'
 // import SharedByUser from './SharedByUser';
 // import SharedByFriends from './SharedByFriends';
 import {getUsers} from '../../store/session';
+import { getClassmates } from '../../store/classmates';
+import { getNotebooks } from '../../store/notebooks';
+import { getDecks } from '../../store/decks';
 
 import styles from '../../css-modules/profile.module.css';
 
@@ -22,6 +25,17 @@ const ProfilePage = () => {
     const [ currentDecks, setCurrentDecks ] = useState(null);
 
     useEffect(() => {
+        (async() => {
+          if (user) {
+            await dispatch(getClassmates(user.id));
+            await dispatch(getNotebooks(user.id));
+            await dispatch(getDecks(user.id));
+            await dispatch(getClassmates(user.id)) 
+          }
+        })();
+      }, [dispatch]);
+
+    useEffect(() => {
         if (user) {
             dispatch(getUsers()); 
         }
@@ -30,12 +44,12 @@ const ProfilePage = () => {
     useEffect(() => {
         if (notebooks) {
             const thenotebook = notebooks[notebooks.length-1];
-            console.log(thenotebook)
-            const thenotes = Object.values(thenotebook?.notes)
-            setCurrentNotes(thenotes);
+            if (thenotebook) {
+                const thenotes = Object.values(thenotebook?.notes)
+                setCurrentNotes(thenotes);
+            }
         }
         
-        // console.log(currentNotes)
     }, [notebooks])
 
     useEffect(() => {
@@ -76,7 +90,7 @@ const ProfilePage = () => {
                 <div className={styles.deck_wrapper}>
                     <h2 className={styles.deck_h2}>Recent Decks</h2>
                     <div className={styles.deck_list}>
-                        {currentDecks ? currentDecks.slice(0, 3).map((deck, index) => (
+                        {currentDecks?.length > 0 ? currentDecks.slice(0, 3).map((deck, index) => (
                             <div key={index} className={styles.deck_item}>
                                 <div className={styles.profile_text}><Link className={styles.link} >{deck.title}</Link></div>
                                 <div className={styles.profile_text}>({Object.values(deck.cards).length} cards)</div>

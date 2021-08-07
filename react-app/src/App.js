@@ -15,28 +15,22 @@ import { getDecks } from './store/decks';
 
 
 function App() {
-  const theuser = useSelector(state => state.session.user);
 
   const [loaded, setLoaded] = useState(false);
-  const [user, setUser] = useState(null);
+  const [forceRefresh, setForceRefresh] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {
     (async() => {
-      const data = await dispatch(authenticate());
-      if (data) {
-        await dispatch(getClassmates(data.id));
-        await dispatch(getNotebooks(data.id));
-        await dispatch(getDecks(data.id));
-        await dispatch(getClassmates(data.id)) 
-      }
+      const user = await dispatch(authenticate());
+
       setLoaded(true);
     })();
-  }, [dispatch, user]);
+  }, [dispatch]);
 
   useEffect(() => {
-    setUser(theuser)
-  }, [loaded]);
+    if (loaded) setForceRefresh(!forceRefresh);
+  }, [loaded])
 
   if (!loaded) {
     return null;

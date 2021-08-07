@@ -36,7 +36,7 @@ const DeckPage = () => {
 
     useEffect(() => {
         if (cards) {
-            setCurrentCards(cards.reverse());
+            setCurrentCards(cards?.reverse());
         }
     }, [cards])
 
