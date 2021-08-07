@@ -31,7 +31,7 @@ const ProfilePage = () => {
         if (notebooks) {
             const thenotebook = notebooks[notebooks.length-1];
             console.log(thenotebook)
-            const thenotes = Object.values(thenotebook.notes)
+            const thenotes = Object.values(thenotebook?.notes)
             setCurrentNotes(thenotes);
         }
         
@@ -76,12 +76,15 @@ const ProfilePage = () => {
                 <div className={styles.deck_wrapper}>
                     <h2 className={styles.deck_h2}>Recent Decks</h2>
                     <div className={styles.deck_list}>
-                        {currentDecks?.slice(0, 3).map((deck, index) => (
+                        {currentDecks ? currentDecks.slice(0, 3).map((deck, index) => (
                             <div key={index} className={styles.deck_item}>
                                 <div className={styles.profile_text}><Link className={styles.link} >{deck.title}</Link></div>
                                 <div className={styles.profile_text}>({Object.values(deck.cards).length} cards)</div>
                             </div>
-                        ))}
+                        ))
+                        :
+                        <p className={styles.profile_text}>You have no decks!</p>
+                        }
                     </div>
                 </div>
                 <div className={styles.reminders_wrapper}>
