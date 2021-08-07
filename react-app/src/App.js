@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import NavBar from './components/NavBar';
 import Splash from './components/Splash';
@@ -15,7 +15,10 @@ import { getDecks } from './store/decks';
 
 
 function App() {
+  const theuser = useSelector(state => state.session.user);
+
   const [loaded, setLoaded] = useState(false);
+  const [user, setUser] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -29,7 +32,11 @@ function App() {
       }
       setLoaded(true);
     })();
-  }, [dispatch ]);
+  }, [dispatch, user]);
+
+  useEffect(() => {
+    setUser(theuser)
+  }, [loaded]);
 
   if (!loaded) {
     return null;
