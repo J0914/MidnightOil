@@ -3,22 +3,24 @@
     height: 400px;
     width: 100%;
     margin: 0;
+    justify-content: flex-start;
+    /* align-items: center; */
     padding: 10px;
     box-sizing: border-box;
     border-radius: 5px;
     box-shadow: 0.0625rem 0.0625rem 0.625rem -2px #13011B;
     padding: 15px;
-    animation: slideIn .3s cubic-bezier(0.7, 0, 0.3, 1) 0s 1 forwards;
+    animation: slideIn .3s 0s 1 forwards;
 }
 
 @keyframes slideIn{
     0%{
-        transform: translate(0px, 10px) rotate3d(1, 2.0, 3.0, -5deg) scale(.8);
+        transform: translate(50px, 0);
 
       }
-      100%{
-        transform: translate(0px, 0px) scale(1);
-      }
+    100%{
+    transform: translate(0px, 0px);
+    }
 }
 
 .card_front__body, .card_back__body {
@@ -32,6 +34,8 @@
     margin: 0;
     margin-top: 10px;
     box-sizing: border-box;
+    position: relative;
+    top: 20px;
 }
 
 .front_btn, .back_btn {
@@ -88,11 +92,13 @@
     margin: 0;
     width: 100%;
     text-align: center;
+    position: relative;
+    top: 15px;
 }
 
 #body_wrapper {
     width: 100%;
-    height: fit-content;
+    height: 100%;
     max-height: 300px;
     display: flex;
     flex-direction: column;

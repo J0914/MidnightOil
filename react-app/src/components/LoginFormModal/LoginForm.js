@@ -18,7 +18,7 @@ const LoginForm = () => {
     if (data) {
       setErrors(data);
     } else {
-        Redirect('/profile')
+        Redirect('/dashboard')
     }
   };
 
@@ -30,7 +30,7 @@ const LoginForm = () => {
     if (data) {
       setErrors(data);
     } else {
-        Redirect('/profile');
+        Redirect('/dashboard');
     }
   }
 
@@ -43,7 +43,7 @@ const LoginForm = () => {
   };
 
   if (user) {
-    return <Redirect to='/profile' />;
+    return <Redirect to='/dashboard' />;
   }
 
   return (

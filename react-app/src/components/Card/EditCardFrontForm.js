@@ -37,7 +37,7 @@ const EditCardFrontForm = ({setIsEditing, isDark, back, body, deckId, userId, ca
     return (
         <div id={styles.form_container}>
             <div id={styles.card_errors}>
-                <ul>
+                <ul className={styles.error_ul}>
             {errors.map((error, ind) => (
                 <li className={styles.error} key={ind}>{error}</li>
                 ))}

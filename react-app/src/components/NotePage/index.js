@@ -76,7 +76,7 @@ const NotePage = () => {
         if (answer) {
             if (currentNotebookNotes?.length <= 1) {
                 dispatch(notebookActions.deleteNote(userId, notebookId,noteId))
-                history.push('/profile')
+                history.push('/dashboard')
             } else {
                 const data = dispatch(notebookActions.deleteNote(userId, notebookId,noteId))
                 if (data.errors) {

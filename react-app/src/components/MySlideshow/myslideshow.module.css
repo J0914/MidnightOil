@@ -57,12 +57,6 @@
     color: rgb(173, 125, 173); ;
 }
 
-.slideshow_controller span:active{
-    color: #541d82;
-    text-shadow: 3px 3px 5px #541d82;
-    background: #ffc200;
-}
-
 .study_label {
     font-size: 1.5rem;
     color: white;
