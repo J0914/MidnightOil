@@ -5,7 +5,7 @@
 On the Landing page you have the option to login or sign up for a new account.
 There is also a demo user account if you'd like to test the site without entering any personal information.
 
-![splash](https://i.ibb.co/VJ6vmLS/splash.png)
+![splash](https://i.ibb.co/DW9tx87/splash.png)
 
 ## Dashboard
 
