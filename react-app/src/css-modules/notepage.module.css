@@ -19,6 +19,10 @@
     
 }
 
+.note_link__wrapper {
+    width: fit-content;
+}
+
 #note_page__header {
     color: white;
     margin: 0;
@@ -28,7 +32,6 @@
 
 #note_sidebar {
     grid-area: sidebar;
-    /* background-color: rgba(19, 1, 27, .5); */
     background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png");
     height: 100%;
     width: 100%;

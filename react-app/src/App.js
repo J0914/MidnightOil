@@ -8,21 +8,28 @@ import ProfilePage from './components/ProfilePage';
 import NotePage from './components/NotePage';
 import DeckPage from './components/DeckPage';
 import Footer from './components/Footer'
-import NotFoundPage from './components/NotFoundPage'
 import { authenticate } from './store/session';
+import { getClassmates } from './store/classmates';
+import { getNotebooks } from './store/notebooks';
+import { getDecks } from './store/decks';
 
 
 function App() {
-
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
     (async() => {
-      await dispatch(authenticate());
+      const data = await dispatch(authenticate());
+      if (data) {
+        await dispatch(getClassmates(data.id));
+        await dispatch(getNotebooks(data.id));
+        await dispatch(getDecks(data.id));
+        await dispatch(getClassmates(data.id)) 
+      }
       setLoaded(true);
     })();
-  }, [dispatch]);
+  }, [dispatch ]);
 
   if (!loaded) {
     return null;
@@ -43,9 +50,6 @@ function App() {
         </ProtectedRoute>
         <Route path='/' exact={true} >
           <Splash />
-        </Route>
-        <Route path="*" >
-          <NotFoundPage />
         </Route>
       </Switch>
       <Footer />
