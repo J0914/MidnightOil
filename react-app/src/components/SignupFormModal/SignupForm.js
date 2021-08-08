@@ -85,7 +85,7 @@ const SignUpForm = () => {
                     value={fName}
                     required={true}
                     className={styles.signup_input}
-                    placeHolder={'first name'}
+                    placeholder={'first name'}
                     ></input>
                 </div>
                 <div className={styles.signup_input__div}>
@@ -97,7 +97,7 @@ const SignUpForm = () => {
                     value={lName}
                     required={true}
                     className={styles.signup_input}
-                    placeHolder={'last name'}
+                    placeholder={'last name'}
                     ></input>
                 </div>
                 </div>
@@ -110,7 +110,7 @@ const SignUpForm = () => {
                         onChange={updateUsername}
                         value={username}
                         required={true}
-                        placeHolder={'username'}
+                        placeholder={'username'}
                         className={styles.signup_input}
                         ></input>
                     </div>
@@ -123,7 +123,7 @@ const SignUpForm = () => {
                         value={email}
                         required={true}
                         className={styles.signup_input}
-                        placeHolder={'email'}
+                        placeholder={'email'}
                         ></input>
                     </div>
                 </div>
@@ -137,7 +137,7 @@ const SignUpForm = () => {
                         value={password}
                         required={true}
                         className={styles.signup_input}
-                        placeHolder={'password'}
+                        placeholder={'password'}
                         ></input>
                     </div>
                     <div className={styles.signup_input__div}>
@@ -149,7 +149,7 @@ const SignUpForm = () => {
                         value={repeatPassword}
                         required={true}
                         className={styles.signup_input}
-                        placeHolder={'confirm password'}
+                        placeholder={'confirm password'}
                         ></input>
                     </div>
                 </div>

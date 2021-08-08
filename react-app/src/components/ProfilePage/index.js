@@ -33,7 +33,7 @@ const ProfilePage = () => {
             await dispatch(getClassmates(user.id)) 
           }
         })();
-      }, [dispatch]);
+      }, [dispatch, user]);
 
     useEffect(() => {
         if (user) {
@@ -66,9 +66,9 @@ const ProfilePage = () => {
                 <img src={'https://i.ibb.co/BrBCh1Q/Midnight-Oil-Logo.png'} alt="logo" className={styles.logo} />
             </div>
                 {/* <div id={styles.theme_wrapper}>
-                    <label for='light' className={styles.radio_label}>Light Theme</label>
+                    <label htmlFor='light' className={styles.radio_label}>Light Theme</label>
                     <input type="radio" id='light' name="theme" checked={isDark === false} onChange={()=> setIsDark(false)}></input>
-                    <label for='dark' className={styles.radio_label}>Dark Theme</label>
+                    <label htmlFor='dark' className={styles.radio_label}>Dark Theme</label>
                     <input type="radio" id='dark' name="theme" checked={isDark === true} onChange={()=> setIsDark(true)}></input>
                 </div> */}
             </div>

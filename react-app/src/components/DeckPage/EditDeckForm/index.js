@@ -35,24 +35,6 @@ const EditDeckForm = ({currentDeck, setIsEditing, currentTitle, setCurrentTitle,
         setIsEditing(false);
     }
 
-    const editShareFalse = async (e) => {
-        e.preventDefault();
-        let userId;
-        if (user) userId = user.id
-        const deckVals = {
-            title: title,
-            share: false,
-            onlyShare: true
-        }
-        const deck = await dispatch(deckActions.editDeck(userId, deckId, deckVals));
-        if (Array.isArray(deck)) {
-          setErrors(deck);
-        } else {
-            setCurrentDeck(deck)
-            setCurrentTitle(title);
-        }
-    }
-
     return (
         <div className={styles.form_container}>
             <form id={styles.deck_form} onSubmit={editDeck}>
