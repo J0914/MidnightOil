@@ -1,5 +1,7 @@
 # Welcome to the Midnight Oil ReadMe!
 
+Midnight Oil is an online learning companion app that allows you to create and organize notes as well as create custom flashcard decks to help you study!
+
 ## Landing Page
 
 On the Landing page you have the option to login or sign up for a new account.
