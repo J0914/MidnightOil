@@ -114,7 +114,7 @@ const ProfilePage = () => {
                         <li className={styles.profile_text}> DONT FORGET TO TAKE BREAKS! </li>
                         </div>
                         <div className={styles.reminder_li}>
-                        <li className={styles.profile_text}> Reading is not studying! </li>
+                        <li className={styles.profile_text}> Create a study schedule! (and stick to it!) </li>
                         </div>
                         <div className={styles.reminder_li}>
                         <li className={styles.profile_text}> Always remember self care.  </li>
