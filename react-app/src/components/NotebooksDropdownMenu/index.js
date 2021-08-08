@@ -43,7 +43,7 @@ const NotebooksDropdownMenu = () => {
         let answer = window.confirm(`Are you sure you want to delete this notebook?`)
         if (answer) {
         dispatch(notebookActions.deleteNotebook(userId, notebookId))
-        history.push('/profile')
+        history.push('/dashboard')
         } else {
             return;
         }

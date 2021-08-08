@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import Search from './search'
 
 
-import styles from '../../../css-modules/profile.module.css';
+import styles from '../../../css-modules/dashboard.module.css';
 
 const Friends = ({isDark, accepted, incoming, pending}) => {
     // debugger

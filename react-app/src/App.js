@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import NavBar from './components/NavBar';
 import Splash from './components/Splash';
-import ProfilePage from './components/ProfilePage';
+import DashboardPage from './components/DashboardPage';
 import NotePage from './components/NotePage';
 import DeckPage from './components/DeckPage';
 import Footer from './components/Footer'
@@ -39,8 +39,8 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
-        <ProtectedRoute path='/profile' exact={true} >
-          <ProfilePage />
+        <ProtectedRoute path='/dashboard' exact={true} >
+          <DashboardPage />
         </ProtectedRoute>
         <ProtectedRoute path='/notebooks/:notebookId/notes/:noteId' exact={true} >
           <NotePage loaded={loaded} />

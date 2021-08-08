@@ -71,7 +71,7 @@ const DeckPage = () => {
         let answer = window.confirm(`Are you sure you want to delete this deck?`)
         if (answer) {
             dispatch(deckActions.deleteDeck(userId, deckId))
-            history.push('/profile')
+            history.push('/dashboard')
         }
     
     }

@@ -92,7 +92,7 @@
 }
 
 .profile_text {
-    font-size: 1.2em;
+    font-size: 1.12rem;
     font-weight: bold;
     color: black;
     text-align: center;
@@ -245,4 +245,5 @@
     justify-content: center;
     align-items: center;
     border-radius: 5px;
+    margin-bottom: 40px;
 }

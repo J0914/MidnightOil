@@ -9,7 +9,7 @@ import { getClassmates } from '../../store/classmates';
 import { getNotebooks } from '../../store/notebooks';
 import { getDecks } from '../../store/decks';
 
-import styles from '../../css-modules/profile.module.css';
+import styles from '../../css-modules/dashboard.module.css';
 
 const ProfilePage = () => {
     // const accepted = useSelector(state => state.classmates.acceptedDetail);

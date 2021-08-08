@@ -12,8 +12,8 @@ const NavBar = () => {
   return location.pathname !== '/' && (
     <nav id={styles.nav}>
       <div className={styles.nav_container}>
-          <NavLink to='/profile' exact={true} className={styles.navlink} activeClassName={styles.nav_active}>
-            Profile
+          <NavLink to='/dashboard' exact={true} className={styles.navlink} activeClassName={styles.nav_active}>
+            Dashboard
           </NavLink>
           <NotebooksDropdownMenu />
           <div id={styles.logo_div}>
