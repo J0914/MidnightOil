@@ -5,7 +5,7 @@
 Midnight Oil is an online learning companion app that allows you to create and organize notes as well as create custom flashcard decks to help you study! It was built using Python/Flask for the backend and React/Redux for the frontend.
 
 - Create an account
-- Log in and Log out
+- [Log in and Log out](#splash)
 - [Log in as a guest via Demo User option](#dashboard)
 - [Create, edit or delete notebooks and notes](#notebooks)
 - [Create, edit or delete decks and flashcards](#decks)
@@ -19,7 +19,7 @@ Midnight Oil is an online learning companion app that allows you to create and o
 - Frontend
   - The frontend of this app was built using React and Redux, utilizing CSS for styling.
 
-## Landing Page
+## Splash
 
 On the Landing page you have the option to login or sign up for a new account.
 There is also a demo user account if you'd like to test the site without entering any personal information.
