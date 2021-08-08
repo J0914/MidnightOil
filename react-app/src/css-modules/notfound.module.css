@@ -1,0 +1,19 @@
+.not_found__wrapper {
+    height: 95vh;
+    width: 95vw;
+}
+
+.logo_wrapper {
+    margin: auto;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.text {
+    color: white;
+    font-size: 3rem;
+}

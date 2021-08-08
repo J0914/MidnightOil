@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ProtectedRoute from './components/auth/ProtectedRoute';
@@ -8,6 +9,7 @@ import ProfilePage from './components/ProfilePage';
 import NotePage from './components/NotePage';
 import DeckPage from './components/DeckPage';
 import Footer from './components/Footer'
+import NotFoundPage from './components/NotFoundPage'
 import { authenticate } from './store/session';
 import { getClassmates } from './store/classmates';
 import { getNotebooks } from './store/notebooks';
@@ -51,6 +53,9 @@ function App() {
         </ProtectedRoute>
         <Route path='/' exact={true} >
           <Splash />
+        </Route>
+        <Route path="*" >
+          <NotFoundPage />
         </Route>
       </Switch>
       <Footer />
