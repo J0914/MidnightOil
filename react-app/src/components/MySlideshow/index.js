@@ -45,9 +45,9 @@ const MySlideshow = ({slideInterval, studyMode, cards}) => {
 		}
 	}, [studyMode, currentCards, currentSlide, slideInterval]);
 
-	// useEffect(() => {
-	// 	setCurrentSlide(0);
-	// }, [currentCards])
+	useEffect(() => {
+		setCurrentSlide(0);
+	}, [currentCards])
 
 	function previous(){
 		if(currentSlide>0){
