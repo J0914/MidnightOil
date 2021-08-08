@@ -65,12 +65,6 @@ const ProfilePage = () => {
             <div className={styles.logo_wrapper}>
                 <img src={'https://i.ibb.co/BrBCh1Q/Midnight-Oil-Logo.png'} alt="logo" className={styles.logo} />
             </div>
-                {/* <div id={styles.theme_wrapper}>
-                    <label htmlFor='light' className={styles.radio_label}>Light Theme</label>
-                    <input type="radio" id='light' name="theme" checked={isDark === false} onChange={()=> setIsDark(false)}></input>
-                    <label htmlFor='dark' className={styles.radio_label}>Dark Theme</label>
-                    <input type="radio" id='dark' name="theme" checked={isDark === true} onChange={()=> setIsDark(true)}></input>
-                </div> */}
             </div>
             <div className={styles.content_wrapper}>
                     <h1 className={styles.profile_h1}>Get back to work! Select a note or flash card deck to get started.</h1>

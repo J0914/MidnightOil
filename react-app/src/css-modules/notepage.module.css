@@ -89,7 +89,7 @@
 }
 
 .edit_and_delete:hover {
-    color: rgb(173, 125, 173);   
+    color: rgb(175, 104, 175);   
 }
 
 .radio_label {
@@ -98,7 +98,7 @@
 }
 
 .radio_label:hover {
-    color: rgb(173, 125, 173); 
+    color: rgb(175, 104, 175); 
 }
 
 .error {
@@ -129,7 +129,7 @@
 }
 
 .note_link:hover {
-    color: rgb(173, 125, 173); 
+    color: rgb(175, 104, 175); 
 }
 
 #logo_div {
@@ -165,7 +165,7 @@
 }
 
 .edit_note__title:hover {
-    color: rgb(173, 125, 173); 
+    color: rgb(175, 104, 175); 
 }
 
 #header_container {
@@ -187,7 +187,7 @@
 }
 
 .add_note:hover {
-    color: rgb(173, 125, 173);  
+    color: rgb(175, 104, 175);  
 }
 
 .form__wrapper {
@@ -203,9 +203,15 @@
 }
 
 .close:hover {
-    color: rgb(173, 125, 173);  
+    color: rgb(175, 104, 175);  
 }
 
 .note_body {
     display: none;
+}
+
+#theme_wrapper {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }

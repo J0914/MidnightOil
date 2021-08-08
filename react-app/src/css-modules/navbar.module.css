@@ -41,7 +41,7 @@
 }
 
 .navlink:hover {
-    background-color: rgb(173, 125, 173);
+    background-color: rgb(175, 104, 175);
     color: white;
     box-shadow: 0 1px 8px 5px rgba(255, 255, 255, 0.3);
 }

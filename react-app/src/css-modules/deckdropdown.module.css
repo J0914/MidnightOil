@@ -53,7 +53,7 @@
 }
 
 .deck_menu__trigger:hover {
-    background-color: rgb(173, 125, 173);
+    background-color: rgb(175, 104, 175);
     color: white;
     box-shadow: 0 1px 8px 5px rgba(255, 255, 255, 0.3);
 }
@@ -70,8 +70,16 @@
     font-size: .9rem;
 }
 
+.add_deck:hover {
+    color: rgb(175, 104, 175);
+}
+
 .form__wrapper {
     display: flex;
     width: 100%;
     justify-content: center;
+}
+
+.deck_nav:hover {
+    color: rgb(175, 104, 175); 
 }

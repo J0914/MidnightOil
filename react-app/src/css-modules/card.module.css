@@ -47,7 +47,7 @@
 }
 
 .front_btn:hover, .back_btn:hover {
-    color: rgb(173, 125, 173);
+    color: rgb(175, 104, 175);
 }
 
 .light {
@@ -78,7 +78,7 @@
 }
 
 .edit_and_delete__btn:hover, .save_and_delete__btn:hover {
-    color: rgb(173, 125, 173);
+    color: rgb(175, 104, 175);
 }
 
 .editing_btns {

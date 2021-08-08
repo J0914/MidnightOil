@@ -129,6 +129,8 @@ const DeckPage = () => {
             </div>
             }
             <div className={styles.under_header}>
+                {currentCards?.length > 0 && 
+                <>
                 <div id={styles.time_div}>
                     <label className={styles.seconds_label}>Set Study Mode Interval</label>
                     <input id={styles.seconds} value={slideInterval/1000} onChange={(e) => setSlideInterval(e.target.value*1000)} type='number' placeholder='seconds' />
@@ -136,8 +138,9 @@ const DeckPage = () => {
                 </div>
                 <div className={styles.hint_wrapper}>
                     <label className={styles.seconds_label}>(Card will flip in half as many seconds as the Study Mode Interval)</label>
-                    <p className={styles.hint}>(new cards go to the front of the deck!)</p>
                 </div>
+                </>
+                }
                 {/* <p className={styles.hint}>(hint: if you click on a card, you can use your keyboard arrows to change cards!)</p>
                 <div id={styles.share_wrapper}>
                     <label htmlFor='public' className={styles.radio_label}>Public</label>
@@ -147,7 +150,7 @@ const DeckPage = () => {
                 </div> */}
             </div>
             </div>
-            {currentCards?.length ?
+            {currentCards?.length > 0 ?
             <div id={styles.body}>
             <div id={styles.above_card}>
                 <div id={styles.create_btn__wrapper}>
@@ -157,9 +160,9 @@ const DeckPage = () => {
                     {currentCards?.length} cards
                 </h5>
                 <div id={styles.theme_wrapper}>
-                    <label htmlFor='light' className={styles.radio_label}>Light Theme</label>
+                    <label htmlFor='light' className={styles.radio_label}>Light</label>
                     <input type="radio" id='light' name="theme" checked={isDark === false} onChange={()=> setIsDark(false)}></input>
-                    <label htmlFor='dark' className={styles.radio_label}>Dark Theme</label>
+                    <label htmlFor='dark' className={styles.radio_label}>Dark</label>
                     <input type="radio" id='dark' name="theme" checked={isDark === true} onChange={()=> setIsDark(true)}></input>
                 </div>
             </div>
@@ -179,6 +182,7 @@ const DeckPage = () => {
             <button onClick={createCard} className={styles.create_btn}>Create Your First Card! <BsPlusCircle /></button>
             }
             <div className={styles.hint_wrapper}>
+                {currentCards?.length > 0 && 
                 <div id={styles.study_wrapper}>
                     <label className={styles.study_label}>Study Mode</label>
                     {!studyMode ? 
@@ -186,7 +190,7 @@ const DeckPage = () => {
                     :
                     <span onClick={() => setStudyMode(false)} className={styles.btns}><BsPauseFill /></span>
                     }
-                </div>
+                </div>}
             </div>
         </div>
         </>
