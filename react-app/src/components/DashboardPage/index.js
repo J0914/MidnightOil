@@ -19,8 +19,10 @@ const ProfilePage = () => {
     const dispatch = useDispatch();
 
     const notebooks = useSelector(state => state.notebooks.notebooks);
+    const currentNotebook = useSelector(state => state.notebooks.currentNotebook)
     const decks = useSelector(state => state.decks.decks);
 
+    const [currentNotebooks, setCurrentNotebooks] = useState(notebooks);
     const [ currentNotes, setCurrentNotes ] = useState(null);
     const [ currentDecks, setCurrentDecks ] = useState(null);
 
@@ -43,14 +45,25 @@ const ProfilePage = () => {
 
     useEffect(() => {
         if (notebooks) {
-            const thenotebook = notebooks[notebooks.length-1];
+            setCurrentNotebooks(notebooks);
+        }
+    }, [notebooks]);
+
+    useEffect(() => {
+        if (currentNotebook) {
+            const thenotes = Object.values(currentNotebook?.notes);
+            setCurrentNotes(thenotes);
+        } else if (currentNotebooks) {
+            const thenotebook = currentNotebooks[currentNotebooks.length-1];
             if (thenotebook) {
                 const thenotes = Object.values(thenotebook?.notes)
                 setCurrentNotes(thenotes);
             }
+        } else {
+            setCurrentNotes(null);
         }
         
-    }, [notebooks])
+    }, [currentNotebook, currentNotebooks])
 
     useEffect(() => {
         if (decks)
@@ -77,7 +90,7 @@ const ProfilePage = () => {
                             </div>
                         ))
                         :
-                        <p className={styles.profile_text}>Your most recent notebook is empty!</p>
+                        <p className={styles.profile_text}>No Recent Notes!</p>
                         }
                     </div>
                 </div>

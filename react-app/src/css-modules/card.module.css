@@ -10,12 +10,12 @@
     border-radius: 5px;
     box-shadow: 0.0625rem 0.0625rem 0.625rem -2px #13011B;
     padding: 15px;
-    animation: slideIn .3s 0s 1 forwards;
+    animation: slideIn 1s 0s 1 forwards;
 }
 
 @keyframes slideIn{
     0%{
-        transform: translate(50px, 0);
+        transform: translate(0px, 5px) rotate3d(-1, 0, -1, 3deg);
 
       }
     100%{
