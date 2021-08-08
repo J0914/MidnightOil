@@ -5,6 +5,9 @@ import {Link} from 'react-router-dom'
 // import SharedByUser from './SharedByUser';
 // import SharedByFriends from './SharedByFriends';
 import {getUsers} from '../../store/session';
+import { getClassmates } from '../../store/classmates';
+import { getNotebooks } from '../../store/notebooks';
+import { getDecks } from '../../store/decks';
 
 import styles from '../../css-modules/profile.module.css';
 
@@ -22,6 +25,17 @@ const ProfilePage = () => {
     const [ currentDecks, setCurrentDecks ] = useState(null);
 
     useEffect(() => {
+        (async() => {
+          if (user) {
+            await dispatch(getClassmates(user.id));
+            await dispatch(getNotebooks(user.id));
+            await dispatch(getDecks(user.id));
+            await dispatch(getClassmates(user.id)) 
+          }
+        })();
+      }, [dispatch, user]);
+
+    useEffect(() => {
         if (user) {
             dispatch(getUsers()); 
         }
@@ -30,12 +44,12 @@ const ProfilePage = () => {
     useEffect(() => {
         if (notebooks) {
             const thenotebook = notebooks[notebooks.length-1];
-            console.log(thenotebook)
-            const thenotes = Object.values(thenotebook?.notes)
-            setCurrentNotes(thenotes);
+            if (thenotebook) {
+                const thenotes = Object.values(thenotebook?.notes)
+                setCurrentNotes(thenotes);
+            }
         }
         
-        // console.log(currentNotes)
     }, [notebooks])
 
     useEffect(() => {
@@ -50,13 +64,13 @@ const ProfilePage = () => {
                     <h1 id={styles.profile_header}>Welcome Back {user?.fName}!</h1>
             <div className={styles.logo_wrapper}>
                 <img src={'https://i.ibb.co/BrBCh1Q/Midnight-Oil-Logo.png'} alt="logo" className={styles.logo} />
+            </div>
                 {/* <div id={styles.theme_wrapper}>
-                    <label for='light' className={styles.radio_label}>Light Theme</label>
+                    <label htmlFor='light' className={styles.radio_label}>Light Theme</label>
                     <input type="radio" id='light' name="theme" checked={isDark === false} onChange={()=> setIsDark(false)}></input>
-                    <label for='dark' className={styles.radio_label}>Dark Theme</label>
+                    <label htmlFor='dark' className={styles.radio_label}>Dark Theme</label>
                     <input type="radio" id='dark' name="theme" checked={isDark === true} onChange={()=> setIsDark(true)}></input>
                 </div> */}
-            </div>
             </div>
             <div className={styles.content_wrapper}>
                     <h1 className={styles.profile_h1}>Get back to work! Select a note or flash card deck to get started.</h1>
@@ -65,7 +79,7 @@ const ProfilePage = () => {
                     <div className={styles.notebook_list}>
                         {currentNotes?.length > 0 ? currentNotes.slice(0, 3).map((note) => (
                             <div key={note.id} className={styles.notebook_item}>
-                                <div className={styles.profile_text}><Link className={styles.note_link} to={`/notebooks/${note.notebookId}/notes/${note.id}`} className={styles.link} >{note.title}</Link></div>
+                                <div className={styles.profile_text}><Link to={`/notebooks/${note.notebookId}/notes/${note.id}`} className={styles.link} >{note.title}</Link></div>
                             </div>
                         ))
                         :
@@ -76,9 +90,9 @@ const ProfilePage = () => {
                 <div className={styles.deck_wrapper}>
                     <h2 className={styles.deck_h2}>Recent Decks</h2>
                     <div className={styles.deck_list}>
-                        {currentDecks ? currentDecks.slice(0, 3).map((deck, index) => (
+                        {currentDecks?.length > 0 ? currentDecks.slice(0, 3).map((deck, index) => (
                             <div key={index} className={styles.deck_item}>
-                                <div className={styles.profile_text}><Link className={styles.link} >{deck.title}</Link></div>
+                                <div className={styles.profile_text}><Link to={`/decks/${deck.id}`} className={styles.link} >{deck.title}</Link></div>
                                 <div className={styles.profile_text}>({Object.values(deck.cards).length} cards)</div>
                             </div>
                         ))

@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux'
 import {useParams, useHistory} from 'react-router-dom'
-import Slideshow from './Slideshow'
 import MySlideshow from '../MySlideshow'
 import * as deckActions from '../../store/decks'
-import {BsPlusCircle, BsDashCircle, BsPencil, BsTrash} from 'react-icons/bs'
+import {BsPlusCircle, BsPencil, BsTrash} from 'react-icons/bs'
 import EditDeckForm from './EditDeckForm'
 import {Prompt} from 'react-router'
 import Card from '../Card'
@@ -16,7 +15,6 @@ const DeckPage = () => {
     const [currentCards, setCurrentCards] = useState(null);
     const [currentDeck, setCurrentDeck] = useState(null);
     const [currentTitle, setCurrentTitle] = useState(null);
-    const [showCreateCardForm, setShowCreateCardForm] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [studyMode, setStudyMode] = useState(false);
     const [slideInterval, setSlideInterval] = useState(20000);
@@ -36,7 +34,7 @@ const DeckPage = () => {
 
     useEffect(() => {
         if (cards) {
-            setCurrentCards(cards.reverse());
+            setCurrentCards(cards?.reverse());
         }
     }, [cards])
 
@@ -82,28 +80,28 @@ const DeckPage = () => {
         </div>)
     ))
 
-    const editShareTrue = async (e) => {
-        e.preventDefault();
-        const deckVals = {
-            title: currentTitle,
-            share: true,
-            onlyShare: true
-        }
-        const deck = await dispatch(deckActions.editDeck(userId, deckId, deckVals));
-        setCurrentDeck(deck)
-        setCurrentTitle(currentTitle); 
-    }
+    // const editShareTrue = async (e) => {
+    //     e.preventDefault();
+    //     const deckVals = {
+    //         title: currentTitle,
+    //         share: true,
+    //         onlyShare: true
+    //     }
+    //     const deck = await dispatch(deckActions.editDeck(userId, deckId, deckVals));
+    //     setCurrentDeck(deck)
+    //     setCurrentTitle(currentTitle); 
+    // }
 
-    const editShareFalse = async (e) => {
-        e.preventDefault();
-        const deckVals = {
-            title: currentTitle,
-            share: false,
-            onlyShare: true
-        }
-        const deck = await dispatch(deckActions.editDeck(userId, deckId, deckVals));
-        setCurrentDeck(deck)
-    }
+    // const editShareFalse = async (e) => {
+    //     e.preventDefault();
+    //     const deckVals = {
+    //         title: currentTitle,
+    //         share: false,
+    //         onlyShare: true
+    //     }
+    //     const deck = await dispatch(deckActions.editDeck(userId, deckId, deckVals));
+    //     setCurrentDeck(deck)
+    // }
 
     return (
         <>
@@ -131,17 +129,17 @@ const DeckPage = () => {
             <div className={styles.under_header}>
                 <div id={styles.time_div}>
                     <label className={styles.seconds_label}>Set Study Mode Interval</label>
-                    <input id={styles.seconds} value={slideInterval/1000} onChange={(e) => setSlideInterval(e.target.value*1000)} type='number' placeHolder='seconds' />
+                    <input id={styles.seconds} value={slideInterval/1000} onChange={(e) => setSlideInterval(e.target.value*1000)} type='number' placeholder='seconds' />
                     <label className={styles.seconds_label}>Seconds</label>
                 </div>
                 <div>
-                    <label className={styles.seconds_label}>(Card will flip in half as many seconds as the Study Mode Interval)</label>}
+                    <label className={styles.seconds_label}>(Card will flip in half as many seconds as the Study Mode Interval)</label>
                 </div>
                 {/* <p className={styles.hint}>(hint: if you click on a card, you can use your keyboard arrows to change cards!)</p>
                 <div id={styles.share_wrapper}>
-                    <label for='public' className={styles.radio_label}>Public</label>
+                    <label htmlFor='public' className={styles.radio_label}>Public</label>
                     <input type="radio" id='public' name="share-btn" checked={currentDeck?.share} value={true} onChange={editShareTrue}></input>
-                    <label for='private' className={styles.radio_label}>Private</label>
+                    <label htmlFor='private' className={styles.radio_label}>Private</label>
                     <input type="radio" id='private' name="share-btn" checked={!currentDeck?.share} value={false} onChange={editShareFalse}></input>
                 </div> */}
             </div>
@@ -150,15 +148,15 @@ const DeckPage = () => {
             <div id={styles.body}>
             <div id={styles.above_card}>
                 <div id={styles.create_btn__wrapper}>
-                    <button id='create-card' className={styles.add_card} onClick={createCard}>Create Card   {!showCreateCardForm ? <BsPlusCircle /> : <BsDashCircle />}</button>
+                    <button id='create-card' className={styles.add_card} onClick={createCard}>Create Card&nbsp;<BsPlusCircle /></button>
                 </div>
                 <h5 id={styles.card_count}>
                     {currentCards?.length} cards
                 </h5>
                 <div id={styles.theme_wrapper}>
-                    <label for='light' className={styles.radio_label}>Light Theme</label>
+                    <label htmlFor='light' className={styles.radio_label}>Light Theme</label>
                     <input type="radio" id='light' name="theme" checked={isDark === false} onChange={()=> setIsDark(false)}></input>
-                    <label for='dark' className={styles.radio_label}>Dark Theme</label>
+                    <label htmlFor='dark' className={styles.radio_label}>Dark Theme</label>
                     <input type="radio" id='dark' name="theme" checked={isDark === true} onChange={()=> setIsDark(true)}></input>
                 </div>
             </div>

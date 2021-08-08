@@ -19,7 +19,14 @@ const SignUpForm = () => {
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password, fName, lName));
+      const userVals = {
+        username: username,
+        fName: fName,
+        lName: lName,
+        email: email,
+        password: password
+      }
+      const data = await dispatch(signUp(userVals));
       if (data) {
         setErrors(data)
       }
@@ -78,6 +85,7 @@ const SignUpForm = () => {
                     value={fName}
                     required={true}
                     className={styles.signup_input}
+                    placeholder={'first name'}
                     ></input>
                 </div>
                 <div className={styles.signup_input__div}>
@@ -89,6 +97,7 @@ const SignUpForm = () => {
                     value={lName}
                     required={true}
                     className={styles.signup_input}
+                    placeholder={'last name'}
                     ></input>
                 </div>
                 </div>
@@ -101,7 +110,7 @@ const SignUpForm = () => {
                         onChange={updateUsername}
                         value={username}
                         required={true}
-                        placeholder='must be 3 - 40 '
+                        placeholder={'username'}
                         className={styles.signup_input}
                         ></input>
                     </div>
@@ -114,6 +123,7 @@ const SignUpForm = () => {
                         value={email}
                         required={true}
                         className={styles.signup_input}
+                        placeholder={'email'}
                         ></input>
                     </div>
                 </div>
@@ -127,6 +137,7 @@ const SignUpForm = () => {
                         value={password}
                         required={true}
                         className={styles.signup_input}
+                        placeholder={'password'}
                         ></input>
                     </div>
                     <div className={styles.signup_input__div}>
@@ -138,6 +149,7 @@ const SignUpForm = () => {
                         value={repeatPassword}
                         required={true}
                         className={styles.signup_input}
+                        placeholder={'confirm password'}
                         ></input>
                     </div>
                 </div>

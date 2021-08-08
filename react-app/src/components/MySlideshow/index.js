@@ -7,24 +7,24 @@ const MySlideshow = ({slideInterval, setSlideInterval, studyMode, setStudyMode, 
 	const [currentCards, setCurrentCards] = useState([]);
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const [currentCard, setCurrentCard] = useState(cards[0]);
-	const [previousCard, setPreviousCard] = useState(null);
-	const [nextCard, setNextCard] = useState(null);
+	// const [previousCard, setPreviousCard] = useState(null);
+	// const [nextCard, setNextCard] = useState(null);
 
 	useEffect(()=>{
 		setCurrentCards(cards);
 		setCurrentCard(currentCards[currentSlide]);
 
-		if(currentSlide>0){
-			setPreviousCard(currentCards[currentSlide-1]);
-		}else{
-				setPreviousCard(currentCards[currentCards.length-1]);
-		}
+		// if(currentSlide>0){
+		// 	setPreviousCard(currentCards[currentSlide-1]);
+		// }else{
+		// 		setPreviousCard(currentCards[currentCards.length-1]);
+		// }
 
-		if(currentSlide === currentCards.length-1){
-				setNextCard(currentCards[0]);
-		}else{
-				setNextCard(currentCards[currentSlide+1]);
-		} 
+		// if(currentSlide === currentCards.length-1){
+		// 		setNextCard(currentCards[0]);
+		// }else{
+		// 		setNextCard(currentCards[currentSlide+1]);
+		// } 
 
 	}, [cards, currentCards, currentSlide]);
 
@@ -43,7 +43,7 @@ const MySlideshow = ({slideInterval, setSlideInterval, studyMode, setStudyMode, 
 		} else {
 			loop = null;
 		}
-	}, [studyMode, currentCards, currentSlide]);
+	}, [studyMode, currentCards, currentSlide, slideInterval]);
 
 	useEffect(() => {
 		setCurrentSlide(0);

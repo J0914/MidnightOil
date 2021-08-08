@@ -5,6 +5,7 @@ const SET_INCOMING = 'classmates/SET_INCOMING';
 const SET_ACCEPTED_DETAIL = 'classmates/SET_ACCEPTED_DETAIL';
 const SET_PENDING_DETAIL = 'classmates/SET_PENDING_DETAIL';
 const SET_INCOMING_DETAIL = 'classmates/SET_INCOMING_DETAIL';
+const REMOVE_CLASSMATES = 'classmates/REMOVE_CLASSMATES'
 
 
 const setAccepted = (accepted) => ({
@@ -36,6 +37,14 @@ const setIncomingDetail = (incomingDetail) => ({
   type: SET_INCOMING_DETAIL,
   payload: incomingDetail
 });
+
+const removeClassmates = () => ({
+    type: REMOVE_CLASSMATES
+})
+
+export const resetClassmates = () => async (dispatch) => {
+    dispatch(removeClassmates());
+}
 
 
 // get all classmates for current user
@@ -340,6 +349,8 @@ export default function reducer(state = initialState, action) {
             return { ...state, pendingDetail: action.payload }
         case SET_INCOMING_DETAIL:
             return { ...state, incomingDetail: action.payload }
+        case REMOVE_CLASSMATES:
+            return { accepted: null, pending: null, incoming: null, acceptedDetail: [], pendingDetail: null, incomingDetail: null }
         default:
         return state;
     }

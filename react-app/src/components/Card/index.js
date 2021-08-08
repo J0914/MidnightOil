@@ -3,8 +3,6 @@ import ReactCardFlip from 'react-card-flip';
 import CardFront from './CardFront';
 import CardBack from './CardBack';
 
-import styles from '../../css-modules/card.module.css'
-
 const Card = ({cardInterval, studyMode, isDark, setIsDark, card, deckId, userId, i}) => {
     const [isFlipped, setIsFlipped] = useState(false);
 
