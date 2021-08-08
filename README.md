@@ -54,5 +54,5 @@ Once your deck is full of cards and you are ready to study, just select an inter
 ![study mode](https://user-images.githubusercontent.com/72579895/128644672-25ebdcdf-f189-446d-89a4-45c3d303064f.gif)
 
 
-Thank you for checking out my app! If you have any further questions please check out the Wiki pages for more in-depth information, or ask me directly!
+Thank you for checking out my app! If you have any further questions please check out the [Wiki](https://github.com/J0914/MidnightOil/wiki) for more in-depth information, or ask me directly!
 
