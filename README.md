@@ -8,8 +8,8 @@ Midnight Oil is an online learning companion app that allows you to create and o
 - Log in and Log out
 - Log in as a guest via Demo User option
 - [Create, edit or delete notebooks and notes](#notebooks)
-- [Create, edit or delete decks and flashcards](#flashcarddecks)
-- [Utilize study mode to test yourself with a time limit!](#studymode)
+- [Create, edit or delete decks and flashcards](#decks)
+- [Utilize study mode to test yourself with a time limit!](#study)
 
 ## Structure Overview
 
@@ -39,15 +39,15 @@ If you click on the notebooks dropdown, you can see a list of the notebooks you'
 ![dashboard to notes](https://user-images.githubusercontent.com/72579895/128644649-76ec1588-3d65-4967-be3a-efa3d3de9346.gif)
 
 
-# Flash Card Decks
+# Decks
 
 If you click on the decks dropdown menu, you can see a list of the decks you have created. You can create a new deck from here which will take you to the deck page and prompt you to create your first card! Once cards are created you can edit and delete them.
 
 ![dashboard to decks](https://user-images.githubusercontent.com/72579895/128644663-79aefd28-7e26-4752-96df-c1ef71085534.gif)
 
-# Study Mode
+# Study
 
-Once your deck is full of cards and you are ready to study, just select an interval at which you'd like the cards to change and the cards will automatically flip for you before moving to the next card! 
+Once your deck is full of cards and you are ready to study, just select an interval at which you'd like the cards to change and start study mode. The cards will automatically flip for you before moving to the next card! 
 
 ![study mode](https://user-images.githubusercontent.com/72579895/128644672-25ebdcdf-f189-446d-89a4-45c3d303064f.gif)
 
