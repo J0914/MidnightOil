@@ -10,8 +10,6 @@ Midnight Oil is an online learning companion app that allows you to create and o
 - Create, edit or delete notebooks and notes
 - Create, edit or delete decks and flashcards
 - Utilize study mode to test yourself with a time limit!
-- Navigate to the notebooks dropdown menu to view/create/delete the current user's notebooks and create or select a note.
-- Navigate to the decks dropdown menu to create/view the current user's decks.
 
 ## Structure Overview
 
