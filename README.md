@@ -1,134 +1,35 @@
-# Flask React Project
+# Welcome to the Midnight Oil ReadMe!
 
-This is the starter for the Flask React project.
+![splash](https://i.ibb.co/VJ6vmLS/splash.png)
 
-## Getting started
+## Landing Page
 
-1. Clone this repository (only this branch)
+On the Landing page you have the option to login or sign up for a new account.
+There is also a demo user account if you'd like to test the site without entering any personal information.
 
-   ```bash
-   git clone https://github.com/appacademy-starters/python-project-starter.git
-   ```
+![login to dashboard](https://user-images.githubusercontent.com/72579895/128643549-3442869b-d397-4957-b3ed-e852aba577ad.mp4)
 
-2. Install dependencies
+## Dashboard
 
-      ```bash
-      pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
-      ```
+Once logged in, you are redirected to the dashboard. The dashboard holds the most recent notes from your most recently created notebook and your most recently created decks. If you scroll to the bottom of the page there is a study beats button and you can listen to some of the developers favorite study music! (future features include embedding your own youtube videos to create your own playlist)
 
-3. Create a **.env** file based on the example with proper settings for your
-   development environment
-4. Setup your PostgreSQL user, password and database and make sure it matches your **.env** file
+![dashboard to notes](https://user-images.githubusercontent.com/72579895/128644000-d3b1f146-60f0-4688-98c2-38fc23d936a7.mp4)
 
-5. Get into your pipenv, migrate your database, seed your database, and run your flask app
+## Notebooks
 
-   ```bash
-   pipenv shell
-   ```
+If you click on the notebooks dropdown, you can see a list of the notebooks you've created and all notes inside of them. You can create a new notebooks, edit a notebooks title, or delete a notebook from this location as well. If you create a new notebook, it takes you to a page with a new note. You can then edit the title or body of that note using MarkDown syntax. The editor has a lot of great features. Check them out!
 
-   ```bash
-   flask db upgrade
-   ```
+![dashboard to cards](https://user-images.githubusercontent.com/72579895/128644074-79a91c6e-57b7-45f3-8e49-2ea9ae57740c.mp4)
 
-   ```bash
-   flask seed all
-   ```
+## Flash Card Decks
 
-   ```bash
-   flask run
-   ```
+If you click on the decks dropdown menu, you can see a list of the decks you have created. You can create a new deck from here which will take you to the deck page and prompt you to create your first card! Once cards are created you can edit and delete them.
 
-6. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
+![study mode](https://user-images.githubusercontent.com/72579895/128644122-2b0fc20a-a558-4658-b696-460b5157f31c.mp4)
 
-***
-*IMPORTANT!*
-   If you add any python dependencies to your pipfiles, you'll need to regenerate your requirements.txt before deployment.
-   You can do this by running:
+### Study Mode
 
-   ```bash
-   pipenv lock -r > requirements.txt
-   ```
+Once your deck is full of cards and you are ready to study, just select an interval at which you'd like the cards to change and the cards will automatically flip for you before moving to the next card! 
 
-*ALSO IMPORTANT!*
-   psycopg2-binary MUST remain a dev dependency because you can't install it on apline-linux.
-   There is a layer in the Dockerfile that will install psycopg2 (not binary) for us.
-***
+Thank you for checking out my app! If you have any further questions please check out the Wiki pages for more in-depth information!
 
-## Deploy to Heroku
-
-1. Before you deploy, don't forget to run the following command in order to
-ensure that your production environment has all of your up-to-date
-dependencies. You only have to run this command when you have installed new
-Python packages since your last deployment, but if you aren't sure, it won't
-hurt to run it again.
-
-   ```bash
-   pipenv lock -r > requirements.txt
-   ```
-
-2. Create a new project on Heroku
-3. Under Resources click "Find more add-ons" and add the add on called "Heroku Postgres"
-4. Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command-line)
-5. Run
-
-   ```bash
-   heroku login
-   ```
-
-6. Login to the heroku container registry
-
-   ```bash
-   heroku container:login
-   ```
-
-7. Update the `REACT_APP_BASE_URL` variable in the Dockerfile.
-   This should be the full URL of your Heroku app: i.e. "https://flask-react-aa.herokuapp.com"
-8. Push your docker container to heroku from the root directory of your project.
-   (If you are using an M1 mac, follow [these steps below](#for-m1-mac-users) instead, then continue on to step 9.)
-   This will build the Dockerfile and push the image to your heroku container registry.
-
-   ```bash
-   heroku container:push web -a {NAME_OF_HEROKU_APP}
-   ```
-
-9. Release your docker container to heroku
-
-      ```bash
-      heroku container:release web -a {NAME_OF_HEROKU_APP}
-      ```
-
-10. set up your database
-
-      ```bash
-      heroku run -a {NAME_OF_HEROKU_APP} flask db upgrade
-      heroku run -a {NAME_OF_HEROKU_APP} flask seed all
-      ```
-
-11. Under Settings find "Config Vars" and add any additional/secret .env
-variables.
-
-12. profit
-
-### For M1 Mac users
-
-(Replaces **Step 8**)
-
-1. Build image with linux platform for heroku servers. Replace
-{NAME_OF_HEROKU_APP} with your own tag:
-
-   ```bash=
-   docker buildx build --platform linux/amd64 -t {NAME_OF_HEROKU_APP} .
-   ```
-
-2. Tag your app with the url for your apps registry. Make sure to use the name
-of your Heroku app in the url and tag name:
-
-   ```bash=2
-   docker tag {NAME_OF_HEROKU_APP} registry.heroku.com/{NAME_OF_HEROKU_APP}/web
-   ```
-
-3. Use docker to push the image to the Heroku container registry:
-
-   ```bash=3
-   docker push registry.heroku.com/{NAME_OF_HEROKU_APP}/web
-   ```
