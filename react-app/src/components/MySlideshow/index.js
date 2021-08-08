@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styles from './myslideshow.module.css';
-import {BsSkipForwardFill, BsSkipBackwardFill, BsPauseFill, BsPlayFill} from 'react-icons/bs'
+import {BsSkipForwardFill, BsSkipBackwardFill} from 'react-icons/bs'
 
 const MySlideshow = ({slideInterval, studyMode, cards}) => {
 
@@ -45,9 +45,9 @@ const MySlideshow = ({slideInterval, studyMode, cards}) => {
 		}
 	}, [studyMode, currentCards, currentSlide, slideInterval]);
 
-	// useEffect(() => {
-	// 	setCurrentSlide(0);
-	// }, [currentCards])
+	useEffect(() => {
+		setCurrentSlide(0);
+	}, [currentCards])
 
 	function previous(){
 		if(currentSlide>0){
