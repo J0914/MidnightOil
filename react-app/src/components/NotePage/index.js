@@ -126,9 +126,9 @@ const NotePage = () => {
                     <button className={styles.edit_and_delete} onClick={deleteNote}><BsTrash /></button>
                 </div>
                 <div id={styles.theme_wrapper}>
-                    <label htmlFor='light' className={styles.radio_label}>Light Theme</label>
+                    <label htmlFor='light' className={styles.radio_label}>Light</label>
                     <input type="radio" id='light' name="theme" checked={!isDark} value={false} onChange={()=> setIsDark(false)}></input>
-                    <label htmlFor='dark' className={styles.radio_label}>Dark Theme</label>
+                    <label htmlFor='dark' className={styles.radio_label}>Dark</label>
                     <input type="radio" id='dark' name="theme" value={true} onChange={()=> setIsDark(true)}></input>
                 </div>
                 </>}

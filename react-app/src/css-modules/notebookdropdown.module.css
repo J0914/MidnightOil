@@ -41,13 +41,14 @@
 .note_nav {
     border-bottom: 1px solid #dddddd;
     padding: 5px;
-}
-
-.note_nav {
     text-decoration: none;
     color: black;
     padding: 15px 20px;
     display: block;
+}
+
+.note_nav:hover {
+    color: rgb(175, 104, 175);
 }
 
 .notebook_menu__trigger {
@@ -65,7 +66,7 @@
 }
 
 .notebook_menu__trigger:hover {
-    background-color: rgb(173, 125, 173);
+    background-color: rgb(175, 104, 175);
     color: white;
     box-shadow: 0 1px 8px 5px rgba(255, 255, 255, 0.3);
 }
@@ -92,6 +93,10 @@
     background: none;
     text-decoration: none;
     font-size: .9rem;
+}
+
+.add_note:hover, .delete_notebook:hover, .add_notebook:hover, .edit_notebook:hover {
+    color: rgb(175, 104, 175);
 }
 
 .notes_container {
