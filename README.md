@@ -24,7 +24,7 @@ Midnight Oil is an online learning companion app that allows you to create and o
 ## Landing Page
 
 On the Landing page you have the option to login or sign up for a new account.
-There is also a demo user account if you'd like to test the site without entering any personal information.
+There is also a demo user account if you'd like to test the site without entering any personal information. (All of the users seeded in the database are characters from The Witcher, so the demo's name will make more sense to other fans once that feature goes live! I love easter eggs.)
 
 ![splash](https://i.ibb.co/DW9tx87/splash.png)
 
