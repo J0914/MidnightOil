@@ -34,7 +34,7 @@ Once logged in, you are redirected to the dashboard. The dashboard holds the mos
 
 # Notebooks
 
-If you click on the notebooks dropdown, you can see a list of the notebooks you've created and all notes inside of them. You can create a new notebook, edit a notebooks title, or delete a notebook from this location as well. If you create a new notebook, it takes you to a page with a new note. You can then edit the title or body of that note using MarkDown syntax. The rich-markdown-editor has a lot of great features. Check them out!
+If you click on the notebooks dropdown, you can see a list of the notebooks you've created and all notes inside of them. You can create a new notebook, edit a notebooks title, or delete a notebook from this location as well. If you create a new notebook, it takes you to a page with a new note. You can then edit the title or body of that note using MarkDown syntax. The [rich-markdown-editor](https://github.com/outline/rich-markdown-editor) has a lot of great features. Check them out!
 
 ![dashboard to notes](https://user-images.githubusercontent.com/72579895/128644649-76ec1588-3d65-4967-be3a-efa3d3de9346.gif)
 
