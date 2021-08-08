@@ -6,8 +6,13 @@
     width: 750px;
     overflow: auto;
     margin: 0;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     box-sizing: border-box;
+    position: relative;
+}
+
+.error_ul {
+    margin: 0;
 }
 
 .card_form__btn {
@@ -30,6 +35,9 @@
 #form_container {
     display: flex;
     flex-direction: column;
+    height: 100%;
+    position: relative;
+    top: 20px;
 }
 
 #card_front__form, #card_back__form {

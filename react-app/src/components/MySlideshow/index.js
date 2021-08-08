@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import styles from './myslideshow.module.css';
 import {BsSkipForwardFill, BsSkipBackwardFill, BsPauseFill, BsPlayFill} from 'react-icons/bs'
 
-const MySlideshow = ({slideInterval, setSlideInterval, studyMode, setStudyMode, cards}) => {
+const MySlideshow = ({slideInterval, studyMode, cards}) => {
 
 	const [currentCards, setCurrentCards] = useState([]);
 	const [currentSlide, setCurrentSlide] = useState(0);
@@ -45,9 +45,9 @@ const MySlideshow = ({slideInterval, setSlideInterval, studyMode, setStudyMode, 
 		}
 	}, [studyMode, currentCards, currentSlide, slideInterval]);
 
-	useEffect(() => {
-		setCurrentSlide(0);
-	}, [currentCards])
+	// useEffect(() => {
+	// 	setCurrentSlide(0);
+	// }, [currentCards])
 
 	function previous(){
 		if(currentSlide>0){
@@ -77,14 +77,7 @@ const MySlideshow = ({slideInterval, setSlideInterval, studyMode, setStudyMode, 
 						<span onClick={next} className={styles.btns}><BsSkipForwardFill /></span>
 				</div>          
 				<div className={styles.slideshow_controller}>
-					<div id={styles.study_wrapper}>
-						<label className={styles.study_label}>Study Mode</label>
-						{!studyMode ? 
-						<span onClick={() => setStudyMode(true)} className={styles.btns}><BsPlayFill /></span>
-						:
-						<span onClick={() => setStudyMode(false)} className={styles.btns}><BsPauseFill /></span>
-						}
-					</div>
+					
 					
 				</div>
 			</div>

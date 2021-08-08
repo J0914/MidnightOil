@@ -7,6 +7,8 @@ import {BsPlusCircle, BsPencil, BsTrash} from 'react-icons/bs'
 import EditDeckForm from './EditDeckForm'
 import {Prompt} from 'react-router'
 import Card from '../Card'
+import { BsPauseFill, BsPlayFill} from 'react-icons/bs'
+
 
 import styles from '../../css-modules/deckpage.module.css'
 
@@ -132,8 +134,9 @@ const DeckPage = () => {
                     <input id={styles.seconds} value={slideInterval/1000} onChange={(e) => setSlideInterval(e.target.value*1000)} type='number' placeholder='seconds' />
                     <label className={styles.seconds_label}>Seconds</label>
                 </div>
-                <div>
+                <div className={styles.hint_wrapper}>
                     <label className={styles.seconds_label}>(Card will flip in half as many seconds as the Study Mode Interval)</label>
+                    <p className={styles.hint}>(new cards go to the front of the deck!)</p>
                 </div>
                 {/* <p className={styles.hint}>(hint: if you click on a card, you can use your keyboard arrows to change cards!)</p>
                 <div id={styles.share_wrapper}>
@@ -176,7 +179,14 @@ const DeckPage = () => {
             <button onClick={createCard} className={styles.create_btn}>Create Your First Card! <BsPlusCircle /></button>
             }
             <div className={styles.hint_wrapper}>
-            <p className={styles.hint}>(new cards go to the front of the deck!)</p>
+                <div id={styles.study_wrapper}>
+                    <label className={styles.study_label}>Study Mode</label>
+                    {!studyMode ? 
+                    <span onClick={() => setStudyMode(true)} className={styles.btns}><BsPlayFill /></span>
+                    :
+                    <span onClick={() => setStudyMode(false)} className={styles.btns}><BsPauseFill /></span>
+                    }
+                </div>
             </div>
         </div>
         </>
