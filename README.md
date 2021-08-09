@@ -6,7 +6,7 @@
 
 - Create an account
 - [Log in and Log out](#splash)
-- [Log in as a guest via Demo User option](#dashboard)
+- [Log in as a guest via Demo account](#dashboard)
 - [Create, edit or delete notebooks and notes](#notebooks)
 - [Create, edit or delete decks and flashcards](#decks)
 - [Utilize study mode to test yourself with a time limit!](#study)
