@@ -7,14 +7,12 @@ const MySlideshow = ({slideInterval, studyMode, cards}) => {
 	const [currentCards, setCurrentCards] = useState([]);
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const [currentCard, setCurrentCard] = useState(cards[0]);
-	// const [currentLength, setCurrentLength] = useState(0);
 	// const [previousCard, setPreviousCard] = useState(null);
 	// const [nextCard, setNextCard] = useState(null);
 
 	useEffect(()=>{
 		setCurrentCards(cards);
 		setCurrentCard(currentCards[currentSlide]);
-		// setCurrentLength(currentCards.length);
 
 		// if(currentSlide>0){
 		// 	setPreviousCard(currentCards[currentSlide-1]);
@@ -48,9 +46,8 @@ const MySlideshow = ({slideInterval, studyMode, cards}) => {
 	}, [studyMode, currentCards, currentSlide, slideInterval]);
 
 	useEffect(() => {
-		setCurrentCard(currentCards[0]);
-
-	}, [currentCards]);
+		setCurrentSlide(0);
+	}, [currentCards])
 
 	function previous(){
 		if(currentSlide>0){
