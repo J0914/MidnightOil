@@ -2,7 +2,7 @@
 
 
 ## Summary
-Midnight Oil is an online learning companion app that allows you to create and organize notes as well as create custom flashcard decks to help you study! It was built using Python/Flask for the backend and React/Redux for the frontend.
+[Midnight Oil](https://midnight-oil-aa.herokuapp.com/decks/48) is an online learning companion app that allows you to create and organize notes as well as create custom flashcard decks to help you study! It was built using Python/Flask for the backend and React/Redux for the frontend.
 
 - Create an account
 - [Log in and Log out](#splash)
