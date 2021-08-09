@@ -76,10 +76,6 @@ const MySlideshow = ({slideInterval, studyMode, cards}) => {
 					</section>
 						<span onClick={next} className={styles.btns}><BsSkipForwardFill /></span>
 				</div>          
-				<div className={styles.slideshow_controller}>
-					
-					
-				</div>
 			</div>
     );
 }
