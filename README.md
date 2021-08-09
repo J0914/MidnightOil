@@ -14,7 +14,7 @@
 ## Structure Overview
 
 - Backend
-  - The backend of this app was built using Python and Flask utilizing SqlAlchemy to interact with a PostgreSQL database. The ReSTful convention was followed in all backend API routes.
+  - The backend of this app was built using Python and Flask utilizing SqlAlchemy to interact with a PostgreSQL database. The RESTful convention was followed in all backend API routes.
 
 - Frontend
   - The frontend of this app was built using React and Redux, utilizing CSS for styling.
