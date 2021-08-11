@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
+from sqlalchemy import desc
 from app.models import db, User, Notebook, Note, Deck, Card, Classmate
 from app.forms import NotebookForm, NoteForm, DeckForm, CardForm, ClassmateForm
 
@@ -246,7 +247,7 @@ def patch_and_delete_decks(userId, deckId):
 @user_routes.route('/<int:userId>/decks/<int:deckId>/cards')
 @login_required
 def get_cards(userId, deckId):
-    cards = Card.query.filter_by(userId=userId, deckId=deckId).all()
+    cards = Card.query.order_by(desc(Card.id)).filter_by(userId=userId, deckId=deckId).all()
     return {'cards': [card.to_dict() for card in cards]}
 
 # create a new card
@@ -262,7 +263,7 @@ def post_cards(userId, deckId):
         card = Card(front=data['front'], back=data['back'], userId=userId,  deckId=deckId)
         db.session.add(card)
         db.session.commit()
-        cards = Card.query.filter_by(userId=userId, deckId=deckId).all()
+        cards = Card.query.order_by(desc(Card.id)).filter_by(userId=userId, deckId=deckId).all()
         return {'cards': [card.to_dict() for card in cards]}
     else: 
         return jsonify({'errors': form.errors})
@@ -285,7 +286,7 @@ def patch_and_delete_cards(userId, deckId, cardId):
                 if 'front' in data.keys():
                     card.front = data['front']
                 db.session.commit()
-                cards = Card.query.filter_by(userId=userId, deckId=deckId).all()
+                cards = Card.query.order_by(desc(Card.id)).filter_by(userId=userId, deckId=deckId).all()
                 return {'cards': [card.to_dict() for card in cards]}
             else: 
                 return jsonify({'errors': form.errors})
@@ -296,7 +297,7 @@ def patch_and_delete_cards(userId, deckId, cardId):
                 if 'back' in data.keys():
                     card.back = data['back']
                 db.session.commit()
-                cards = Card.query.filter_by(userId=userId, deckId=deckId).all()
+                cards = Card.query.order_by(desc(Card.id)).filter_by(userId=userId, deckId=deckId).all()
                 return {'cards': [card.to_dict() for card in cards]}
             else: 
                 return jsonify({'errors': form.errors})
@@ -305,7 +306,7 @@ def patch_and_delete_cards(userId, deckId, cardId):
         card = Card.query.get(cardId)
         db.session.delete(card)
         db.session.commit()
-        cards = Card.query.filter_by(userId=userId, deckId=deckId).all()
+        cards = Card.query.order_by(desc(Card.id)).filter_by(userId=userId, deckId=deckId).all()
         return {'cards': [card.to_dict() for card in cards]}
     else:
         raise Exception('Invalid request method, try a different route')
