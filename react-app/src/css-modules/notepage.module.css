@@ -28,11 +28,11 @@
     margin: 0;
     margin-bottom: 2px;
     font-size: 2.7rem;
+    
 }
 
 #note_sidebar {
     grid-area: sidebar;
-    background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png");
     height: 100%;
     width: 100%;
     max-width: 240px;
@@ -44,13 +44,14 @@
 #note_header__div {
     grid-area: header;
     /* background-color: rgba(2, 2, 17, 1); */
-
+    background-image: url("https://www.transparenttextures.com/patterns/mirrored-squares.png");
     height: 100px;
     display: flex;
     justify-content: space-between;
     margin-right: 15px;
     align-items: flex-end;
     font-size: 3rem;
+    border-radius: 3px;
 }
 
 
@@ -110,6 +111,7 @@
     flex-direction: column;
     padding-left: 7px;
     overflow-y: auto;
+    background: none;
 }
 
 #sidebar_header {
@@ -177,6 +179,8 @@
 .sticky {
     position: fixed;
     top: 200px;
+    height: fit-content;
+    /* background-color: rgba(2, 2, 17, 1); */
 }
 
 .add_note {
