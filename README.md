@@ -28,7 +28,7 @@ There is also a demo user account if you'd like to test the site without enterin
 
 # Dashboard
 
-Once logged in, you are redirected to the dashboard. The dashboard holds the most recent notes from your most recently created notebook and your most recently created decks. If you scroll to the bottom of the page there is a study beats button and you can listen to some of the developers favorite study music! (future features include embedding your own youtube videos to create your own playlist)
+Once logged in, you are redirected to the dashboard. The dashboard holds the most recent notes from your most recently opened notebook and your most recently created decks. If you scroll to the bottom of the page there is a study beats button and you can listen to some of the developers favorite study music! (future features include embedding your own youtube videos to create your own playlist)
 
 ![login to dashboard](https://user-images.githubusercontent.com/72579895/128644422-516d7449-d728-4eb6-b889-2ad5e4718e9f.gif)
 
