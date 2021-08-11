@@ -204,6 +204,8 @@
 
 .close {
     background: none;
+    height: 27px;
+    align-self: flex-end;
 }
 
 .close:hover {

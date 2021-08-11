@@ -79,7 +79,7 @@
 }
 
 .notebook_title {
-    font-size: 18px;
+    font-size: 1.3rem;
     font-weight: 700;
 
 }
@@ -92,7 +92,7 @@
 .add_note, .delete_notebook, .add_notebook, .edit_notebook {
     background: none;
     text-decoration: none;
-    font-size: .9rem;
+    font-size: 1.1rem;
 }
 
 .add_note:hover, .delete_notebook:hover, .add_notebook:hover, .edit_notebook:hover {
@@ -111,4 +111,6 @@
 
 .close {
     background: none;
+    max-height: 27px;
+    align-self: flex-end;
 }
