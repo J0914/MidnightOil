@@ -192,13 +192,15 @@
 }
 
 .seconds_label {
-    font-size: 1rem;
+    font-size: 1.3rem;
     color: white;
     text-align: center;
+    white-space: nowrap;
 }
 
 #seconds {
-    width: 40px;
+    width: 50px;
+    font-size: 1.5rem;
 }
 
 #time_div {
