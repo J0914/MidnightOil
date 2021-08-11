@@ -2,6 +2,22 @@
     background: none;
 }
 
+#note_form {
+    display: flex;
+}
+
+.note_name {
+    font-size: 1rem;
+    max-width: 175px;
+}
+
 .error {
     color: red;
+    list-style: none;
+}
+
+#form_wrapper {
+    max-width: 205px;
+    display: flex;
+    flex-direction: column;
 }

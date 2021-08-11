@@ -9,3 +9,7 @@
 .notebook_form__cancel {
     background: none;
 }
+
+.notebook_name {
+    font-size: 1rem;
+}

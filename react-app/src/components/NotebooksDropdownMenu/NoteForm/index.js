@@ -37,10 +37,11 @@ const NoteForm = ({setShowNoteForm, notebookId, setIsOpen}) => {
       };
 
     return (
-        <form id={styles.note_form} onSubmit={createNote}>
+        <div id={styles.form_wrapper}>
             {errors.map((error, ind) => (
             <li className={styles.error} key={ind}>{error}</li>
             ))}
+        <form id={styles.note_form} onSubmit={createNote}>
             <input 
             type="text" 
             placeholder="Note Title" 
@@ -52,6 +53,7 @@ const NoteForm = ({setShowNoteForm, notebookId, setIsOpen}) => {
             />
             <button type="submit" className={styles.note_form__btn}><BsCheck /></button>
         </form>
+        </div>
     )
 }
 
