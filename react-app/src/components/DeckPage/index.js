@@ -132,9 +132,9 @@ const DeckPage = () => {
                 {currentCards?.length > 0 && 
                 <>
                 <div id={styles.time_div}>
-                    <label className={styles.seconds_label}>Set Study Mode Interval</label>
+                    <label className={styles.seconds_label}>Set Study Mode Interval&nbsp;</label>
                     <input id={styles.seconds} value={slideInterval/1000} onChange={(e) => setSlideInterval(e.target.value*1000)} type='number' placeholder='seconds' />
-                    <label className={styles.seconds_label}>Seconds</label>
+                    <label className={styles.seconds_label}>&nbsp;Seconds</label>
                 </div>
                 <div className={styles.hint_wrapper}>
                     <label className={styles.seconds_label}>(Card will flip in half as many seconds as the Study Mode Interval)</label>
