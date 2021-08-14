@@ -10,9 +10,8 @@ import * as notebookActions from '../../store/notebooks'
 
 import styles from '../../css-modules/notebookdropdown.module.css'
 
-const NotebooksDropdownMenu = () => {
+const NotebooksDropdownMenu = ({isOpen, setIsOpen, setDecksIsOpen}) => {
     const dropdownRef = useRef(null);
-    const [isOpen, setIsOpen] = useState(false);
     const [showNotebookForm, setShowNotebookForm] = useState(false);
     const [showEditNotebookForm, setShowEditNotebookForm] = useState(false);
     const [showNoteForm, setShowNoteForm] = useState(false);
@@ -23,7 +22,10 @@ const NotebooksDropdownMenu = () => {
     const user = useSelector(state => state.session.user)
     const notebooks = useSelector(state => state.notebooks.notebooks);
 
-    const handleClick = () => setIsOpen(!isOpen);
+    const handleClick = () => {
+        setIsOpen(!isOpen)
+        setDecksIsOpen(false);
+    };
 
     const handleEditNotebookClick = (id) => {
         setShowEditNotebookForm(true);
