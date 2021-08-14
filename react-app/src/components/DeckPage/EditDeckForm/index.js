@@ -38,6 +38,7 @@ const EditDeckForm = ({currentDeck, setIsEditing, currentTitle, setCurrentTitle,
     return (
         <div className={styles.form_container}>
             <form id={styles.deck_form} onSubmit={editDeck}>
+                <div className={styles.form_col}>
                 {errors.map((error, ind) => (
                 <li className={styles.error} key={ind}>{error}</li>
                 ))}
@@ -51,6 +52,7 @@ const EditDeckForm = ({currentDeck, setIsEditing, currentTitle, setCurrentTitle,
                 className={styles.deck_name}
                 required={true}
                 />
+                </div>
             <div className={styles.card_btns__container}>
                 <button type="submit" className={styles.deck_form__btn}><BsCheck /></button>
                 <button onClick={close} className={styles.deck_form__btn}><BsX /></button>

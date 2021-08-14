@@ -18,7 +18,26 @@
     'footer';
 }
 
+#body {
+    margin: 25px 0;
+}
+
+.study_container {
+    margin-top: 15px;
+}
+
+.question {
+    color: white;
+    font-size: 1.5em;
+}
+
+.question:hover {
+    color: rgb(155, 104, 168);
+}
+
 .hint_wrapper {
+    position: absolute;
+    top: 160px;
     height: fit-content;
     width: 100%;
     display: flex;
