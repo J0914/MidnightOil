@@ -55,7 +55,7 @@
 }
 
 .edit_and_delete__btn:hover {
-    color: rgb(175, 104, 175);
+    color: rgb(155, 104, 168);
 }
 
 #header {
@@ -93,7 +93,7 @@
 }
 
 .radio_label:hover {
-    color: rgb(175, 104, 175); 
+    color: rgb(155, 104, 168); 
 }
 
 .create_btn {
@@ -103,7 +103,7 @@
 }
 
 .create_btn:hover {
-     color: rgb(175, 104, 175); 
+     color: rgb(155, 104, 168); 
 }
 
 #card_count {
@@ -184,11 +184,11 @@
 }
 
 .add_card:hover {
-    color: rgb(175, 104, 175);
+    color: rgb(155, 104, 168);
 }
 
 .add_card_label:hover {
-    color: rgb(175, 104, 175);
+    color: rgb(155, 104, 168);
 }
 
 .seconds_label {
@@ -231,5 +231,5 @@
 }
 
 .btns:hover{
-    color: rgb(175, 104, 175); ;
+    color: rgb(155, 104, 168); ;
 }

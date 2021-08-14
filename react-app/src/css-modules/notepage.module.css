@@ -90,7 +90,7 @@
 }
 
 .edit_and_delete:hover {
-    color: rgb(175, 104, 175);   
+    color: rgb(155, 104, 168);   
 }
 
 .radio_label {
@@ -99,7 +99,7 @@
 }
 
 .radio_label:hover {
-    color: rgb(175, 104, 175); 
+    color: rgb(155, 104, 168); 
 }
 
 .error {
@@ -131,7 +131,7 @@
 }
 
 .note_link:hover {
-    color: rgb(175, 104, 175); 
+    color: rgb(155, 104, 168); 
 }
 
 #logo_div {
@@ -167,7 +167,7 @@
 }
 
 .edit_note__title:hover {
-    color: rgb(175, 104, 175); 
+    color: rgb(155, 104, 168); 
 }
 
 #header_container {
@@ -191,7 +191,7 @@
 }
 
 .add_note:hover {
-    color: rgb(175, 104, 175);  
+    color: rgb(155, 104, 168);  
 }
 
 .form__wrapper {
@@ -209,7 +209,7 @@
 }
 
 .close:hover {
-    color: rgb(175, 104, 175);  
+    color: rgb(155, 104, 168);  
 }
 
 .note_body {

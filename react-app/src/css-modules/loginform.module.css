@@ -79,6 +79,12 @@
     font-size: 2rem;
 }
 
+.login_btns:hover {
+    background-color: rgb(155, 104, 168);
+    box-shadow: 0.0625rem 0.0625rem 0.325rem -2px #2c0863;
+
+}
+
 #login_errors {
     width: fit-content;
     height: 100%;
