@@ -1,16 +1,21 @@
 #splash_login__btn, #splash_signup__btn {
     margin: 20px;
-    height: 100px;
-    width: 200px;
+    height: 3rem;
+    width: 80%;
+    padding: 20px;
+    box-sizing: border-box;
     border-radius: 10px;
     background-color: #050424    ;
     box-shadow: 0.0625rem 0.0625rem 0.325rem -2px #161385;
     color: white;
     font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #splash_login__btn:hover, #splash_signup__btn:hover {
-    background-color: rgb(143, 80, 143);
+    background-color: rgb(155, 104, 168);
     box-shadow: 0.0625rem 0.0625rem 0.325rem -2px #2c0863;
 
 }

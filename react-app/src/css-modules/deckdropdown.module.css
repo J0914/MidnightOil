@@ -53,7 +53,7 @@
 }
 
 .deck_menu__trigger:hover {
-    background-color: rgb(175, 104, 175);
+    background-color: rgb(155, 104, 168);
     color: white;
     box-shadow: 0 1px 8px 5px rgba(255, 255, 255, 0.3);
 }
@@ -71,7 +71,7 @@
 }
 
 .add_deck:hover {
-    color: rgb(175, 104, 175);
+    color: rgb(155, 104, 168);
 }
 
 .form__wrapper {
@@ -81,5 +81,5 @@
 }
 
 .deck_nav:hover {
-    color: rgb(175, 104, 175); 
+    color: rgb(155, 104, 168); 
 }

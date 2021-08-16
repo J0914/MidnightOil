@@ -3,7 +3,7 @@
     min-height: 93vh;
     width: 95vw;
     max-width: 1200px;
-    background-color: #020211;
+    background-color: rgb(2, 2, 22);
     margin: auto;
     padding: 20px;
     box-sizing: border-box;
@@ -18,7 +18,26 @@
     'footer';
 }
 
+#body {
+    margin: 25px 0;
+}
+
+.study_container {
+    margin-top: 15px;
+}
+
+.question {
+    color: white;
+    font-size: 1.5em;
+}
+
+.question:hover {
+    color: rgb(155, 104, 168);
+}
+
 .hint_wrapper {
+    position: absolute;
+    top: 160px;
     height: fit-content;
     width: 100%;
     display: flex;
@@ -55,7 +74,7 @@
 }
 
 .edit_and_delete__btn:hover {
-    color: rgb(175, 104, 175);
+    color: rgb(155, 104, 168);
 }
 
 #header {
@@ -93,7 +112,7 @@
 }
 
 .radio_label:hover {
-    color: rgb(175, 104, 175); 
+    color: rgb(155, 104, 168); 
 }
 
 .create_btn {
@@ -103,7 +122,7 @@
 }
 
 .create_btn:hover {
-     color: rgb(175, 104, 175); 
+     color: rgb(155, 104, 168); 
 }
 
 #card_count {
@@ -184,11 +203,11 @@
 }
 
 .add_card:hover {
-    color: rgb(175, 104, 175);
+    color: rgb(155, 104, 168);
 }
 
 .add_card_label:hover {
-    color: rgb(175, 104, 175);
+    color: rgb(155, 104, 168);
 }
 
 .seconds_label {
@@ -231,5 +250,5 @@
 }
 
 .btns:hover{
-    color: rgb(175, 104, 175); ;
+    color: rgb(155, 104, 168); ;
 }

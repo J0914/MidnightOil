@@ -36,8 +36,11 @@
 }
 
 #auth_btns {
+    height: 100%;
     display: flex;
     justify-content: space-around;
+    align-items: flex-end;
+
 }
 
 #splash_login__btn, #splash_signup__btn {
@@ -52,12 +55,12 @@
 }
 
 #splash_signup__btn:hover {
-    background-color: rgb(175, 104, 175); 
+    background-color: rgb(155, 104, 168); 
     box-shadow: 0.0625rem 0.0625rem 0.325rem -2px #2c0863;
 }
 
 #splash_login__btn:hover {
-    background-color: rgb(175, 104, 175); 
+    background-color: rgb(155, 104, 168); 
     box-shadow: 0.0625rem 0.0625rem 0.325rem -2px #2c0863;
 
 }

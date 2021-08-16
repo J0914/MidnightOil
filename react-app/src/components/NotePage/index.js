@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import Editor from 'rich-markdown-editor';
 import {useSelector, useDispatch} from 'react-redux'
 import {useParams, NavLink, useHistory} from 'react-router-dom'
@@ -12,7 +12,7 @@ import NoteForm from '../NotebooksDropdownMenu/NoteForm'
 import styles from '../../css-modules/notepage.module.css';
 
 const NotePage = () => {
-    
+    const inputEl = useRef(null);
     const userId = useSelector(state => state.session.user?.id);
     const notebook = useSelector(state => state.notebooks.currentNotebook);
     const note = useSelector(state => state.notebooks.currentNote);
@@ -102,7 +102,7 @@ const NotePage = () => {
                 <li className={styles.error} key={ind}>{error}</li>
                 ))}
                 <form id='edit_note__form' onSubmit={editNote}>
-                    <textarea 
+                    <textarea
                     type="hidden" 
                     value={body}
                     className={styles.note_body}
@@ -158,7 +158,7 @@ const NotePage = () => {
                         {showNoteForm && 
                         <div className={styles.form__wrapper}>
                         <NoteForm notebookId={currentNotebook?.id} setShowNoteForm={setShowNoteForm} />
-                        <button onClick={() => setShowNoteForm(false)} className={styles.close}><BsX /></button>
+                        <button onClick={() => {setShowNoteForm(false)}} className={styles.close}><BsX /></button>
                         </div>}
                         <div id={styles.note_sidebar}>
                             {currentNotebookNotes?.map(thenote => (

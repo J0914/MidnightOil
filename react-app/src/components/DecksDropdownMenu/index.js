@@ -7,21 +7,24 @@ import DeckForm from './DeckForm'
 
 import styles from '../../css-modules/deckdropdown.module.css'
 
-const DecksDropdownMenu = () => {
+const DecksDropdownMenu = ({isOpen, setIsOpen, setNotebooksIsOpen}) => {
     const dropdownRef = useRef(null);
-    const [isOpen, setIsOpen] = useState(false);
     const [showDeckForm, setShowDeckForm] = useState(false);
     const decks = useSelector(state => state.decks.decks);
 
-    const handleClick = () => setIsOpen(!isOpen);
+    const handleClick = () => {
+        setIsOpen(!isOpen)
+        setNotebooksIsOpen(false);
+        
+    };
 
     return (
-        <div className={styles.deck_menu__container}>
+        <div ref={dropdownRef}  className={styles.deck_menu__container}>
             <button onClick={handleClick} className={styles.deck_menu__trigger}>
                 <span>Decks</span>
             </button>
             {isOpen && 
-            <div ref={dropdownRef} className={`${styles.deck_menu} ${isOpen ? styles.active : styles.inactive}`}>
+            <div className={`${styles.deck_menu} ${isOpen ? styles.active : styles.inactive}`}>
                 <button className={styles.add_deck} onClick={() => setShowDeckForm(!showDeckForm)}>Create Deck {!showDeckForm ? <BsPlusCircle /> : <BsDashCircle />}</button>
                 {showDeckForm && 
                 <div className={styles.form__wrapper}>

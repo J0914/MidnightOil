@@ -106,7 +106,7 @@
 }
 
 .link:hover {
-    color:rgb(175, 104, 175);
+    color:rgb(155, 104, 168);
 }
 
 .img {
@@ -124,7 +124,7 @@
     min-height: 93vh;
     width: 95vw;
     max-width: 1200px;
-    background-color: rgba(2, 2, 17, 1);
+    background-color: rgb(2, 2, 22);
     margin: auto;
     overflow-y: auto;
     position: relative;
