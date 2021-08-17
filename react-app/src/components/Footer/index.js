@@ -1,6 +1,7 @@
 import React from 'react';
 import {DiGithubBadge} from 'react-icons/di'
-import {FaLinkedin, FaMusic} from 'react-icons/fa'
+import {FaLinkedin, FaMusic, FaAngellist} from 'react-icons/fa'
+import {BiUserCircle} from 'react-icons/bi'
 import {BsX} from 'react-icons/bs'
 import {BiHide, BiShow} from 'react-icons/bi'
 import Slideshow from '../DeckPage/Slideshow';
@@ -21,8 +22,10 @@ const Footer = () => {
         <div id={styles.footer_wrapper}>
             <div id={styles.footer_content}>
                 <label className={styles.footer_text}>Created by: Jordyn Sechrist</label>
-                <a rel='noreferrer' target="_blank" className={styles.footer_link} href='https://github.com/J0914'><DiGithubBadge /></a>
+                <a rel='noreferrer' target="_blank" className={`${styles.footer_link} ${styles.github}`} href='https://github.com/J0914'><DiGithubBadge /></a>
                 <a rel='noreferrer' target="_blank" className={styles.footer_link} href='https://www.linkedin.com/in/jordyn-sechrist-87710b207/'><FaLinkedin /></a>
+                <a rel='noreferrer' target="_blank" className={styles.footer_link} href='https://angel.co/u/jordyn-sechrist'><FaAngellist /></a>
+                <a rel='noreferrer' target="_blank" className={styles.footer_link} href='https://j0914.github.io/'><BiUserCircle /></a>
             </div>
             <div id={styles.youtube_wrapper}>
                 <div id={styles.music_label__div}>
