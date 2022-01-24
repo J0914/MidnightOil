@@ -1,11 +1,12 @@
 import React from 'react';
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {NavLink, useHistory} from 'react-router-dom';
 import {BsPlusCircle, BsDashCircle, BsTrash, BsPencil, BsX} from 'react-icons/bs'
 import NotebookForm from './NotebookForm'
 import EditNotebookForm from './EditNotebookForm'
 import NoteForm from './NoteForm'
+import DeleteModal from '../DeleteModal'
 import * as notebookActions from '../../store/notebooks'
 
 import styles from '../../css-modules/notebookdropdown.module.css'
@@ -16,11 +17,19 @@ const NotebooksDropdownMenu = ({isOpen, setIsOpen, setDecksIsOpen}) => {
     const [showEditNotebookForm, setShowEditNotebookForm] = useState(false);
     const [showNoteForm, setShowNoteForm] = useState(false);
     const [currentEle, setCurrentEle] = useState(null);
+    const [doDelete, setDelete] = useState(false);
+    const [currentId, setCurrentId] = useState(null);
     const dispatch = useDispatch();
     const history = useHistory();
-
+    
     const user = useSelector(state => state.session.user)
     const notebooks = useSelector(state => state.notebooks.notebooks);
+    
+    console.log(currentId)
+
+    useEffect(() => {
+        if (doDelete) deleteNotebook(currentId);
+    }, [doDelete])
 
     const handleClick = () => {
         setIsOpen(!isOpen)
@@ -38,16 +47,10 @@ const NotebooksDropdownMenu = ({isOpen, setIsOpen, setDecksIsOpen}) => {
     }
 
     const deleteNotebook = (notebookId) => {
-        let userId;
-        if (user) {
-            userId = user.id
-        }
-        let answer = window.confirm(`Are you sure you want to delete this notebook?`)
-        if (answer) {
-        dispatch(notebookActions.deleteNotebook(userId, notebookId))
-        history.push('/dashboard')
-        } else {
-            return;
+        let userId = user?.id       
+        if (doDelete) {
+            dispatch(notebookActions.deleteNotebook(userId, notebookId))
+            history.push('/dashboard')
         }
     }
 
@@ -73,7 +76,8 @@ const NotebooksDropdownMenu = ({isOpen, setIsOpen, setDecksIsOpen}) => {
                             <>
                             <ul id={notebook.id}className={styles.notebook_title}>{notebook.title}</ul>
                             <button id={notebook.id} className={styles.edit_notebook} onClick={(e) => handleEditNotebookClick(notebook.id)}><BsPencil /></button>
-                            <button className={styles.delete_notebook} onClick={() => deleteNotebook(notebook.id)}><BsTrash /></button>
+                            {/* <button className={styles.delete_notebook} onClick={() => deleteNotebook(notebook.id)}><BsTrash /></button> */}
+                            <DeleteModal setCurrentId={setCurrentId} notebookId={notebook.id} setDelete={setDelete} item={'notebook'}/>
                             </>
                             }
                             {showEditNotebookForm && notebook.id === currentEle &&

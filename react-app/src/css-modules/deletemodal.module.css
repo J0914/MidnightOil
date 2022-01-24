@@ -1,0 +1,62 @@
+#delete_modal {
+    background: none;
+    color: black;
+    font-size: 1rem;
+}
+
+#delete_modal:hover {
+    color: rgb(155, 104, 168);   
+}
+
+#delete_wrapper {
+    background-color: rgb(230, 230, 230);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    left: 50%;
+    margin: 0 auto;
+    max-width: 500px;
+    padding: 20px;
+    position: fixed;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    z-index: 1;
+}
+
+#button_wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 40%;
+}
+
+.del_or_cancel {
+    background: #ffffff;
+    border-radius: 90px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    border: none;
+    vertical-align: middle;
+    transition: box-shadow 0.4s ease;
+    font-size: 1.3rem;
+}
+
+.del_or_cancel:hover {
+    background-color: rgb(155, 104, 168);
+}
+
+#delete_header {
+
+}
+
+#sure {
+    font-size: 1.1rem;
+    padding-bottom: 10px;
+}
