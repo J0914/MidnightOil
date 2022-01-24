@@ -20,7 +20,7 @@ const DeckPage = () => {
     const [currentTitle, setCurrentTitle] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
     const [studyMode, setStudyMode] = useState(false);
-    const [slideInterval, setSlideInterval] = useState(20000);
+    const [slideInterval, setSlideInterval] = useState(5000);
     const [cardInterval, setCardInterval] = useState(slideInterval/2);
     const [question, setQuestion] = useState(false)
 
