@@ -7,6 +7,7 @@ import * as notebookActions from '../../store/notebooks'
 import { BsPencil, BsTrash, BsX, BsPlusCircle, BsDashCircle} from 'react-icons/bs'
 import {FiSave} from 'react-icons/fi'
 import EditNoteForm from './EditNoteForm'
+import DeleteModal from '../DeleteModal'
 import NoteForm from '../NotebooksDropdownMenu/NoteForm'
 
 import styles from '../../css-modules/notepage.module.css';
@@ -29,6 +30,11 @@ const NotePage = () => {
     const [ showEditNoteForm, setShowEditNoteForm ] = useState(false);
     const [ showNoteForm, setShowNoteForm] = useState(false);
     const [ errors, setErrors] = useState([]);
+    const [doDelete, setDelete] = useState(false);
+
+    useEffect(() => {
+        if (doDelete) deleteNote();
+    }, [doDelete])
 
     const dispatch = useDispatch();
     const history = useHistory()
@@ -71,22 +77,18 @@ const NotePage = () => {
     }
 
     const deleteNote = () => {
-
-        let answer = window.confirm(`Are you sure you want to delete this note?`)
-        if (answer) {
-            if (currentNotebookNotes?.length <= 1) {
-                dispatch(notebookActions.deleteNote(userId, notebookId,noteId))
-                history.push('/dashboard')
-            } else {
-                const data = dispatch(notebookActions.deleteNote(userId, notebookId,noteId))
-                if (data.errors) {
-                    setErrors(data.errors)
-                } else {
-                    history.push(`/notebooks/${notebookId}/notes/${currentNotebookNotes[0].id}`)
-                }
-            }
+        if (currentNotebookNotes?.length <= 1) {
+            dispatch(notebookActions.deleteNote(userId, notebookId,noteId))
+            setDelete(false);
+            history.push('/dashboard')
         } else {
-            return;
+            const data = dispatch(notebookActions.deleteNote(userId, notebookId,noteId))
+            if (data.errors) {
+                setErrors(data.errors)
+            } else {
+                setDelete(false);
+                history.push(`/notebooks/${notebookId}/notes/${currentNotebookNotes[0].id}`)
+            }
         }
     }   
 
@@ -123,7 +125,8 @@ const NotePage = () => {
                 <>
                 <div className={styles.btn_wrapper}>
                     <button className={styles.edit_and_delete} onClick={() => setIsEditing(true)}>Edit Note <BsPencil /></button>
-                    <button className={styles.edit_and_delete} onClick={deleteNote}><BsTrash /></button>
+                    {/* <button className={styles.edit_and_delete} onClick={deleteNote}><BsTrash /></button> */}
+                    <DeleteModal setDelete={setDelete} item={'note'}/>
                 </div>
                 <div id={styles.theme_wrapper}>
                     <label htmlFor='light' className={styles.radio_label}>Light</label>

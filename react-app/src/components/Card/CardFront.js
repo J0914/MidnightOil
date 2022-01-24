@@ -7,7 +7,7 @@ import {Prompt} from 'react-router'
 
 import styles from '../../css-modules/card.module.css';
 
-const CardFront = ({ isDark, setIsDark, i, body, handleClick, deckId, userId, cardId, back }) => {
+const CardFront = ({ isFlipped, isDark, setIsDark, i, body, handleClick, deckId, userId, cardId, back }) => {
     const [isEditing, setIsEditing] = React.useState(false);
     const dispatch = useDispatch();
 
@@ -24,7 +24,7 @@ const CardFront = ({ isDark, setIsDark, i, body, handleClick, deckId, userId, ca
         when={isEditing}
         message="Are you sure you want to leave without saving?"
         />
-        <div className={`${styles.card_front__wrapper} ${isDark ? styles.dark : styles.light}`}>
+        <div className={`${styles.card_front__wrapper} ${styles.face} ${isFlipped ? styles.isFlipped : styles.notFlipped} ${isDark ? styles.dark : styles.light}`}>
             {!isEditing && 
             <div className={styles.btns_container}>
                 <button className={`${styles.front_btn} ${isDark ? styles.dark : styles.light}`} onClick={handleClick}><BsArrowBarUp /></button>
