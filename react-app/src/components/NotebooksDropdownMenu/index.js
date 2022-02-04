@@ -77,7 +77,7 @@ const NotebooksDropdownMenu = ({isOpen, setIsOpen, setDecksIsOpen}) => {
                             <ul id={notebook.id}className={styles.notebook_title}>{notebook.title}</ul>
                             <button id={notebook.id} className={styles.edit_notebook} onClick={(e) => handleEditNotebookClick(notebook.id)}><BsPencil /></button>
                             {/* <button className={styles.delete_notebook} onClick={() => deleteNotebook(notebook.id)}><BsTrash /></button> */}
-                            <DeleteModal setCurrentId={setCurrentId} notebookId={notebook.id} setDelete={setDelete} item={'notebook'}/>
+                            <DeleteModal setCurrentId={setCurrentId} notebookId={notebook.id} setDelete={setDelete} item={'notebook'} isDropdown={true}/>
                             </>
                             }
                             {showEditNotebookForm && notebook.id === currentEle &&

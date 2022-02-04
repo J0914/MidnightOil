@@ -1,4 +1,12 @@
-#delete_modal {
+
+
+#delete_modal.isDropdown {
+    background: none;
+    font-size: 1rem;
+    color: black;
+}
+
+#delete_modal.notDropdown {
     background: none;
     color: white;
     font-size: 2.5rem;
@@ -50,10 +58,6 @@
 
 .del_or_cancel:hover {
     background-color: rgb(155, 104, 168);
-}
-
-#delete_header {
-
 }
 
 #sure {

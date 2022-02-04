@@ -126,7 +126,7 @@ const NotePage = () => {
                 <div className={styles.btn_wrapper}>
                     <button className={styles.edit_and_delete} onClick={() => setIsEditing(true)}>Edit Note <BsPencil /></button>
                     {/* <button className={styles.edit_and_delete} onClick={deleteNote}><BsTrash /></button> */}
-                    <DeleteModal setDelete={setDelete} item={'note'}/>
+                    <DeleteModal setDelete={setDelete} item={'note'} isDropdown={null}/>
                 </div>
                 <div id={styles.theme_wrapper}>
                     <label htmlFor='light' className={styles.radio_label}>Light</label>
