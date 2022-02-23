@@ -24,7 +24,7 @@
 }
 
 .animate{
-    animation: flip .5s 0s 1 backwards;
+    animation: flip .5s 0s 1 forwards;
 }
 
 @keyframes flip{
