@@ -74,7 +74,10 @@ const ProfilePage = () => {
     return (
         <div id={styles.profile_wrapper}>
             <div id={styles.header_wrapper}>
-                    <h1 id={styles.profile_header}>Welcome Back {user?.fName}!</h1>
+                <div id={styles.hello}>
+                    <h1 id={styles.profile_header}>Welcome Back {user?.username}!</h1>
+                    {/* <Link className={styles.profileLink} to='/profile'>Go to Profile</Link> */}
+                </div>
             <div className={styles.logo_wrapper}>
                 <img src={'https://i.ibb.co/BrBCh1Q/Midnight-Oil-Logo.png'} alt="logo" className={styles.logo} />
             </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {useDispatch} from 'react-redux'
 import { BsPencil, BsTrash, BsArrowBarUp} from 'react-icons/bs'
 import EditCardBackForm from './EditCardBackForm';
@@ -8,8 +8,8 @@ import {Prompt} from 'react-router'
 
 import styles from '../../css-modules/card.module.css';
 
-const CardBack = ({ isFlipped, isDark, i, body, handleClick,  deckId, userId, cardId, front}) => {
-    const [isEditing, setIsEditing] = React.useState(false);
+const CardBack = ({ animate, countdown, isFlipped, isDark, i, body, handleClick,  deckId, userId, cardId, front}) => {
+    const [isEditing, setIsEditing] = useState(false);
     const dispatch = useDispatch();
 
     const handleDelete = () => {
@@ -25,7 +25,7 @@ const CardBack = ({ isFlipped, isDark, i, body, handleClick,  deckId, userId, ca
         when={isEditing}
         message="Are you sure you want to leave without saving?"
         />
-        <div className={`${styles.card_back__wrapper} ${styles.face} ${isFlipped ? styles.isFlipped : styles.notFlipped} ${isDark ? styles.dark : styles.light}`}>
+        <div className={`${styles.card_back__wrapper} ${styles.face} ${animate ? styles.animate : ''} ${isDark ? styles.dark : styles.light}`}>
             {!isEditing && 
             <div className={styles.btns_container}>
                 <button className={`${styles.back_btn} ${isDark ? styles.dark : styles.light}`} onClick={handleClick}><BsArrowBarUp /></button>
@@ -37,6 +37,7 @@ const CardBack = ({ isFlipped, isDark, i, body, handleClick,  deckId, userId, ca
             <div id={styles.body_wrapper}>
                 <div id={styles.title_div}>
                     <label className={styles.label}>Back - Card #{i + 1}</label>
+                    <label className={styles.label}> Time until switch: {countdown/1000}s </label>
                 </div>
                 {!isEditing ?
                 <p className={styles.card_back__body}>{body}</p>

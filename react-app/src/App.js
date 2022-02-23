@@ -7,6 +7,7 @@ import Splash from './components/Splash';
 import DashboardPage from './components/DashboardPage';
 import NotePage from './components/NotePage';
 import DeckPage from './components/DeckPage';
+import Profile from './components/Profile'
 import Footer from './components/Footer'
 import { authenticate } from './store/session';
 import { getClassmates } from './store/classmates';
@@ -47,6 +48,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/decks/:deckId' exact={true} >
           <DeckPage />
+        </ProtectedRoute>
+        <ProtectedRoute path='/profile' exact={true} >
+          <Profile />
         </ProtectedRoute>
         <Route path='/' exact={true} >
           <Splash />

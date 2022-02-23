@@ -36,6 +36,7 @@ const EditNotebookForm = ({setShowEditNotebookForm, currentTitle, notebookId}) =
                 onChange={(e) => setTitle(e.target.value)}
                 className={styles.notebook_name}
                 required={true}
+                autoFocus={true}
                 />
                 <button type="submit" className={styles.notebook_form__submit}><BsCheck /></button>
             </form>

@@ -139,7 +139,8 @@ def patch_and_delete_notes(userId, notebookId, noteId):
                 db.session.commit()
                 notes = Note.query.order_by(desc(Note.id)).filter_by(userId=userId, notebookId=notebookId).all()
                 notebooks = Notebook.query.order_by(desc(Notebook.id)).filter_by(userId=userId).all()
-                return {'note': note.to_dict(), 'notebooks': [notebook.to_dict() for notebook in notebooks],'notes': [note.to_dict() for note in notes]}
+                currentNotebook = Notebook.query.order_by(desc(Notebook.id)).filter_by(userId=userId, id=notebookId).first()
+                return {'note': note.to_dict(), 'notebooks': [notebook.to_dict() for notebook in notebooks],'notes': [note.to_dict() for note in notes], 'currentNotebook': currentNotebook.to_dict()}
             else: 
                 return jsonify({'errors': form.errors})
 
@@ -152,7 +153,8 @@ def patch_and_delete_notes(userId, notebookId, noteId):
                 db.session.commit()
                 notes = Note.query.order_by(desc(Note.id)).filter_by(userId=userId, notebookId=notebookId).all()
                 notebooks = Notebook.query.order_by(desc(Notebook.id)).filter_by(userId=userId).all()
-                return {'note': note.to_dict(), 'notebooks': [notebook.to_dict() for notebook in notebooks],'notes': [note.to_dict() for note in notes]}
+                currentNotebook = Notebook.query.order_by(desc(Notebook.id)).filter_by(userId=userId, id=notebookId).first()
+                return {'note': note.to_dict(), 'notebooks': [notebook.to_dict() for notebook in notebooks],'notes': [note.to_dict() for note in notes], 'currentNotebook': currentNotebook.to_dict()}
             else: 
                 return jsonify({'errors': form.errors})
 

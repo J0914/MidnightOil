@@ -50,6 +50,7 @@ const NoteForm = ({setShowNoteForm, notebookId, setIsOpen}) => {
             className={styles.note_name}
             maxLength={20}
             required={true}
+            autoFocus={true}
             />
             <button type="submit" className={styles.note_form__btn}><BsCheck /></button>
         </form>

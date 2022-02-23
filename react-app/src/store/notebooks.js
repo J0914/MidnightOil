@@ -221,6 +221,7 @@ export const editNote = (userId, notebookId, noteId, noteVals) => async (dispatc
           dispatch(setNotebooks(data.notebooks))
           dispatch(setNotes(data.notes))
           dispatch(setNote(data.note))
+          dispatch(setNotebook(data.currentNotebook))
           return data.note
       }
     } else {

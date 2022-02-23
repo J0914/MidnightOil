@@ -9,16 +9,30 @@
     border-radius: 5px;
     box-shadow: 0.0625rem 0.0625rem 0.625rem -2px #13011B;
     padding: 15px;
-    animation: slideIn .5s 0s 1 forwards;
+    animation: slideIn .3s 0s 1 forwards;
+    /* backface-visibility: hidden; */
 }
 
 @keyframes slideIn{
     0%{
-        transform: translate(0px, 0px) rotate3d(-1, 0, -1, 3deg) scale(.9);
+        transform: translate(-20px, 0px) scale(.9);
 
       }
     100%{
-    transform: translate(0px, 0px) scale(1);
+        transform: translate(0px, 0px) scale(1);
+    }
+}
+
+.animate{
+    animation: flip .5s 0s 1 backwards;
+}
+
+@keyframes flip{
+    0%{
+        transform: rotateX(180deg) scale(.9);
+    }
+    100%{
+        transform: rotateX(0deg);
     }
 }
 

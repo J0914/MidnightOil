@@ -52,6 +52,7 @@ const NotebooksDropdownMenu = ({isOpen, setIsOpen, setDecksIsOpen}) => {
             dispatch(notebookActions.deleteNotebook(userId, notebookId))
             history.push('/dashboard')
         }
+        setDelete(false)
     }
 
     return (

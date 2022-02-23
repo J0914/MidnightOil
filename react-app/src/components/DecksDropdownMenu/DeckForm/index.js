@@ -45,6 +45,7 @@ const DeckForm = ({setIsOpen, setShowDeckForm}) => {
                 onChange={(e) => setTitle(e.target.value)}
                 className={styles.deck_dropdown__name}
                 required={true}
+                autoFocus={true}
                 />
                 <button type="submit" className={styles.dropdown_deck_form__btn}><BsCheck /></button>
                 <button onClick={() => setShowDeckForm(false)} className={styles.dropdown_deck_form__btn}><BsX /></button>

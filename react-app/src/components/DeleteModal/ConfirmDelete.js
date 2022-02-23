@@ -1,8 +1,15 @@
 
-
+import {useEffect} from 'react';
 import styles from '../../css-modules/deletemodal.module.css';
 
-const ConfirmDelete = ({setShowModal, setDelete, item}) => {
+const ConfirmDelete = ({setCurrentId, notebookId, setShowModal, setDelete, item}) => {
+   
+    useEffect(() => {
+        if (item === 'notebook') {
+            setCurrentId(notebookId)
+        }
+      }, [])
+   
     return (
         <div id={styles.delete_wrapper}>
             <h1 id={styles.delete_header}>Confirm Delete</h1>

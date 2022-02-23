@@ -8,7 +8,7 @@ import EditDeckForm from './EditDeckForm'
 import {Prompt} from 'react-router'
 import Card from '../Card'
 import { BsPauseFill, BsPlayFill} from 'react-icons/bs'
-import {AiFillQuestionCircle, AiFillAnswerCircle} from 'react-icons/ai'
+import {AiFillQuestionCircle} from 'react-icons/ai'
 
 
 import styles from '../../css-modules/deckpage.module.css'
@@ -20,7 +20,7 @@ const DeckPage = () => {
     const [currentTitle, setCurrentTitle] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
     const [studyMode, setStudyMode] = useState(false);
-    const [slideInterval, setSlideInterval] = useState(5000);
+    const [slideInterval, setSlideInterval] = useState(6000);
     const [cardInterval, setCardInterval] = useState(slideInterval/2);
     const [question, setQuestion] = useState(false)
 
@@ -135,7 +135,7 @@ const DeckPage = () => {
                 <>
                 <div id={styles.time_div}>
                     <label className={styles.seconds_label}>Set Study Mode Interval&nbsp;</label>
-                    <input id={styles.seconds} value={slideInterval/1000} onChange={(e) => setSlideInterval(e.target.value*1000)} type='number' placeholder='seconds' />
+                    <input onFocus={e => e.target.blur()} step={2} min={6} id={styles.seconds} value={slideInterval/1000} onChange={(e) => setSlideInterval(e.target.value*1000)} type='number' placeholder='seconds' />
                     <label className={styles.seconds_label}>&nbsp;Seconds&nbsp;</label>
                     <div className={styles.question} onMouseEnter={() => setQuestion(true)} onMouseLeave={() => setQuestion(false)}> <AiFillQuestionCircle /></div>
                 </div>

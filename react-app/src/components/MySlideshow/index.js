@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import styles from './myslideshow.module.css';
 import {BsSkipForwardFill, BsSkipBackwardFill} from 'react-icons/bs'
+
+import styles from './myslideshow.module.css';
 
 const MySlideshow = ({slideInterval, studyMode, cards}) => {
 
